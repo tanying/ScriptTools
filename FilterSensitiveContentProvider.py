@@ -9,6 +9,7 @@ import re
 import time
 import shutil
 import codecs
+from pyXls import *
 
 result = "Pass"
 EnvPath = sys.path[0]
@@ -23,7 +24,44 @@ outAospDir = tempdir + "/outAosp/"
 customDir = outdir + "/custom/"
 diffTxt = outdir + "/diff.txt"
 customTxt = outdir + "/custom.txt"
+withoutPermissionTxt = outdir + "/withoutPermission.txt"
 
+outXls = outdir + "/out.xls"
+
+showDiff = True
+outList = []
+
+def setStyles():
+    fnt = Font()
+    fnt.name = 'Times New Roman'
+    al = Alignment()
+    al.horz = Alignment.HORZ_LEFT
+    al.vert = Alignment.VERT_CENTER
+    style = XFStyle()
+    style.font = fnt
+    style.alignment = al
+    return style
+
+def initWorkbook(style, list):
+    _wb = Workbook()
+    _ws0 = _wb.add_sheet(u'customContentProvider')
+    # initial title of workbook
+    _ws0.write(0, 0, u'PackageName', style)
+    _ws0.write(0, 1, u'ProviderName', style)
+    _ws0.write(0, 2, u'ContentProvider', style)
+    if showDiff :
+        _ws0.write(0, 3, u'Difference', style)
+
+    for itemDict in list:
+        i = list.index(itemDict) + 1
+        _ws0.write(i, 0, itemDict['packagename'], style)
+        _ws0.write(i, 1, itemDict['providername'], style)
+        _ws0.write(i, 2, itemDict['contentprovider'], style)
+        if showDiff and itemDict.get('diff'):
+            _ws0.write(i, 3, itemDict['diff'], style)
+
+    _wb.save(outXls) 
+    print "Generate xls table successed!! --> %s" % outXls       
 
 def getPackageName(path):
     lastIdx = path.find(".")
@@ -65,13 +103,17 @@ def filterContentProvider(path):
     f.close()
     return contentProviderStr
 
-#Get the content provider name
-def getContentProviderName(str):
-    pos1 = str.find('android:name="') + len('android:name="')
-    name = str[pos1:]
-    pos2 = name.find('"')
-    name = name[:pos2]
-    return name
+#Get the content provider attribute value
+def getAttrValueByAttrTitle(attrTitle, str):
+    attrStr = 'android:' + attrTitle + '="'
+    if str.find(attrStr) > -1:
+        pos1 = str.find(attrStr) + len(attrStr)
+        attrValue = str[pos1:]
+        pos2 = attrValue.find('"')
+        attrValue = attrValue[:pos2]
+    else:
+        attrValue = ''
+    return attrValue
 
 #Get the Content Provider Node by name
 def getContentProviderNode(name, emuStr):
@@ -108,10 +150,10 @@ def analyseDiff(jrdStr, emuStr, path):
             jrdProvider = ('<provider ' + provider).strip(' ')
 
             if emuStr.find(jrdProvider) > -1:
-                print ":::::same\n"
+                #print ":::::same\n"
                 pass
             else:
-                name = getContentProviderName(jrdProvider)
+                name = getAttrValueByAttrTitle('name', jrdProvider)
                 if emuStr.find(name) > -1:
                     diffStr += 'Different Package: '
                     diffStr += getPackageName(path)
@@ -136,6 +178,11 @@ def analyseDiff(jrdStr, emuStr, path):
 def filterCustomOEM():
     diffStr = ''
     customStr = ''
+    withoutPermissionStr = ''
+    itemNo = 0
+    diffNo = 0
+    withoutPermissionNo = 0
+
     for root,dirs,files in os.walk(ManifestListPath):
         for filespath in files:
             jrdfilepath = os.path.join(root,filespath)
@@ -153,35 +200,73 @@ def filterCustomOEM():
                     shutil.copy(jrdfilepath, customDir)
 
                     #print "++++++++++not same+++++++++++"
-                    print filespath
+                    #print filespath
+                    itemNo += 1
                     diff = analyseDiff(jrdProviderStr, emuProviderStr, filespath)
-                    diffStr += diff['diffStr'] 
+                    
+                    if diff['diffStr']:
+                        diffNo += 1 
+                        diffStr += str(diffNo) + '. ' + diff['diffStr'] 
 
-                    customStr += 'PackageName: '
+                    customStr += str(itemNo) + '. PackageName: '
                     customStr += getPackageName(filespath)
                     customStr += '\n'
                     customStr += '        '
                     customStr += diff['customStr']
                     customStr += '\n'
+
+                    tempStr = filterWithoutPermissionContentProvider(diff['customStr'], filespath)
+                    len(tempStr)
+                    if len(tempStr) > 1:
+                        withoutPermissionNo += 1 
+                        filename = getPackageName(filespath)
+                        tempStr = str(withoutPermissionNo) + '. Without Permission Package: ' + filename + tempStr
+                        withoutPermissionStr += tempStr
+
+                    outDict = {}            
+                    outDict['packagename'] = getPackageName(filespath)
+                    outDict['contentprovider'] = diff['customStr']
+                    outDict['providername'] = getAttrValueByAttrTitle('name', diff['customStr'])
+                    outDict['diff'] = diff['diffStr'] 
+                    outList.append(outDict)
             else:
                 outAospFile = outAospDir + filespath
                 #print "Copy file:" + outAospDir+filespath
                 shutil.copy(jrdfilepath, outAospDir)
                 jrdProviderStr = filterContentProvider(outAospFile)
-                if jrdProviderStr!='':
+                if jrdProviderStr != '':
+                    itemNo += 1
+
                     shutil.copy(jrdfilepath, customDir)
-                    customStr += 'PackageName: '
+                    customStr += str(itemNo) + '. PackageName: '
                     customStr += getPackageName(filespath)
                     customStr += '\n'
                     customStr += jrdProviderStr
                     customStr += '\n'
 
+                    tempStr = filterWithoutPermissionContentProvider(jrdProviderStr, filespath)
+                    #print len(tempStr)
+                    if len(tempStr) > 1:
+                        withoutPermissionNo += 1 
+                        filename = getPackageName(filespath)
+                        tempStr = str(withoutPermissionNo) + '. Without Permission Package: ' + filename + tempStr
+                        withoutPermissionStr += tempStr
+
+                    outDict = {}
+                    outDict['packagename'] = getPackageName(filespath)
+                    outDict['providername'] = getAttrValueByAttrTitle('name', jrdProviderStr)
+                    outDict['contentprovider'] = jrdProviderStr
+                    outList.append(outDict)
+
             fDiff = open(diffTxt, 'w')
             fCustom = open(customTxt, 'w')
+            fWithoutPermission = open(withoutPermissionTxt, 'w')
             fDiff.write(diffStr)
             fCustom.write(customStr)
+            fWithoutPermission.write(withoutPermissionStr)
             fDiff.close()
             fCustom.close()
+            fWithoutPermission.close()
 
 def filterSensitiveContentProvider(path):
     packagefile = open(path, 'r')
@@ -227,6 +312,63 @@ def filterSensitiveContentProvider(path):
                 print "Can not find permission declare in file."
     packagefile.close()
 
+def splitProvider(provider):
+    provider = provider.strip(' ')
+    templist = provider.split('<provider')
+    providerlist = []
+    #print templist
+    for item in templist:
+
+        if item != '':
+            string = '<provider' + item
+            providerlist.append(string.strip(' '))
+    #print providerlist
+    return providerlist
+
+
+def filterWithoutPermissionContentProvider(providers, filename):
+    string = ''
+    providerlist = splitProvider(providers)
+    
+    for provider in providerlist:
+        exported = getAttrValueByAttrTitle('exported', provider)
+        if exported == 'true':
+            readPermission = getAttrValueByAttrTitle('readPermission', provider)
+            writePermission = getAttrValueByAttrTitle('writePermission', provider)
+            if readPermission or writePermission:
+                pass
+            else:
+                string += '\n'
+                string += '        '
+                string += provider
+
+        elif exported == '':
+            filepath = customDir + filename
+            checkSdkVersion(filepath)
+            string += '\n'
+            string += '        '
+            string += provider
+
+    string += '\n'
+    
+    return string
+
+def checkSdkVersion(path):
+    file = open(path, 'r')
+    
+    while True:
+        line = file.readline()
+        if not line:
+            break
+        if line.find('minSdkVersion') > -1:
+            minSdkVersion = getAttrValueByAttrTitle('minSdkVersion', lines)
+            print 'minSdkVersion ' + minSdkVersion
+            break 
+        elif line.find('targetSdkVersion') > -1:
+            targetSdkVersion = getAttrValueByAttrTitle('targetSdkVersion', lines)
+            print 'targetSdkVersion ' + targetSdkVersion
+            break
+
 def main():
     #if never excute pull Android manifest, get android.manifest from phone.
     #if need to pull again, should manually remove jrd_ManifestList directory first.
@@ -255,14 +397,19 @@ def main():
         #work through the Jrd_ManifestList to filter Custom and OEM Content Provider.
         filterCustomOEM()
         print "Filter CustomOEM content provider successed!!!\n"
-        #Filter Sensitive Content Provider.
+
+        style = setStyles()
+        initWorkbook(style, outList)
+
+        # #Filter Sensitive Content Provider.
         # for root,dirs,files in os.walk(customDir):
         #     for filename in files:
         #         filepath = os.path.join(root ,filename)
         #         print filepath
         #         #filterSensitiveContentProvider(filepath)
-        # print "Filter Sensitive content provider successed!!!\n"
-
+        #         filterWithoutPermissionContentProvider(filepath)
+        # #print "Filter Sensitive content provider successed!!!\n"
+        # print "Filter without permission content provider successed!!!\n"
     
 if __name__ == '__main__':
     main()

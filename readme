@@ -13,3 +13,4 @@ Usage:
     custom文件夹存放所有包含custom content provider的AndroidManifest文件. 
     custom.txt 中记录了最终过滤出的所有Custom ContentProvider.
     diff.txt 中记录了在inAosp中, 但被jrd修改过的ContentProvider, 方便人工检查使用.
+    withoutPermission.txt 中记录了export = 'true' 但是没有定义readPermission或writePermission的CP.
