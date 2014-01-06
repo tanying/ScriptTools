@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="7230059" android:versionName="3.2.3.7230059" package="com.telenav.app.android.cingular"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="@string/app_name" android:icon="@drawable/app_icon" android:debuggable="false">
+        <activity android:theme="@style/CustomTheme" android:label="@string/app_name" android:name=".TeleNav" android:launchMode="singleTop" android:screenOrientation="unspecified" android:configChanges="locale|keyboard|keyboardHidden|orientation|uiMode|screenSize" android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.telenav.intent.action.EXIT_APP" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.telenav.intent.action.DRIVE_TO" />
+                <action android:name="com.telenav.intent.action.VIEW_MAP" />
+                <action android:name="com.telenav.intent.action.BIZ_FIND" />
+                <action android:name="com.telenav.intent.action.SHARE_ADDRESS" />
+                <action android:name="com.telenav.intent.action.COMMUTE_ALERT" />
+                <action android:name="com.telenav.app.android.cingular.TeleNav.PLUGIN_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.telenav.intent.category.PLUGIN_LAUNCH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.telenav.app.android.cingular.TeleNav.MAITAI" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.telenav.intent.category.TELENAV" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.telenav.app.android.cingular.TeleNav.MAITAI" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.telenav.intent.category.TELENAV" />
+                <data android:scheme="http" android:host="tln.me" android:pathPrefix="/tn/" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/app_name" android:name=".MaiTaiListener" android:process=":MaiTaiListener" android:launchMode="standard" android:screenOrientation="unspecified" android:configChanges="keyboard|keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="com.telenav.intent.action.maitai" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.telenav.intent.category.MaiTai" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="tln.me" android:pathPrefix="/tn/" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/app_name" android:name=".PluginListener" android:process=":PluginListener" android:launchMode="standard" android:screenOrientation="unspecified" android:configChanges="keyboard|keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.item/postal-address" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="maps.google.com" android:pathPattern="/maps.*" />
+                <data android:scheme="https" android:host="maps.google.com" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="geo" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="telenav" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="google.navigation" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ShortcutActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:label="@string/maps_shortcut_name" android:icon="@drawable/app_icon_map" android:name=".ShortcutMapsActivity" android:targetActivity=".ShortcutActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:label="@string/nav_shortcut_name" android:icon="@drawable/app_icon_drive" android:name=".ShortcutDriveActivity" android:targetActivity=".ShortcutActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:label="@string/places_shortcut_name" android:icon="@drawable/app_icon_place" android:name=".ShortcutPlaceActivity" android:targetActivity=".ShortcutActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+        <service android:label="Nav Service" android:name="com.telenav.navservice.android.NavServiceAN" android:process=":NavService">
+            <intent-filter>
+                <action android:name="com.telenav.navservice.main.NavService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+        <receiver android:name=".ExitAppReceiver" android:enabled="true">
+            <intent-filter>
+                <action android:name="com.telenav.intent.action.EXIT_APP" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".DeviceBootCompletedTrigger">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".C2DMReceiver" />
+        <service android:name=".RestartService" android:process=":RestartService" />
+        <receiver android:name="com.telenav.app.android.c2dm.C2DMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.telenav.app.android.cingular" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.telenav.app.android.cingular" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RETRY" />
+                <category android:name="com.telenav.app.android.cingular" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RESTART" />
+                <category android:name="com.telenav.app.android.cingular" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".TeleNav$SwitchAppScreenService" />
+        <service android:name=".BillingService" />
+        <receiver android:name=".BillingReceiver">
+            <intent-filter>
+                <action android:name="com.android.vending.billing.IN_APP_NOTIFY" />
+                <action android:name="com.android.vending.billing.RESPONSE_CODE" />
+                <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.telenav.carconnect.host.AndroidCarHookReceiver">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.telenav.carconnect.host.AndroidCarConnectionService" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar" android:label="@string/searchwidget_mini_name" android:name="com.telenav.searchwidget.android.OneBoxActivity" android:process=":searchwidget" android:launchMode="singleTask" android:configChanges="keyboard|keyboardHidden|orientation" android:windowSoftInputMode="stateAlwaysVisible|adjustPan" />
+        <activity android:label="" android:name="com.telenav.searchwidget.android.WidgetAdapterActivity" android:process=":searchwidget" android:launchMode="singleTask" android:configChanges="keyboard|keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="com.telenav.app.android.cingular.searchwidget.maitaiadapter" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <receiver android:label="@string/searchwidget_mini_name" android:icon="@drawable/app_icon" android:name="com.telenav.searchwidget.android.SearchWidgetProviderMini" android:process=":searchwidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_mini_info" />
+        </receiver>
+        <receiver android:label="@string/searchwidget_half_name" android:icon="@drawable/app_icon" android:name="com.telenav.searchwidget.android.SearchWidgetProviderHalf" android:process=":searchwidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_half_info" />
+        </receiver>
+        <receiver android:label="@string/searchwidget_full_name" android:icon="@drawable/app_icon" android:name="com.telenav.searchwidget.android.SearchWidgetProviderFull" android:process=":searchwidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_full_info" />
+        </receiver>
+        <receiver android:name="com.telenav.searchwidget.android.WidgetBroadcastReceiver" android:process=":searchwidget">
+            <intent-filter>
+                <action android:name="com.telenav.searchwidget.action.refreshwidget" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.telenav.searchwidget.android.WidgetService" android:process=":searchwidget">
+            <intent-filter>
+                <action android:name="com.telenav.searchwidget.action.service" />
+                <data android:scheme="widget" android:host="widget.telenav.com" android:pathPrefix="/service/" />
+            </intent-filter>
+        </service>
+    </application>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <permission android:name="com.telenav.app.android.cingular.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.telenav.app.android.cingular.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <supports-screens android:anyDensity="true" />
+    <compatible-screens>
+        <screen android:screenSize="small" android:screenDensity="mdpi" />
+        <screen android:screenSize="small" android:screenDensity="hdpi" />
+        <screen android:screenSize="small" android:screenDensity="xhdpi" />
+        <screen android:screenSize="small" android:screenDensity="480" />
+        <screen android:screenSize="normal" android:screenDensity="mdpi" />
+        <screen android:screenSize="normal" android:screenDensity="hdpi" />
+        <screen android:screenSize="normal" android:screenDensity="xhdpi" />
+        <screen android:screenSize="normal" android:screenDensity="480" />
+        <screen android:screenSize="large" android:screenDensity="ldpi" />
+        <screen android:screenSize="large" android:screenDensity="mdpi" />
+        <screen android:screenSize="large" android:screenDensity="hdpi" />
+        <screen android:screenSize="large" android:screenDensity="xhdpi" />
+        <screen android:screenSize="large" android:screenDensity="480" />
+        <screen android:screenSize="xlarge" android:screenDensity="ldpi" />
+        <screen android:screenSize="xlarge" android:screenDensity="mdpi" />
+        <screen android:screenSize="xlarge" android:screenDensity="hdpi" />
+        <screen android:screenSize="xlarge" android:screenDensity="xhdpi" />
+        <screen android:screenSize="xlarge" android:screenDensity="480" />
+    </compatible-screens>
+</manifest>

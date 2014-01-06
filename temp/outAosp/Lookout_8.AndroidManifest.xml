@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="81971" android:versionName="8.19.7-ba12277" package="com.lookout"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.PERSISTENT_ACTIVITY" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.READ_OWNER_DATA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="android.permission.READ_USER_DICTIONARY" />
+    <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <permission android:name="com.lookout.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.lookout.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <uses-feature android:name="android.hardware.location.network" android:required="false" />
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    <uses-feature android:name="android.hardware.screen.portrait" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <supports-screens android:anyDensity="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" />
+    <application android:theme="@style/flex_default" android:label="@string/short_application_name_preload" android:icon="@drawable/logo_box_72x72" android:name="com.lookout.LookoutApplication" android:allowBackup="false">
+        <activity android:name=".ui.LoadDispatch" android:taskAffinity="" android:excludeFromRecents="true" android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/invisible_dialog" android:name=".ui.WarnOfThreatActivity" android:taskAffinity="" android:excludeFromRecents="true" android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/invisible_dialog" android:name=".ui.WarnOfAutorunActivity" android:taskAffinity="" android:excludeFromRecents="true" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/invisible_dialog" android:name=".ui.CustomMessageBoxActivity" android:taskAffinity="" android:excludeFromRecents="true" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/invisible_dialog" android:name=".ui.InvitedToPremiumLLLDialogActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".ui.trials.BillingOptions" android:launchMode="singleTask" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="com.lookout.intent.action.UPGRADE_LOOKOUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/invisible_dialog" android:name=".ui.InstallUpdateActivity" android:launchMode="singleTask" />
+        <activity android:theme="@style/Theme.Sherlock" android:label="@string/notification_settings" android:name=".ui.NotificationSettings" android:launchMode="singleTask" android:logo="@drawable/logo_green_trans_bg" />
+        <activity android:theme="@style/settings_theme" android:label="@string/security_settings" android:name=".ui.AntiVirusSettings" android:launchMode="singleTask" android:logo="@drawable/logo_green_trans_bg" />
+        <activity android:theme="@style/settings_theme" android:label="@string/security_settings" android:name=".ui.AntiVirusSettingsUnregisteredAutoscan" android:launchMode="singleTask" />
+        <activity android:theme="@style/Theme.Sherlock" android:label="@string/backup_settings" android:name=".ui.BackupSettings" android:launchMode="singleTask" android:logo="@drawable/logo_green_trans_bg" />
+        <activity android:name=".ui.AboutActivity" android:launchMode="singleTask" />
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.LookoutAppsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.LegalActivity" android:launchMode="singleTask" />
+        <activity android:name=".ui.Scream" android:excludeFromRecents="true" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".ui.LockActivity" android:launchMode="singleTask" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.SmsDetailActivity" android:launchMode="singleTop" android:screenOrientation="portrait" android:parentActivityName=".ui.v2.Dashboard">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="lookout" android:host="sms" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.FlexilisWebViewActivity" android:launchMode="singleTask" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".ui.LightWebViewActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".ui.group.CreateMasterAccount" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".ui.group.CreateIndividualAccount" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".ui.group.CreateChildAccount" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".ui.group.CreateAccountPasswordPrompt" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".ui.group.InvitedToJoinGroupActivity" android:launchMode="singleTask" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".ui.group.ClearDataActivity" android:launchMode="singleTask" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/invisible_dialog" android:name=".security.safebrowsing.WarnOfWebsiteActivity" android:taskAffinity="" android:excludeFromRecents="true" android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".security.safebrowsing.SafeBrowsingSetupActivity" />
+        <activity android:theme="@*android:style/Theme.NoDisplay" android:label="Safe Browsing" android:name=".security.safebrowsing.UrlScanActivity" android:enabled="false" android:taskAffinity="" android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.speech.action.VOICE_SEARCH_RESULTS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:scheme="about" />
+                <data android:scheme="javascript" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:scheme="inline" />
+                <data android:mimeType="text/html" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="application/xhtml+xml" />
+                <data android:mimeType="application/vnd.wap.xhtml+xml" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.WEB_SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.Dashboard" android:launchMode="singleTask" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Dialog" android:name=".ui.v2.AboutActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.AboutPrivacyAdvisorActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.PrivacyAdvisorActivity" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.SecurityActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.SecurityListActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.SecurityActivity" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.PrivacyListActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.PrivacyAdvisorActivity" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.BackupActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.MissingDeviceMapActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.MissingDeviceNoMapActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.SafeBrowsingActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.PrivacyAdvisorActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.AppDetailActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.FileDetailActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.BucketListActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.PrivacyAdvisorActivity" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.walk1st.SetupIntro" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.walk1st.SetupAntivirus" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.walk1st.SetupBackup" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.walk1st.SetupMtn" android:screenOrientation="portrait" />
+        <activity android:theme="@*android:style/Theme.Black.NoTitleBar.Fullscreen" android:name=".ui.v2.OrangeUpgradeActivity" android:screenOrientation="portrait" android:noHistory="true" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.SprintRetailPremiumActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="lookout" android:host="sprint" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.TmoRetailPremiumActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="lookout" android:host="tmo" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/Theme.Lookout.Dialog" android:name=".ui.v2.OrangeCancelSubscriptionActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Dialog" android:name=".ui.v2.OrangePromoteOrigamiActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.EEProductWalkthrough" android:launchMode="singleTask" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.walk1st.SetupMissingDevice" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.walk1st.CreateAccount" android:windowSoftInputMode="adjustPan" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.walk1st.LoginToAccount" android:windowSoftInputMode="adjustPan" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.WelcomeToPremium" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.WelcomeToPremiumTrial" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.HomeWithCustom" android:name=".ui.trials.InvitedToPremium" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/Theme.Lookout.HomeWithCustom" android:name=".ui.trials.InvitedToPremiumBeautiful" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/Theme.Lookout.HomeWithCustom" android:name=".ui.trials.InvitedToPremiumSimple" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/Theme.Lookout.HomeWithCustom" android:name=".ui.trials.TryPremiumTrialActivityBeautiful" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/Theme.Lookout.HomeWithCustom" android:name=".ui.trials.InvitedToPremiumGrid" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/Theme.Lookout.HomeWithCustom" android:name=".ui.trials.InvitedToPremiumMtnWalkthroughV1" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/Theme.Lookout.HomeWithCustom" android:name=".ui.trials.InvitedToPremiumMtnWalkthroughV2" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/invisible_dialog" android:name=".ui.trials.TryPremiumTrialAlertActivity" android:taskAffinity="" android:excludeFromRecents="true" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@style/Theme.Lookout.HomeWithCustom" android:name=".ui.v2.AboutTrialActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.HomeWithCustom" android:name=".ui.v2.TryPremiumTrialActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.HomeWithCustom" android:name=".ui.v2.TryPremiumTrial2ButtonsActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.intro.WelcomeActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.intro.TimelineActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.intro.BackupActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.intro.LocateActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Settings" android:label="@string/settings" android:name=".ui.v2.Settings" />
+        <activity android:theme="@style/Theme.Lookout.Settings" android:label="@string/settings" android:name=".ui.v2.BackupDataTypesSettings" />
+        <activity android:theme="@style/Theme.Lookout.SettingsWithSwitch" android:label="@string/settings" android:name=".ui.v2.ScheduledBackupActivity" />
+        <activity android:theme="@style/Theme.Lookout.SettingsWithSwitch" android:label="@string/settings" android:name=".ui.v2.ScheduledScansActivity" />
+        <activity android:theme="@style/Theme.Lookout.NoActionBar" android:name=".ui.v2.payment.PremiumUpgradeActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+        </activity>
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.payment.BillingOptionsActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.payment.BillingConfirmationActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout" android:name=".ui.v2.payment.WaitingForProActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".growth.registrationflows.CreateAccountNewActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".growth.registrationflows.ProductWalkthroughBackupActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".growth.registrationflows.ProductWalkthroughLocateActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".growth.registrationflows.ProductWalkthroughWelcomeActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.DeviceInfoActivity" android:launchMode="singleInstance" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.PendingUpgradeActivity" android:launchMode="singleInstance" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.v2.DisabledDeviceActivity" android:launchMode="singleInstance" android:screenOrientation="portrait" />
+        <receiver android:name=".growth.notifications.BackupNotificationScheduledReceiver" android:enabled="false" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.LockCamNotificationLanding" android:screenOrientation="portrait" />
+        <activity android:theme="@style/Theme.Lookout.Home" android:name=".ui.NotificationOverhaulLandingActivity" android:screenOrientation="portrait">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".ui.v2.Dashboard" />
+        </activity>
+        <receiver android:name="SmsListener" android:enabled="false">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".services.SmsListenerService" />
+        <service android:name=".services.HomeListenerService" />
+        <service android:name=".services.CloudpushService" />
+        <service android:name=".services.ConnectivityService" />
+        <receiver android:name=".ConnectivityReceiver" android:enabled="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <category android:name="com.lookout" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".C2DMReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.lookout" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.lookout" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.lookout" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".security.InstallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <activity android:theme="@style/invisible_dialog" android:label="@string/scan_with_lookout_before_install" android:name=".security.ScanApkActivity" android:enabled="false" android:taskAffinity="" android:excludeFromRecents="true" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:mimeType="application/vnd.android.package-archive" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/Theme.Sherlock.Dialog" android:label="@string/scan_with_lookout" android:name=".security.ScanTelIntent" android:taskAffinity="" android:excludeFromRecents="true" android:configChanges="keyboardHidden|orientation">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <action android:name="android.intent.action.DIAL" />
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="tel" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/Theme.Lookout.LockCam" android:name=".lockcam.HiddenLockCamActivity" android:taskAffinity="" android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <receiver android:label="@string/app_widget_name_preload" android:name=".ui.DashboardWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/dashboard_widget_provider" />
+        </receiver>
+        <service android:name=".security.InstallReceiverService" />
+        <service android:name=".security.filesystem.FileSystemMonitorService" />
+        <receiver android:name="AppLauncher" android:enabled="true">
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".services.AppLauncherService" />
+        <service android:name=".services.AutoScanService" />
+        <service android:name=".services.SMSDigestService" />
+        <service android:name=".services.C2DMReceiverService" />
+        <service android:name=".GCMIntentService" />
+        <service android:name=".services.ForceConnectionService" />
+        <service android:name=".services.NotificationService" />
+        <service android:name=".services.PolicyDownloaderService" />
+        <service android:name=".services.RestartLockService" />
+        <service android:name=".services.RestartWarnOfThreatActivityService" />
+        <receiver android:name="InstallReferrerReceiver" android:process=":InstallReferrerReceiver">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.google.analytics.tracking.android.CampaignTrackingReceiver" android:exported="true" />
+        <receiver android:label="@string/device_admin_label" android:name=".DeviceAdminReceiver" android:permission="android.permission.BIND_DEVICE_ADMIN" android:enabled="false" android:description="@string/device_admin_description">
+            <meta-data android:name="android.app.device_admin" android:resource="@xml/device_admin" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".billing.android.BillingService" />
+        <receiver android:name=".billing.android.BillingReceiver" android:enabled="false">
+            <intent-filter>
+                <action android:name="com.android.vending.billing.IN_APP_NOTIFY" />
+                <action android:name="com.android.vending.billing.RESPONSE_CODE" />
+                <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <service android:label="@string/safe_browsing_service_name" android:name=".security.safebrowsing.BrowserHistoryObserverService" />
+        <service android:name=".billing.boku.BokuBillingStateManager" />
+        <uses-library android:name="com.google.android.maps" android:required="false" />
+    </application>
+</manifest>

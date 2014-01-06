@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="1" android:versionName="1.0" package="com.android.galaxy4"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-feature android:name="android.software.live_wallpaper" />
+    <application android:label="@2131099648" android:icon="@2130837507">
+        <activity android:theme="@*android:style/Theme.NoTitleBar" android:label="@2131099648" android:name=".Galaxy4" android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <service android:label="@2131099648" android:name=".Galaxy4Wallpaper" android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <meta-data android:name="android.service.wallpaper" android:resource="@2130968576" />
+        </service>
+        <activity android:theme="@2131165185" android:name=".PreviewStubActivity" android:configChanges="orientation|screenSize" />
+    </application>
+</manifest>

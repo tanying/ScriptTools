@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="17" android:versionName="4.2.2-vC1M-0" package="com.android.vpndialogs"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="VpnDialogs" android:allowBackup="false">
+        <activity android:theme="@*android:style/Theme.Holo.Dialog.Alert" android:name=".ConfirmDialog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@*android:style/Theme.Holo.Dialog.Alert" android:name=".ManageDialog" android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

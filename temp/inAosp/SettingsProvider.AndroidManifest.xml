@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:sharedUserId="android.uid.system" android:versionCode="17" android:versionName="4.2.2-vC1M-0" package="com.android.providers.settings" coreApp="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="@2131099674" android:icon="@2130837504" android:allowClearUserData="false" android:process="system" android:backupAgent="SettingsBackupAgent" android:killAfterRestore="false">
+        <provider android:name="SettingsProvider" android:writePermission="android.permission.WRITE_SETTINGS" android:exported="true" android:multiprocess="false" android:authorities="settings" android:initOrder="100" />
+        <receiver android:name="com.tct.providers.settings.ProviderSettingsResetReceiver">
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.LAUNCH_DEVICE_RESET" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.tct.providers.settings.ProviderSettingsResetService" android:exported="false" />
+    </application>
+</manifest>

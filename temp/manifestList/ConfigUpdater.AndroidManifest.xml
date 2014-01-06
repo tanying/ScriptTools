@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="17" android:versionName="4.2.2-721232" package="com.google.android.configupdater"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED" />
+    <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" />
+    <application android:label="ConfigUpdater" android:allowBackup="false">
+        <service android:name=".CertPinUpdateFetcherService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.configupdater.CertPin.START" />
+                <action android:name="com.google.android.configupdater.CertPin.NEW_CONTENT" />
+                <action android:name="com.google.android.configupdater.CertPin.NEW_METADATA" />
+            </intent-filter>
+        </service>
+        <receiver android:name=".CertPinUpdateRequestReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <action android:name="com.google.gservices.intent.action.GSERVICES_CHANGED" />
+                <action android:name="com.google.android.configupdater.CertPin.UPDATE_CERT_PINS" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".SmsShortCodesUpdateFetcherService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.configupdater.SmsShortCodes.START" />
+                <action android:name="com.google.android.configupdater.SmsShortCodes.NEW_CONTENT" />
+                <action android:name="com.google.android.configupdater.SmsShortCodes.NEW_METADATA" />
+            </intent-filter>
+        </service>
+        <receiver android:name=".SmsShortCodesUpdateRequestReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <action android:name="com.google.gservices.intent.action.GSERVICES_CHANGED" />
+                <action android:name="com.google.android.configupdater.SmsShortCodes.UPDATE_SMS_SHORT_CODES" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

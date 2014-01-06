@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="40003" android:versionName="4.0.3" android:installLocation="auto" package="com.yellowpages.android.ypmobile"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-feature android:glEsVersion="0x20000" android:required="true" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <permission android:name="com.yellowpages.android.ypmobile.permission.MAPS_RECEIVE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.yellowpages.android.ypmobile.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <supports-screens android:largeScreens="true" android:xlargeScreens="true" />
+    <application android:theme="@style/Default" android:label="YP" android:icon="@drawable/ic_launcher" android:name="YPApplication" android:allowBackup="true">
+        <activity android:name="YPM" android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="yp" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="HomeActivity" />
+        <activity android:name="SearchActivity" />
+        <activity android:name="LocationActivity" />
+        <activity android:name="MoreNearbyActivity" />
+        <activity android:name="AddQuickSearchActivity" />
+        <activity android:name="BusinessSRPActivity" />
+        <activity android:name="CouponSRPActivity" />
+        <activity android:name="GasSRPActivity" />
+        <activity android:name="SettingsActivity" />
+        <activity android:name="MyProfileActivity" android:screenOrientation="portrait" />
+        <activity android:name="PublicProfileActivity" android:screenOrientation="portrait" />
+        <activity android:name="ReviewDetailActivity" />
+        <activity android:name="WriteReviewActivity" />
+        <activity android:name="PhotoDetailActivity" />
+        <activity android:name="YP360DetailActivity" />
+        <activity android:name="EditProfileActivity" />
+        <activity android:name="AttributionActivity" />
+        <activity android:name="OOBEIntroActivity" android:screenOrientation="portrait" />
+        <activity android:name="OOBETourActivity" android:screenOrientation="portrait" />
+        <activity android:name="OOBESignInLandingActivity" android:screenOrientation="portrait" />
+        <activity android:name="FacebookLoginActivity" />
+        <activity android:name="JoinLandingActivity" />
+        <activity android:name="JoinLandingMenuActivity" />
+        <activity android:name="SignInActivity" />
+        <activity android:name="SignInMenuActivity" />
+        <activity android:name="SignInAddNameActivity" />
+        <activity android:name="JoinActivity" android:configChanges="orientation|screenSize" />
+        <activity android:name="ForgotPasswordActivity" />
+        <activity android:name="MyBookLandingActivity" />
+        <activity android:name="MyBookCategoryActivity" />
+        <activity android:name="MyBookBusinessesActivity" />
+        <activity android:name="MyBookCouponsActivity" />
+        <activity android:name="MyBookFilterActivity" />
+        <activity android:name="MyBookAddActivity" />
+        <activity android:name="CouponSearchActivity" />
+        <activity android:name="MyHistoryActivity" />
+        <activity android:name="WebViewActivity" android:screenOrientation="portrait" />
+        <activity android:name="WebViewMenuActivity" android:screenOrientation="portrait" />
+        <activity android:name="WidgetLocationActivity" />
+        <activity android:name="RestaurantWizardActivity" android:screenOrientation="portrait" />
+        <activity android:name="MenuSearchActivity" />
+        <activity android:name="AddBusinessActivity" />
+        <activity android:name="PhotoUploadActivity" />
+        <activity android:name=".mip.BusinessMIPActivity" />
+        <activity android:name=".mip.BusinessDetailsActivity" />
+        <activity android:name=".mip.BusinessReviewsActivity" />
+        <activity android:name=".mip.MenuActivity" />
+        <activity android:name=".mip.ShowtimesActivity" />
+        <activity android:name=".mip.CouponMIPActivity" />
+        <activity android:name=".mip.BusinessMIPMapActivity" />
+        <activity android:name=".mip.GasMIPActivity" />
+        <activity android:name=".mip.GasMIPMapActivity" />
+        <activity android:name=".mip.BusinessFilterActivity" />
+        <activity android:name=".mip.RestaurantFilterActivity" />
+        <activity android:name=".mip.GasFilterActivity" />
+        <activity android:name="DebugActivity" android:exported="true" />
+        <activity android:name="com.yellowpages.android.app.ChainActivity" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar" android:name="com.yellowpages.android.app.DialogActivity" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar" android:name="com.yellowpages.android.app.ResultActivity" />
+        <activity android:name="com.facebook.LoginActivity" />
+        <activity android:name="com.everyscape.android.panoramaui.ESPanoramaActivity" />
+        <receiver android:name="com.AdX.tag.AdXAppTracker" android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <meta-data android:name="APP_NAME" android:value="com.yellowpages.android.ypmobile" />
+        <meta-data android:name="ADX_CLIENT_ID" android:value="mobextyellowpages78948jo" />
+        <receiver android:label="YP (Large)" android:name="YPWidgetLargeProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget_large" />
+        </receiver>
+        <receiver android:label="YP (Small)" android:name="YPWidgetSmallProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget_small" />
+        </receiver>
+        <service android:name="LocationService" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_key" />
+        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="@string/googlemaps_key" />
+    </application>
+</manifest>

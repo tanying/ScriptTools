@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="1" android:versionName="1.0" package="com.mediatek.filemanager"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="@2131230720" android:icon="@2130837515" android:name=".FileManagerApplication">
+        <meta-data android:name="android.app.default_searchable" android:value="com.mediatek.filemanager.FileManagerSearchActivity" />
+        <activity android:theme="@2131361792" android:label="@2131230720" android:name="FileManagerOperationActivity" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize" android:alwaysRetainTaskState="true" android:uiOptions="splitActionBarWhenNarrow">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@2131361794" android:label="@2131230720" android:name=".FileManagerSearchActivity" android:launchMode="singleTask" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@2130968576" />
+        </activity>
+        <activity android:theme="@*android:style/Theme.Holo.Light.NoActionBar" android:label="@2131230720" android:name=".FileManagerSelectPathActivity" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize">
+            <intent-filter>
+                <action android:name="com.mediatek.filemanager.DOWNLOAD_LOCATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@*android:style/Theme.Holo.Light.NoActionBar" android:label="@2131230720" android:name=".FileManagerSelectFileActivity" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize">
+            <intent-filter>
+                <action android:name="com.mediatek.filemanager.ADD_FILE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
+            </intent-filter>
+        </activity>
+        <service android:name=".service.FileManagerService">
+            <intent-filter>
+                <action android:name="com.mediatek.filemanager.service.FileManagerService" />
+            </intent-filter>
+        </service>
+    </application>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.NFC" />
+</manifest>

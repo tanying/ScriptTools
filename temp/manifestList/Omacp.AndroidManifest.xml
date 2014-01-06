@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:sharedUserId="android.uid.mms" android:versionCode="17" android:versionName="4.2.2-vC1M-0" android:sharedUserLabel="@2131034112" package="com.mediatek.omacp"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <original-package android:name="com.mediatek.omacp" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH" />
+    <application android:label="@2131034112">
+        <receiver android:name=".message.OmacpReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED" />
+                <data android:mimeType="application/vnd.wap.connectivity-wbxml" />
+                <data android:mimeType="text/vnd.wap.connectivity-xml" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".message.OmacpReceiverService" android:exported="false" />
+        <activity android:label="@2131034113" android:name=".message.OmacpMessageList">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@2131034156" android:name=".message.OmacpMessageSettingsDetail" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <provider android:name=".provider.OmacpProvider" android:multiprocess="true" android:authorities="omacp" />
+    </application>
+</manifest>

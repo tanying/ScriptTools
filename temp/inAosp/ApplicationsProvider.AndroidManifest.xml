@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:sharedUserId="android.uid.shared" android:versionCode="17" android:versionName="4.2.2-vC1M-0" package="com.android.providers.applications"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+    <application android:label="@2131034112" android:process="android.process.acore">
+        <provider android:name="ApplicationsProvider" android:exported="true" android:multiprocess="false" android:authorities="applications" android:syncable="false" />
+        <activity android:label="@2131034113" android:name="ApplicationLauncher" android:stateNotNeeded="true" android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@2130968576" />
+        </activity>
+    </application>
+</manifest>

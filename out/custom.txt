@@ -1,0 +1,243 @@
+1. PackageName: CityID-release.apk
+        <provider android:name="com.cequint.cityid.CityIdContentProvider" android:enabled="true" android:exported="true" android:authorities="com.cequint.cityid" />
+        <provider android:name="com.cequint.cityid.CallerIdContentProvider" android:enabled="true" android:exported="true" android:authorities="com.cequint.ecid" />
+
+2. PackageName: JrdWeather.apk
+        <provider android:name="com.jrdcom.provider.WeatherContentProvider" android:authorities="com.jrdcom.provider.weatherinfo" />
+
+3. PackageName: GooglePartnerSetup.apk
+        <provider android:name=".RlzProvider" android:permission="com.google.android.partnersetup.permission.ACCESS_PROVIDER" android:exported="true" android:authorities="com.google.android.partnersetup.rlzprovider" />
+        <provider android:name=".RlzAppProvider" android:exported="true" android:authorities="com.google.android.partnersetup.rlzappprovider" />
+
+4. PackageName: DigitalLocker-release-1.apk
+        <provider android:name="com.att.android.digitallocker.async.disk.DiskCacheProvider" android:exported="false" android:process=":loadingProcess" android:authorities="com.att.android.digitallocker.diskcacheprovider" />
+        <provider android:name="com.att.android.digitallocker.utils.UserPreferenceProvider" android:exported="false" android:process=":loadingProcess" android:authorities="com.att.android.digitallocker.utils.userpreferenceprovider" />
+        <provider android:name="com.att.android.digitallocker.upload.UploadQueueProvider" android:exported="false" android:process=":loadingProcess" android:authorities="com.att.android.digitallocker.uploadqueueprovider" />
+
+5. PackageName: SchedulePowerOnOff.apk
+        <provider android:name="com.mediatek.schpwronoff.AlarmProvider" android:authorities="com.android.settings" />
+
+6. PackageName: AABNativeSync.apk
+        <provider android:name=".provider.SyncMLProvider" android:readPermission="android.permission.READ_SYNCML" android:writePermission="android.permission.WRITE_SYNCML" android:exported="true" android:authorities="com.jrdcom.android.syncml" />
+
+7. PackageName: JrdMemo.apk
+        <provider android:name=".data.MemoProvider" android:exported="true" android:authorities="com.tcl.memo" />
+
+8. PackageName: GoogleServicesFramework.apk
+        <provider android:name=".gservices.GservicesProvider" android:readPermission="com.google.android.providers.gsf.permission.READ_GSERVICES" android:writePermission="com.google.android.providers.gsf.permission.WRITE_GSERVICES" android:exported="true" android:process="com.google.process.gapps" android:multiprocess="false" android:authorities="com.google.android.gsf.gservices" />
+        <provider android:label="@string/provider_label" android:name=".subscribedfeeds.SubscribedFeedsProvider" android:readPermission="android.permission.SUBSCRIBED_FEEDS_READ" android:writePermission="android.permission.SUBSCRIBED_FEEDS_WRITE" android:exported="true" android:multiprocess="false" android:authorities="subscribedfeeds" />
+        <provider android:name=".talk.TalkProvider" android:readPermission="com.google.android.providers.talk.permission.READ_ONLY" android:writePermission="com.google.android.providers.talk.permission.WRITE_ONLY" android:exported="true" android:multiprocess="false" android:authorities="com.google.android.providers.talk" android:grantUriPermissions="true">
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:path="/contacts/search_suggest_query" />
+        </provider>
+        <provider android:name=".settings.GoogleSettingsProvider" android:writePermission="com.google.android.providers.settings.permission.WRITE_GSETTINGS" android:exported="true" android:multiprocess="false" android:authorities="com.google.settings" android:initOrder="100" />
+
+9. PackageName: Omacp.apk
+        <provider android:name=".provider.OmacpProvider" android:multiprocess="true" android:authorities="omacp" />
+
+10. PackageName: Email.apk
+        <provider android:name="com.mediatek.email.provider.EmailSuggestionsProvider" android:exported="true" android:authorities="com.mediatek.email.provider.EmailSuggestionsProvider" />
+        <provider android:name=".provider.AttachmentProvider" android:readPermission="com.android.email.permission.READ_ATTACHMENT" android:exported="true" android:multiprocess="true" android:authorities="com.android.email.attachmentprovider" android:grantUriPermissions="true" />
+        <provider android:label="@2131231010" android:name=".provider.EmailProvider" android:permission="com.android.email.permission.ACCESS_PROVIDER" android:exported="true" android:multiprocess="true" android:authorities="com.android.email.provider;com.android.email.notifier" android:grantUriPermissions="true" />
+        <provider android:label="@2131231010" android:name="com.mediatek.email.provider.history.EmailAddressHisProviders" android:exported="true" android:authorities="com.mediatek.email.provider.history">
+            <meta-data android:name="android.content.ContactDirectory" android:value="true" />
+        </provider>
+
+11. PackageName: ContactsProvider.apk
+        <provider android:label="@2130968579" android:name="ContactsProvider2" android:readPermission="android.permission.READ_CONTACTS" android:writePermission="android.permission.WRITE_CONTACTS" android:exported="true" android:multiprocess="false" android:authorities="contacts;com.android.contacts">
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPrefix="/search_suggest_query" />
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPrefix="/search_suggest_shortcut" />
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPattern="/contacts/.*/photo" />
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+
+12. PackageName: Books.apk
+        <provider android:name=".provider.BooksProvider" android:permission="android.permission.GLOBAL_SEARCH" android:exported="true" android:authorities="com.google.android.apps.books" />
+        <provider android:name=".provider.BooksProvider$PublicProvider" android:exported="true" android:authorities="com.google.android.apps.books.public" />
+
+13. PackageName: PlusOne.apk
+        <provider android:label="@string/es_data" android:name=".content.EsProvider" android:exported="false" android:authorities="com.google.android.apps.plus.content.EsProvider">
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:path="/search_suggest_query" />
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:label="@string/es_data" android:name=".content.EsApiProvider" android:exported="true" android:authorities="com.google.android.apps.plus.content.ApiProvider">
+            <path-permission android:readPermission="android.permission.GET_ACCOUNTS" android:path="/account" />
+        </provider>
+        <provider android:label="@string/es_google_photo_provider" android:name="com.google.android.picasasync.PicasaContentProvider" android:exported="true" android:authorities="com.google.android.apps.plus.content.EsGooglePhotoProvider" android:syncable="true" />
+        <provider android:label="@string/es_google_photo_share_provider" android:name="com.google.android.apps.photos.content.GooglePhotosImageProvider" android:permission="com.google.android.apps.photos.permission.GOOGLE_PHOTOS" android:exported="true" android:authorities="com.google.android.apps.photos.content" android:syncable="false" android:grantUriPermissions="true" />
+        <provider android:label="@string/es_google_iu_provider" android:name=".iu.InstantUploadProvider" android:exported="false" android:authorities="com.google.android.apps.plus.iu.EsGoogleIuProvider" android:syncable="true" />
+        <provider android:name="com.google.android.picasastore.PicasaPhotoContentProvider" android:permission="com.google.android.apps.plus.permission.PICASA_STORE" android:exported="true" android:authorities="com.google.android.apps.plus.content.EsPicasaStoreProvider" />
+        <provider android:name="com.google.android.apps.plus.content.AdsProvider" android:exported="true" android:authorities="com.google.plus.platform" />
+
+14. PackageName: GmsCore.apk
+        <provider android:label="@string/games_sync_label" android:icon="@drawable/ic_launcher_play_games" android:name=".games.provider.GamesContentProvider" android:exported="false" android:authorities="com.google.android.gms.games.background" android:syncable="true" />
+        <provider android:label="@string/games_sync_label" android:icon="@drawable/ic_launcher_play_games" android:name=".games.provider.NotificationStubContentProvider" android:exported="false" android:authorities="com.google.android.gms.games" android:syncable="true" />
+        <provider android:name=".plus.provider.PlusProvider" android:exported="false" android:authorities="com.google.android.gms.plus;com.google.android.gms.plus.action" />
+        <provider android:name="com.google.android.location.internal.LocationContentProvider" android:exported="true" android:process="com.google.process.location" android:authorities="com.google.android.location.internal" android:syncable="false" />
+        <provider android:label="@string/location_ulr_sync_label" android:name="com.google.android.location.reporting.service.ReportingContentProvider" android:exported="false" android:process="com.google.process.location" android:authorities="com.google.android.location.reporting" android:syncable="true" />
+        <provider android:label="@string/people_content_provider_title" android:name=".people.service.PeopleContentProvider" android:exported="false" android:authorities="com.google.android.gms.people" android:syncable="true" />
+        <provider android:label="@string/people_content_provider_title" android:name=".people.debug.PeopleExportProvider" android:exported="true" android:authorities="com.google.android.gms.people.export" />
+        <provider android:label="@string/appstate_sync_label" android:name=".appstate.provider.AppStateContentProvider" android:exported="false" android:authorities="com.google.android.gms.appstate" android:syncable="true" />
+
+15. PackageName: Chrome.apk
+        <provider android:name="com.google.android.apps.chrome.snapshot.SnapshotProvider" android:exported="false" android:authorities="com.android.chrome.snapshot" />
+        <provider android:name="com.google.android.apps.chrome.ChromeBrowserProvider" android:readPermission="com.android.browser.permission.READ_HISTORY_BOOKMARKS" android:writePermission="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS" android:exported="true" android:authorities="com.android.chrome.ChromeBrowserProvider;com.android.chrome.browser;com.android.chrome">
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:path="/bookmarks/search_suggest_query" />
+        </provider>
+        <provider android:name="com.google.android.apps.chrome.icing.IcingProvider" android:exported="false" android:authorities="com.android.chrome.icing" android:grantUriPermissions="true" />
+        <provider android:name="com.google.android.apps.chrome.AutofillDataProvider" android:exported="true" android:authorities="com.android.chrome.AutofillDataProvider" />
+
+16. PackageName: MediaUploader.apk
+        <provider android:name="com.google.android.picasasync.PicasaContentProvider1" android:exported="false" android:authorities="com.google.android.apps.uploader.PicasaUploadProvider" />
+
+17. PackageName: PartnerBookmarksProvider.apk
+        <provider android:name="PartnerBookmarksProvider" android:authorities="com.android.partnerbookmarks" />
+
+18. PackageName: CellBroadcastReceiver.apk
+        <provider android:name="CellBroadcastContentProvider" android:readPermission="android.permission.READ_CELL_BROADCASTS" android:exported="true" android:authorities="cellbroadcasts" />
+
+19. PackageName: AndroidGamesApp-1.apk
+        <provider android:name=".provider.PropertiesProvider" android:exported="true" android:authorities="com.wildtangent.android.provider.propertyprovider" />
+
+20. PackageName: Hangouts.apk
+        <provider android:authorities="com.google.android.apps.babel.content.EsProvider" android:label="@string/babel_data" android:name="com.google.android.apps.babel.content.EsProvider">
+            <path-permission android:path="/search_suggest_query" android:readPermission="android.permission.GLOBAL_SEARCH"/>
+            <grant-uri-permission android:pathPrefix="/imagescratchspace/"/>
+        </provider>
+
+21. PackageName: Settings.apk
+        <provider android:name="com.mediatek.thememanager.ThemeProvider" android:authorities="com.mediatek.thememanager.ThemeProvider" />
+
+22. PackageName: Gmail2.apk
+        <provider android:label="@string/provider_label" android:name=".provider.MailProvider" android:readPermission="com.google.android.gm.permission.READ_GMAIL" android:writePermission="com.google.android.gm.permission.WRITE_GMAIL" android:exported="true" android:multiprocess="false" android:authorities="gmail-ls">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:label="@string/public_provider_label" android:name=".provider.PublicContentProvider" android:readPermission="com.google.android.gm.permission.READ_CONTENT_PROVIDER" android:exported="true" android:multiprocess="false" android:authorities="com.google.android.gm">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:label="@string/ui_provider_label" android:name=".provider.GmailProvider" android:readPermission="com.google.android.gm.permission.READ_GMAIL" android:writePermission="com.google.android.gm.permission.WRITE_GMAIL" android:exported="false" android:multiprocess="false" android:authorities="com.android.gmail.ui">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:name="com.google.android.gm.SuggestionsProvider" android:exported="false" android:authorities="com.google.android.gmail.SuggestionsProvider" />
+        <provider android:label="@string/conversation_content_provider" android:name="com.android.mail.browse.GmailConversationProvider" android:exported="false" android:multiprocess="false" android:authorities="com.google.android.gm2.conversation.provider">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:label="@string/account_cache_provider" android:name="com.android.mail.providers.GmailAccountCacheProvider" android:exported="false" android:multiprocess="false" android:authorities="com.google.android.gm2.accountcache">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:name="com.android.mail.providers.EmlAttachmentProvider" android:exported="false" android:multiprocess="false" android:authorities="@string/eml_attachment_provider">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+
+23. PackageName: FMRadio.apk
+        <provider android:name=".FMRadioContentProvider" android:authorities="com.mediatek.FMRadio.FMRadioContentProvider" />
+
+24. PackageName: Phone.apk
+        <provider android:name="com.mediatek.settings.CallRejectContentProvider" android:authorities="reject" />
+
+25. PackageName: GoogleDrive.apk
+        <provider android:authorities="com.google.android.apps.docs" android:exported="false" android:name="com.google.android.gms.drive.database.DocListProvider"/>
+        <provider android:authorities="com.google.android.apps.docs.storage" android:enabled="@bool/is_kitkat_or_above" android:exported="@bool/is_kitkat_or_above" android:grantUriPermissions="true" android:icon="@drawable/launcher_drive_icon" android:label="@string/app_name" android:name="com.google.android.gms.drive.external.StorageBackendContentProvider" android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER"/>
+            </intent-filter>
+        </provider>
+        <provider android:authorities="com.google.android.apps.docs.storage.legacy" android:exported="true" android:icon="@drawable/launcher_drive_icon" android:label="@string/app_name" android:name="com.google.android.gms.drive.external.LegacyStorageBackendContentProvider"/>
+        <provider android:authorities="com.google.android.apps.docs.doclist.search_suggest" android:name="com.google.android.apps.docs.doclist.DocListGlobalSearchSuggestionProvider" android:permission="com.google.android.apps.docs.permission.READ_MY_DATA">
+            <path-permission android:pathPrefix="/search_suggest_query" android:readPermission="android.permission.GLOBAL_SEARCH"/>
+        </provider>
+        <provider android:authorities="com.google.android.apps.docs.doclist.account_suggest" android:exported="false" android:name="com.google.android.apps.docs.doclist.DocListAccountSuggestionProvider"/>
+        <provider android:authorities="com.google.android.apps.docs.files" android:name="com.google.android.apps.docs.sync.filemanager.FileProvider"/>
+        <provider android:authorities="com.google.android.apps.docs.oem.welcome.promotion" android:exported="true" android:name="com.google.android.apps.docs.welcome.PromotionEnabled"/>
+
+26. PackageName: Gallery2.apk
+        <provider android:name="com.android.gallery3d.filtershow.provider.SharedImageProvider" android:exported="true" android:authorities="com.android.gallery3d.filtershow.provider.SharedImageProvider" />
+
+27. PackageName: TelephonyProvider.apk
+        <provider android:name="CbProvider" android:exported="true" android:multiprocess="true" android:authorities="cb" />
+
+28. PackageName: YouTube.apk
+        <provider android:name="com.google.android.apps.youtube.core.suggest.SuggestionProvider" android:exported="false" android:authorities="com.google.android.youtube.SuggestionProvider" />
+
+29. PackageName: OfficeSuite_Viewer_Alcatel_With_Links_7.apk
+        <provider android:name="com.mobisystems.office.io.HelpContentProvider" android:exported="true" android:authorities="com.mobisystems.office.help" />
+        <provider android:name="com.mobisystems.office.search.FileSearchProvider" android:exported="true" android:process=":search" android:multiprocess="false" android:authorities="com.mobisystems.office.search" />
+        <provider android:name="com.mobisystems.zip.ZipProvider" android:exported="true" android:process=":browser" android:authorities="com.mobisystems.office.zip" />
+        <provider android:name="com.mobisystems.office.mail.provider.AttachmentProvider" android:exported="true" android:process="com.mobisystems.office.mail" android:authorities="com.mobisystems.office.mail.provider.attachmentprovider" />
+        <provider android:name="com.mobisystems.provider.ProviderWrapper" android:permission="com.mobisystems.wrapper.permission" android:exported="true" android:authorities="com.mobisystems.office.wrapper" android:grantUriPermissions="true" />
+
+30. PackageName: AdobeReader_20130308_v10.apk
+        <provider android:name=".ARContentProvider" android:readPermission="com.adobe.reader.provider.permission.READ" android:writePermission="com.adobe.reader.provider.permission.WRITE" android:authorities="com.adobe.reader.fileprovider" android:grantUriPermissions="false">
+            <grant-uri-permission android:pathPrefix="/attachment_extracted_docs/" />
+            <grant-uri-permission android:pathPrefix="/.Skybox.Cache/" />
+        </provider>
+
+31. PackageName: Phonesky.apk
+        <provider android:name="com.google.android.finsky.providers.RecentSuggestionsProvider" android:authorities="com.google.android.finsky.RecentSuggestionsProvider" />
+        <provider android:name="com.google.android.finsky.providers.AppIconProvider" android:authorities="com.google.android.finsky.AppIconProvider" />
+        <provider android:name="com.google.android.finsky.providers.QSBSuggestionsProvider" android:authorities="com.google.android.finsky.QSBSuggestionsProvider2" />
+
+32. PackageName: VoiceSearchStub.apk
+        <provider android:name=".VoiceSearchSettingsProvider" android:readPermission="com.google.android.voicesearch.ACCESS_SETTINGS" android:writePermission="com.google.android.voicesearch.ACCESS_SETTINGS" android:enabled="true" android:exported="true" android:multiprocess="true" android:authorities="com.google.android.voicesearch" android:syncable="false" android:grantUriPermissions="false" />
+
+33. PackageName: Magazines.apk
+        <provider android:label="@string/app_name" android:name="com.google.apps.dots.android.newsstand.provider.NSContentProvider" android:exported="false" android:multiprocess="false" android:authorities="com.google.android.apps.magazines" android:syncable="false" />
+        <provider android:label="@string/app_name" android:name="com.google.apps.dots.android.newsstand.provider.ExportedContentProvider" android:exported="true" android:multiprocess="false" android:authorities="com.google.android.apps.magazines.exported" android:syncable="false" />
+        <provider android:label="@string/app_name" android:name="com.google.apps.dots.android.newsstand.provider.WebDataContentProvider" android:exported="true" android:multiprocess="false" android:authorities="com.google.android.apps.magazines.webdata" android:syncable="false" />
+
+34. PackageName: Videos.apk
+        <provider android:name="com.google.android.videos.search.VideoSearchProvider" android:exported="true" android:authorities="com.google.android.videos" />
+        <provider android:name="com.google.android.videos.search.IcingContentProvider" android:exported="false" android:authorities="com.google.android.videos.icing" android:grantUriPermissions="true" />
+        <provider android:name="com.google.android.videos.search.SuggestionsProvider" android:exported="false" android:authorities="com.google.android.videos.suggest" />
+        <provider android:label="@string/sync_purchases_label" android:name="com.google.android.videos.store.SyncService$DummyContentProvider" android:exported="false" android:authorities="com.google.android.videos.sync" />
+
+35. PackageName: SmsReg.apk
+        <provider android:name="com.mediatek.smsreg.SmsRegContentProvider" android:readPermission="android.permission.READ_PHONE_STATE" android:authorities="com.mediatek.providers.smsreg" />
+
+36. PackageName: MtkBt.apk
+        <provider android:name=".ftp.BluetoothFtpProvider" android:authorities="com.mediatek.provider.bluetooth.ftp" />
+        <provider android:name=".bip.BipProvider" android:authorities="com.mediatek.provider.bluetooth.bip" />
+        <provider android:name=".share.BluetoothShareProvider" android:authorities="com.mediatek.provider.bluetooth.share" />
+
+37. PackageName: Velvet.apk
+        <provider android:label="@string/app_name" android:name="com.google.android.search.core.google.GoogleSuggestionProvider" android:permission="android.permission.INTERNET" android:exported="true" android:process=":search" android:authorities="com.google.android.googlequicksearchbox.google" />
+        <provider android:name="com.google.android.speech.audio.AudioProvider" android:permission="com.google.android.voicesearch.AUDIO_FILE_ACCESS" android:exported="true" android:process=":search" android:authorities="com.google.android.googlequicksearchbox.AudioProvider" android:grantUriPermissions="true" />
+        <provider android:name="com.google.android.velvet.gallery.ImageProvider" android:exported="false" android:process=":search" android:authorities="com.google.android.velvet.gallery.ImageProvider" />
+        <provider android:name="com.google.android.search.core.summons.icing.InternalIcingCorporaProvider" android:enabled="@bool/internal_icing_corpora_enabled" android:exported="false" android:process=":search" android:authorities="com.google.android.googlequicksearchbox.icing" android:grantUriPermissions="true" />
+        <provider android:name="com.android.launcher3.LauncherProvider" android:readPermission="com.android.launcher3.permission.READ_SETTINGS" android:writePermission="com.android.launcher3.permission.WRITE_SETTINGS" android:enabled="true" android:exported="true" android:process="" android:authorities="com.google.android.launcher.settings" />
+
+38. PackageName: Calendar.apk
+        <provider android:name=".CalendarRecentSuggestionsProvider" android:exported="true" android:authorities="com.android.calendar.CalendarRecentSuggestionsProvider" />
+
+39. PackageName: Music2.apk
+        <provider android:name="com.google.android.music.store.ConfigContentProvider" android:exported="false" android:process=":main" android:multiprocess="false" android:authorities="com.google.android.music.ConfigContent" android:initOrder="2" />
+        <provider android:name="com.google.android.music.store.MusicContentProvider" android:exported="true" android:process=":main" android:multiprocess="false" android:authorities="com.google.android.music.MusicContent" android:initOrder="1" />
+        <provider android:name=".xdi.XdiContentProvider" android:readPermission="com.google.android.xdi.permission.ACCESS_APP_BROWSE_DATA" android:writePermission="com.google.android.xdi.permission.ACCESS_APP_BROWSE_DATA" android:exported="true" android:process=":main" android:multiprocess="false" android:authorities="com.google.android.music.xdi" />
+
+40. PackageName: JrdTimeTool.apk
+        <provider android:name="com.jrdcom.timetool.alarm.provider.AlarmProvider" android:exported="true" android:authorities="com.jrdcom.timetool.alarm" />
+        <provider android:name="com.jrdcom.timetool.worldclock.provider.TimeZoneProvider" android:exported="true" android:authorities="com.jrdcom.timetool.worldclock" android:grantUriPermissions="true" />
+
+41. PackageName: CalendarProvider.apk
+        <provider android:label="@2131034120" android:name="CalendarProvider2" android:readPermission="android.permission.READ_CALENDAR" android:writePermission="android.permission.WRITE_CALENDAR" android:exported="true" android:multiprocess="false" android:authorities="com.android.calendar" />
+
+42. PackageName: CalendarImporter.apk
+        <provider android:name=".ICalendarProvider" android:exported="true" android:authorities="com.mediatek.calendarimporter" />
+
+43. PackageName: talkback.apk
+        <provider android:name=".StatusProvider" android:exported="true" android:authorities="com.google.android.marvin.talkback.providers.StatusProvider" />
+        <provider android:name=".labeling.LabelProvider" android:readPermission="com.google.android.marvin.talkback.permission.LABELING" android:writePermission="com.google.android.marvin.talkback.permission.LABELING" android:exported="true" android:authorities="com.google.android.marvin.talkback.providers.LabelProvider" />
+
+44. PackageName: Browser.apk
+        <provider android:name=".provider.BrowserProvider2" android:readPermission="com.android.browser.permission.READ_HISTORY_BOOKMARKS" android:writePermission="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS" android:exported="true" android:multiprocess="false" android:authorities="com.android.browser;browser">
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:path="/bookmarks/search_suggest_query" />
+            <path-permission android:readPermission="com.android.browser.permission.READ_HOMEPAGE" android:writePermission="com.android.browser.permission.WRITE_HOMEPAGE" android:path="/homepage" />
+        </provider>
+
+45. PackageName: GoogleContactsSyncAdapter.apk
+        <provider android:name="com.google.android.syncadapters.contacts.GalProvider" android:readPermission="android.permission.BIND_DIRECTORY_SEARCH" android:exported="true" android:multiprocess="false" android:authorities="com.google.contacts.gal.provider">
+            <meta-data android:name="android.content.ContactDirectory" android:value="true" />
+        </provider>
+
+46. PackageName: Maps_alldpi.apk
+        <provider android:name="com.google.android.apps.gmm.navigation.util.NavigationAvailabilityProvider" android:exported="true" android:authorities="com.google.android.maps.NavigationAvailabilityProvider" />
+

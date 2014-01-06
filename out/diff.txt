@@ -1,0 +1,39 @@
+1. Different Package: ContactsProvider.apk
+    Jrd Content Provider:
+        <provider android:label="@2130968579" android:name="ContactsProvider2" android:readPermission="android.permission.READ_CONTACTS" android:writePermission="android.permission.WRITE_CONTACTS" android:exported="true" android:multiprocess="false" android:authorities="contacts;com.android.contacts">
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPrefix="/search_suggest_query" />
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPrefix="/search_suggest_shortcut" />
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPattern="/contacts/.*/photo" />
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+    Emu Content Provider:
+        <provider android:label="@string/provider_label" android:name="ContactsProvider2" android:readPermission="android.permission.READ_CONTACTS" android:writePermission="android.permission.WRITE_CONTACTS" android:exported="true" android:multiprocess="false" android:authorities="contacts;com.android.contacts">
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPrefix="/search_suggest_query" />
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPrefix="/search_suggest_shortcut" />
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPattern="/contacts/.*/photo" />
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+
+2. Different Package: Calendar.apk
+    Jrd Content Provider:
+        <provider android:name=".CalendarRecentSuggestionsProvider" android:exported="true" android:authorities="com.android.calendar.CalendarRecentSuggestionsProvider" />
+    Emu Content Provider:
+        <provider android:name=".CalendarRecentSuggestionsProvider" android:exported="false" android:authorities="com.android.calendar.CalendarRecentSuggestionsProvider" />
+
+3. Different Package: CalendarProvider.apk
+    Jrd Content Provider:
+        <provider android:label="@2131034120" android:name="CalendarProvider2" android:readPermission="android.permission.READ_CALENDAR" android:writePermission="android.permission.WRITE_CALENDAR" android:exported="true" android:multiprocess="false" android:authorities="com.android.calendar" />
+    Emu Content Provider:
+        <provider android:label="@string/provider_label" android:name="CalendarProvider2" android:readPermission="android.permission.READ_CALENDAR" android:writePermission="android.permission.WRITE_CALENDAR" android:exported="true" android:multiprocess="false" android:authorities="com.android.calendar" />
+
+4. Different Package: Browser.apk
+    Jrd Content Provider:
+        <provider android:name=".provider.BrowserProvider2" android:readPermission="com.android.browser.permission.READ_HISTORY_BOOKMARKS" android:writePermission="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS" android:exported="true" android:multiprocess="false" android:authorities="com.android.browser;browser">
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:path="/bookmarks/search_suggest_query" />
+            <path-permission android:readPermission="com.android.browser.permission.READ_HOMEPAGE" android:writePermission="com.android.browser.permission.WRITE_HOMEPAGE" android:path="/homepage" />
+        </provider>
+    Emu Content Provider:
+        <provider android:name=".provider.BrowserProvider2" android:readPermission="com.android.browser.permission.READ_HISTORY_BOOKMARKS" android:writePermission="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS" android:exported="true" android:multiprocess="false" android:authorities="com.android.browser;browser">
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:path="/bookmarks/search_suggest_query" />
+        </provider>
+

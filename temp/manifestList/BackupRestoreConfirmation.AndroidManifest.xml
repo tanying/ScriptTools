@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="17" android:versionName="4.2.2-vC1M-0" package="com.android.backupconfirm"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.BACKUP" />
+    <uses-permission android:name="android.permission.CRYPT_KEEPER" />
+    <application android:allowClearUserData="false" android:permission="android.permission.CONFIRM_FULL_BACKUP" android:allowBackup="false">
+        <activity android:name=".BackupRestoreConfirmation" android:exported="true" android:excludeFromRecents="true" android:title="" android:windowSoftInputMode="stateAlwaysHidden" />
+    </application>
+</manifest>

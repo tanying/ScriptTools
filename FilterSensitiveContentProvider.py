@@ -25,6 +25,7 @@ customDir = outdir + "/custom/"
 diffTxt = outdir + "/diff.txt"
 customTxt = outdir + "/custom.txt"
 withoutPermissionTxt = outdir + "/withoutPermission.txt"
+withPermissionTxt = outdir + "/withPermission.txt"
 
 outXls = outdir + "/out.xls"
 
@@ -179,9 +180,11 @@ def filterCustomOEM():
     diffStr = ''
     customStr = ''
     withoutPermissionStr = ''
+    withPermissionStr = ''
     itemNo = 0
     diffNo = 0
     withoutPermissionNo = 0
+    withPermissionNo = 0
 
     for root,dirs,files in os.walk(ManifestListPath):
         for filespath in files:
@@ -215,13 +218,20 @@ def filterCustomOEM():
                     customStr += diff['customStr']
                     customStr += '\n'
 
-                    tempStr = filterWithoutPermissionContentProvider(diff['customStr'], filespath)
-                    len(tempStr)
-                    if len(tempStr) > 1:
+                    pdict = filterPermissionContentProvider(diff['customStr'], filespath)
+                    tempStr1 = pdict['without']
+                    tempStr2 = pdict['within']
+                    len(tempStr1)
+                    if len(tempStr1) > 1:
                         withoutPermissionNo += 1 
                         filename = getPackageName(filespath)
-                        tempStr = str(withoutPermissionNo) + '. Without Permission Package: ' + filename + tempStr
-                        withoutPermissionStr += tempStr
+                        tempStr1 = str(withoutPermissionNo) + '. Without Permission Package: ' + filename + tempStr1
+                        withoutPermissionStr += tempStr1
+                    if len(tempStr2) > 1:
+                        withPermissionNo += 1 
+                        filename = getPackageName(filespath)
+                        tempStr2 = str(withoutPermissionNo) + '. With Permission Package: ' + filename + tempStr2
+                        withPermissionStr += tempStr2
 
                     outDict = {}            
                     outDict['packagename'] = getPackageName(filespath)
@@ -244,13 +254,20 @@ def filterCustomOEM():
                     customStr += jrdProviderStr
                     customStr += '\n'
 
-                    tempStr = filterWithoutPermissionContentProvider(jrdProviderStr, filespath)
+                    pdict = filterPermissionContentProvider(jrdProviderStr, filespath)
+                    tempStr1 = pdict['without']
+                    tempStr2 = pdict['within']
                     #print len(tempStr)
-                    if len(tempStr) > 1:
+                    if len(tempStr1) > 1:
                         withoutPermissionNo += 1 
                         filename = getPackageName(filespath)
-                        tempStr = str(withoutPermissionNo) + '. Without Permission Package: ' + filename + tempStr
-                        withoutPermissionStr += tempStr
+                        tempStr1 = str(withoutPermissionNo) + '. Without Permission Package: ' + filename + tempStr1
+                        withoutPermissionStr += tempStr1
+                    if len(tempStr2) > 1:
+                        withPermissionNo += 1 
+                        filename = getPackageName(filespath)
+                        tempStr2 = str(withPermissionNo) + '. With Permission Package: ' + filename + tempStr2
+                        withPermissionStr += tempStr2
 
                     outDict = {}
                     outDict['packagename'] = getPackageName(filespath)
@@ -261,9 +278,11 @@ def filterCustomOEM():
             fDiff = open(diffTxt, 'w')
             fCustom = open(customTxt, 'w')
             fWithoutPermission = open(withoutPermissionTxt, 'w')
+            fWithPermission = open(withPermissionTxt, 'w')
             fDiff.write(diffStr)
             fCustom.write(customStr)
             fWithoutPermission.write(withoutPermissionStr)
+            fWithPermission.write(withPermissionStr)
             fDiff.close()
             fCustom.close()
             fWithoutPermission.close()
@@ -325,33 +344,51 @@ def splitProvider(provider):
     #print providerlist
     return providerlist
 
-
-def filterWithoutPermissionContentProvider(providers, filename):
-    string = ''
+def filterPermissionContentProvider(providers, filename):
+    withPermissionStr = ''
+    withoutPermissionStr = ''
     providerlist = splitProvider(providers)
+    permissionDict = {}
     
     for provider in providerlist:
         exported = getAttrValueByAttrTitle('exported', provider)
         if exported == 'true':
-            readPermission = getAttrValueByAttrTitle('readPermission', provider)
-            writePermission = getAttrValueByAttrTitle('writePermission', provider)
-            if readPermission or writePermission:
-                pass
+            if checkPermissionAttr(provider):
+                withPermissionStr += '\n'
+                withPermissionStr += '        '
+                withPermissionStr += provider
             else:
-                string += '\n'
-                string += '        '
-                string += provider
-
+                withoutPermissionStr += '\n'
+                withoutPermissionStr += '        '
+                withoutPermissionStr += provider
         elif exported == '':
-            filepath = customDir + filename
-            checkSdkVersion(filepath)
-            string += '\n'
-            string += '        '
-            string += provider
+            #filepath = customDir + filename
+            #checkSdkVersion(filepath)
+            if checkPermissionAttr(provider):
+                withPermissionStr += '\n'
+                withPermissionStr += '        '
+                withPermissionStr += provider
+            else:
+                withoutPermissionStr += '\n'
+                withoutPermissionStr += '        '
+                withoutPermissionStr += provider
 
-    string += '\n'
+    withPermissionStr += '\n'
+    withoutPermissionStr += '\n'
+
+    permissionDict['within'] = withPermissionStr
+    permissionDict['without'] = withoutPermissionStr
     
-    return string
+    return permissionDict
+
+def checkPermissionAttr(provider):
+    readPermission = getAttrValueByAttrTitle('readPermission', provider)
+    writePermission = getAttrValueByAttrTitle('writePermission', provider)
+    permission = getAttrValueByAttrTitle('permission', provider)
+    if readPermission or writePermission or permission:
+        return True
+    else:
+         return False 
 
 def checkSdkVersion(path):
     file = open(path, 'r')
@@ -407,7 +444,7 @@ def main():
         #         filepath = os.path.join(root ,filename)
         #         print filepath
         #         #filterSensitiveContentProvider(filepath)
-        #         filterWithoutPermissionContentProvider(filepath)
+        #         filterPermissionContentProvider(filepath)
         # #print "Filter Sensitive content provider successed!!!\n"
         # print "Filter without permission content provider successed!!!\n"
     

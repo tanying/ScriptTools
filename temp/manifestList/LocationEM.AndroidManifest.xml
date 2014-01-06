@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="1" android:versionName="1.0" package="com.mediatek.lbs.em"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher2">
+        <activity android:label="@string/app_name" android:name=".MyTabActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/app_name" android:name=".LbsGps" />
+        <activity android:label="@string/app_name" android:name=".LbsView" />
+        <activity android:label="@string/app_name" android:name=".LbsAgps" />
+        <activity android:label="@string/app_name" android:name=".LbsCpAutoTest" />
+        <activity android:label="@string/app_name" android:name=".LbsEpo" />
+        <activity android:label="@string/app_name" android:name=".LbsMap" />
+        <activity android:label="@string/app_name" android:name=".LbsNet" />
+        <activity android:label="@string/app_name" android:name=".LbsMisc" />
+        <activity android:label="@string/app_name" android:name=".FileBrowser" />
+    </application>
+</manifest>
