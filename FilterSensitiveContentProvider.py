@@ -26,7 +26,7 @@ diffTxt = outdir + "/diff.txt"
 customTxt = outdir + "/custom.txt"
 withoutPermissionTxt = outdir + "/withoutPermission.txt"
 withPermissionTxt = outdir + "/withPermission.txt"
-
+shareUserIdPkgTxt = outdir + "/shareUserIdPkg.txt"
 outXls = outdir + "/out.xls"
 
 showDiff = True
@@ -75,9 +75,7 @@ def pullAndroidManifestsFromPhone(path1, path2, path3):
 
     os.chdir("PullAndroidManifestTool")
     os.system("pwd")
-    os.system("%s %s %s" % (command, path1, tempdir))
-    os.system("%s %s %s" % (command, path2, tempdir))
-    os.system("%s %s %s" % (command, path3, tempdir))
+    os.system("%s %s %s %s %s" % (command, path1, path2, path3, tempdir))
     os.chdir("%s" % EnvPath)
 
 #Find Content Provider in android manifest, return a contentProvider String.
@@ -106,7 +104,7 @@ def filterContentProvider(path):
 
 #Get the content provider attribute value
 def getAttrValueByAttrTitle(attrTitle, str):
-    attrStr = 'android:' + attrTitle + '="'
+    attrStr = attrTitle + '="'
     if str.find(attrStr) > -1:
         pos1 = str.find(attrStr) + len(attrStr)
         attrValue = str[pos1:]
@@ -154,7 +152,7 @@ def analyseDiff(jrdStr, emuStr, path):
                 #print ":::::same\n"
                 pass
             else:
-                name = getAttrValueByAttrTitle('name', jrdProvider)
+                name = getAttrValueByAttrTitle('android:name', jrdProvider)
                 if emuStr.find(name) > -1:
                     diffStr += 'Different Package: '
                     diffStr += getPackageName(path)
@@ -176,20 +174,55 @@ def analyseDiff(jrdStr, emuStr, path):
                 diffDict['diffStr'] = diffStr
                 return diffDict
 
+# Filter SharedUserIdPkg.
+def filterSharedUserIdPkg(path):
+    manifestStr = getNodeByTag('manifest', path)
+    shareUserId = getAttrValueByAttrTitle('android:sharedUserId', manifestStr)
+    pkg = getAttrValueByAttrTitle('package', manifestStr)
+    sharedUserIdPkgStr = '' 
+    if shareUserId.strip(' '):
+        sharedUserIdPkgStr = 'android:sharedUserId="'+shareUserId + '  ' + 'package="'+pkg+'"\n'
+    return sharedUserIdPkgStr
+
+# get xml node by tag name of each manifest file
+def getNodeByTag(tag, path):
+    file = open(path, 'r')
+    nodeStr = ''
+    inTag = False
+    while True:
+        line = file.readline()
+        if line.find('<' + tag) > -1 and not (inTag):
+            nodeStr += line
+            inTag = True
+        if line.find('>') > -1 and inTag:
+            nodeStr += line
+            break
+        if line.find('<' + tag) <0 and line.find('>') < 0 and inTag:
+            nodeStr += line
+    return nodeStr 
+
+
 def filterCustomOEM():
     diffStr = ''
     customStr = ''
     withoutPermissionStr = ''
     withPermissionStr = ''
+    shareUserIdPkgStr = ''
     itemNo = 0
     diffNo = 0
     withoutPermissionNo = 0
     withPermissionNo = 0
+    shareUserIdNo = 0
 
     for root,dirs,files in os.walk(ManifestListPath):
         for filespath in files:
             jrdfilepath = os.path.join(root,filespath)
             emufilepath = os.path.join(EmuListPath,filespath)
+            # Filter SharedUserIdPkg 
+            shareUserIdStr = filterSharedUserIdPkg(jrdfilepath) 
+            if shareUserIdStr:
+                shareUserIdNo +=1
+                shareUserIdPkgStr += str(shareUserIdNo) + '. ' + shareUserIdStr
             if os.path.isfile(emufilepath):
                 inAospFile = inAospDir + filespath
                 #print "Copy file:" + inAospFile
@@ -236,7 +269,7 @@ def filterCustomOEM():
                     outDict = {}            
                     outDict['packagename'] = getPackageName(filespath)
                     outDict['contentprovider'] = diff['customStr']
-                    outDict['providername'] = getAttrValueByAttrTitle('name', diff['customStr'])
+                    outDict['providername'] = getAttrValueByAttrTitle('android:name', diff['customStr'])
                     outDict['diff'] = diff['diffStr'] 
                     outList.append(outDict)
             else:
@@ -271,7 +304,7 @@ def filterCustomOEM():
 
                     outDict = {}
                     outDict['packagename'] = getPackageName(filespath)
-                    outDict['providername'] = getAttrValueByAttrTitle('name', jrdProviderStr)
+                    outDict['providername'] = getAttrValueByAttrTitle('android:name', jrdProviderStr)
                     outDict['contentprovider'] = jrdProviderStr
                     outList.append(outDict)
 
@@ -286,6 +319,9 @@ def filterCustomOEM():
             fDiff.close()
             fCustom.close()
             fWithoutPermission.close()
+        fShaedUserIdPkg = open(shareUserIdPkgTxt, 'w')
+        fShaedUserIdPkg.write(shareUserIdPkgStr)
+        fShaedUserIdPkg.close()
 
 def filterSensitiveContentProvider(path):
     packagefile = open(path, 'r')
@@ -351,7 +387,7 @@ def filterPermissionContentProvider(providers, filename):
     permissionDict = {}
     
     for provider in providerlist:
-        exported = getAttrValueByAttrTitle('exported', provider)
+        exported = getAttrValueByAttrTitle('android:exported', provider)
         if exported == 'true':
             if checkPermissionAttr(provider):
                 withPermissionStr += '\n'
@@ -382,9 +418,9 @@ def filterPermissionContentProvider(providers, filename):
     return permissionDict
 
 def checkPermissionAttr(provider):
-    readPermission = getAttrValueByAttrTitle('readPermission', provider)
-    writePermission = getAttrValueByAttrTitle('writePermission', provider)
-    permission = getAttrValueByAttrTitle('permission', provider)
+    readPermission = getAttrValueByAttrTitle('android:readPermission', provider)
+    writePermission = getAttrValueByAttrTitle('android:writePermission', provider)
+    permission = getAttrValueByAttrTitle('android:permission', provider)
     if readPermission or writePermission or permission:
         return True
     else:

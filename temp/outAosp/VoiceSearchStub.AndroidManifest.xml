@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="40000000" android:versionName="4.0.0" package="com.google.android.voicesearch"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <permission android:name="com.google.android.voicesearch.ACCESS_SETTINGS" android:protectionLevel="signature" />
-    <application>
-        <provider android:name=".VoiceSearchSettingsProvider" android:readPermission="com.google.android.voicesearch.ACCESS_SETTINGS" android:writePermission="com.google.android.voicesearch.ACCESS_SETTINGS" android:enabled="true" android:exported="true" android:multiprocess="true" android:authorities="com.google.android.voicesearch" android:syncable="false" android:grantUriPermissions="false" />
-    </application>
-</manifest>
