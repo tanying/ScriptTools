@@ -145,18 +145,14 @@ def analyseDiff(jrdStr, emuStr, path):
     diffDict = {}
 
     for provider in tempArr:
+        
         if provider != '':
             jrdProvider = ('<provider ' + provider).strip(' ')
+            #print jrdProvider
 
-            if emuStr.find(jrdProvider) > -1:
-                #print ":::::same\n"
-                pass
-            else:
+            if emuStr.find(jrdProvider) < 0:
                 name = getAttrValueByAttrTitle('android:name', jrdProvider)
                 if emuStr.find(name) > -1:
-                    diffStr += 'Different Package: '
-                    diffStr += getPackageName(path)
-                    diffStr += '\n'
                     diffStr += '    Jrd Content Provider:\n'
                     diffStr += '        '
                     diffStr += jrdProvider
@@ -165,14 +161,12 @@ def analyseDiff(jrdStr, emuStr, path):
                     diffStr += '        '
                     diffStr += emuProvider
                     diffStr += '\n\n'
-                    customStr +=jrdProvider
+                customStr += jrdProvider
+                customStr += '        '
 
-                else:
-                    customStr += jrdProvider
-
-                diffDict['customStr'] = customStr
-                diffDict['diffStr'] = diffStr
-                return diffDict
+    diffDict['customStr'] = customStr
+    diffDict['diffStr'] = diffStr
+    return diffDict
 
 # Filter SharedUserIdPkg.
 def filterSharedUserIdPkg(path):
@@ -242,7 +236,12 @@ def filterCustomOEM():
                     
                     if diff['diffStr']:
                         diffNo += 1 
-                        diffStr += str(diffNo) + '. ' + diff['diffStr'] 
+                        diffStr += str(diffNo) + '. ' 
+                        diffStr += 'Different Package: '
+                        diffStr += getPackageName(filespath)
+                        diffStr += '\n'
+                        diffStr += diff['diffStr']
+                        #print diffStr
 
                     customStr += str(itemNo) + '. PackageName: '
                     customStr += getPackageName(filespath)
