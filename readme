@@ -19,3 +19,4 @@ Usage:
     withPermission.txt 中记录了exprot = 'true',
     且同时定义了readPermission和writePermission的CP.
     或者没有exported属性, 但定义了permission的CP.
+5.  out.xls

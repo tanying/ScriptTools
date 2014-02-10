@@ -45,16 +45,40 @@ def setStyles():
 
 def initWorkbook(style, list):
     _wb = Workbook()
-    _ws0 = _wb.add_sheet(u'customContentProvider')
+    _ws0 = _wb.add_sheet(u'5.5 Providers')
     # initial title of workbook
-    _ws0.write(0, 0, u'PackageName', style)
-    _ws0.write(0, 1, u'ProviderName', style)
-    _ws0.write(0, 2, u'ContentProvider', style)
-    if showDiff :
-        _ws0.write(0, 3, u'Difference', style)
+    _ws0.write(0, 0, u'General Package Information', style)
+    _ws0.write(0, 5, u'Global Provider Permission Information', style)
+    _ws0.write(0, 11, u'Path-Permission Information', style)
+    _ws0.write(0, 19, u'Provider Export Information', style)
+   
+    _ws0.write(2, 0, u'Content Provider', style) #A
+    _ws0.write(2, 1, u'Package', style) #B
+    _ws0.write(2, 2, u'Package Installation Path', style) #C
+    _ws0.write(2, 3, u'Package Shared UID', style) #D
+    _ws0.write(2, 4, u'Source', style) #E
+    _ws0.write(2, 5, u'Permission', style) #F
+    _ws0.write(2, 6, u'Permission Protection Level', style) #G
+    _ws0.write(2, 7, u'Read Permission', style) #H
+    _ws0.write(2, 8, u'Read Permission Protection Level', style) #I
+    _ws0.write(2, 9, u'Write Permission', style) #J
+    _ws0.write(2, 10, u'Write Permission Protection Level', style) #K
+    _ws0.write(2, 11, u'Path-Permission Path', style) #L
+    _ws0.write(2, 12, u'Path-Permission Permission', style) #M
+    _ws0.write(2, 13, u'Path-Permission Permission Protection Level', style) #N
+    _ws0.write(2, 14, u'Path-Permissions Read Permission', style) #O
+    _ws0.write(2, 15, u'Path-Permissions Read Permission Protection Level', style) #P
+    _ws0.write(2, 16, u'Path-Permissions Write Permission', style) #Q
+    _ws0.write(2, 17, u'Path-Permissions Write Permission Protection Level', style) #R
+    _ws0.write(2, 18, u'Grant URI Permission', style) #S
+    _ws0.write(2, 19, u'Provider is exported?', style) #T
+    _ws0.write(2, 20, u'Provider Export Value', style) #U
+    _ws0.write(2, 21, u'Package min Sdk Version', style) #V
+    _ws0.write(2, 22, u'Package target Sdk Version', style) #W
 
+    print list
     for itemDict in list:
-        i = list.index(itemDict) + 1
+        i = list.index(itemDict) + 3
         _ws0.write(i, 0, itemDict['packagename'], style)
         _ws0.write(i, 1, itemDict['providername'], style)
         _ws0.write(i, 2, itemDict['contentprovider'], style)
@@ -265,10 +289,8 @@ def filterCustomOEM():
                         tempStr2 = str(withoutPermissionNo) + '. With Permission Package: ' + filename + tempStr2
                         withPermissionStr += tempStr2
 
-                    outDict = {}            
-                    outDict['packagename'] = getPackageName(filespath)
-                    outDict['contentprovider'] = diff['customStr']
-                    outDict['providername'] = getAttrValueByAttrTitle('android:name', diff['customStr'])
+                    outDict = {}          
+                    generateOutPutDict(outDict, filespath, diff['customStr'])
                     outDict['diff'] = diff['diffStr'] 
                     outList.append(outDict)
             else:
@@ -302,9 +324,7 @@ def filterCustomOEM():
                         withPermissionStr += tempStr2
 
                     outDict = {}
-                    outDict['packagename'] = getPackageName(filespath)
-                    outDict['providername'] = getAttrValueByAttrTitle('android:name', jrdProviderStr)
-                    outDict['contentprovider'] = jrdProviderStr
+                    generateOutPutDict(outDict, filespath, jrdProviderStr)
                     outList.append(outDict)
 
             fDiff = open(diffTxt, 'w')
@@ -378,6 +398,11 @@ def splitProvider(provider):
             providerlist.append(string.strip(' '))
     #print providerlist
     return providerlist
+
+def generateOutPutDict(outDict, filespath, string):  
+    outDict['packagename'] = getPackageName(filespath)
+    outDict['contentprovider'] = string
+    outDict['providername'] = getAttrValueByAttrTitle('android:name', string)
 
 def filterPermissionContentProvider(providers, filename):
     withPermissionStr = ''
