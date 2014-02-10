@@ -14,8 +14,8 @@ Usage:
     custom.txt 中记录了最终过滤出的所有Custom ContentProvider.
     diff.txt 中记录了在inAosp中, 但被jrd修改过的ContentProvider, 方便人工检查使用.
     withoutPermission.txt 中记录了export = 'true',
-    但没有定义readPermission或writePermission的CP.
-    或者没有exported属性, 且没有定义readPermission或writePermission的CP.
+    但没有同时定义readPermission和writePermission的CP.
+    或者没有exported属性, 且没有同时定义readPermission和writePermission的CP.
     withPermission.txt 中记录了exprot = 'true',
-    且定义了readPermission或writePermission的CP.
-    或者没有exported属性, 但定义了readPermission或writePermission的CP.
+    且同时定义了readPermission和writePermission的CP.
+    或者没有exported属性, 但定义了permission的CP.

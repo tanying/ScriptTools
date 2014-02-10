@@ -420,7 +420,7 @@ def checkPermissionAttr(provider):
     readPermission = getAttrValueByAttrTitle('android:readPermission', provider)
     writePermission = getAttrValueByAttrTitle('android:writePermission', provider)
     permission = getAttrValueByAttrTitle('android:permission', provider)
-    if readPermission or writePermission or permission:
+    if (readPermission and writePermission) or permission:
         return True
     else:
          return False 
