@@ -29,34 +29,34 @@ withPermissionTxt = outdir + "/withPermission.txt"
 shareUserIdPkgTxt = outdir + "/shareUserIdPkg.txt"
 outXls = outdir + "/out.xls"
 
-showDiff = True
+#showDiff = True
 outList = []
 
 # define data structure of packageInfo
 class packageInfo:
     def __init__(self):
-        self.ContentProvider = ''
+        self.ContentProvider = []
         self.Package = ''
-        self. 
-        self.
-        self.
-        self.
-        self.
-        self.
-        self.
-        self.
-        self.
-        self.
-        self. 
-        self.
-        self.
-        self.
-        self.
-        self.
-        self.
-        self.
-        self.
-        self.
+        self.PackageInstallationPath = ''
+        self.PackageSharedUID = ''
+        self.Source = ''
+        self.Permission = ''
+        self.PermissionProtectionLevel = ''
+        self.ReadPermission = ''
+        self.ReadPermissionProtectionLevel = ''
+        self.WritePermission = ''
+        self.WritePermissionProtectionLevel = ''
+        self.PathPermissionPath = ''
+        self.PathPermissionPermission = ''
+        self.PathPermissionsReadPermission = ''
+        self.PathPermissionsReadPermissionProtectionLevel = ''
+        self.PathPermissionsWritePermission = ''
+        self.PathPermissionsWritePermissionProtectionLevel = ''
+        self.GrantURIPermission = ''
+        self.ProviderIsexported = ''
+        self.ProviderExportValue = ''
+        self.PackageMinSdkVersion = ''
+        self.PackageTargetSdkVersion = ''
 
 def setStyles():
     fnt = Font()
@@ -107,8 +107,6 @@ def initWorkbook(style, list):
         _ws0.write(i, 0, itemDict['packagename'], style)
         _ws0.write(i, 1, itemDict['providername'], style)
         _ws0.write(i, 2, itemDict['contentprovider'], style)
-        if showDiff and itemDict.get('diff'):
-            _ws0.write(i, 3, itemDict['diff'], style)
 
     _wb.save(outXls) 
     print "Generate xls table successed!! --> %s" % outXls       
@@ -227,6 +225,9 @@ def filterSharedUserIdPkg(path):
         sharedUserIdPkgStr = 'android:sharedUserId="'+shareUserId + '  ' + 'package="'+pkg+'"\n'
     return sharedUserIdPkgStr
 
+def appendContentProviderList(list, string):
+    print splitProvider(string)
+
 # get xml node by tag name of each manifest file
 def getNodeByTag(tag, path):
     file = open(path, 'r')
@@ -261,10 +262,18 @@ def filterCustomOEM():
         for filespath in files:
             jrdfilepath = os.path.join(root,filespath)
             emufilepath = os.path.join(EmuListPath,filespath)
-            # Filter SharedUserIdPkg
-            print filespath
+            #generate package info
+            info = packageInfo()
+            manifestStr = getNodeByTag('manifest', jrdfilepath)
+            pkg = getAttrValueByAttrTitle('package', manifestStr)
+            shareUserId = getAttrValueByAttrTitle('android:sharedUserId', manifestStr)
             
-            shareUserIdStr = filterSharedUserIdPkg(jrdfilepath) 
+            info.Package = pkg
+            info.PackageSharedUID = shareUserId.strip(' ')
+            print info.Package + '---------------------'
+
+            # Filter SharedUserIdPkg
+            shareUserIdStr = filterSharedUserIdPkg(jrdfilepath)
             if shareUserIdStr:
                 shareUserIdNo +=1
                 shareUserIdPkgStr += str(shareUserIdNo) + '. ' + shareUserIdStr
@@ -301,6 +310,9 @@ def filterCustomOEM():
                     customStr += diff['customStr']
                     customStr += '\n'
 
+                    for provider in splitProvider(diff['customStr']):
+                        info.ContentProvider.append(getAttrValueByAttrTitle('android:name', provider))
+
                     pdict = filterPermissionContentProvider(diff['customStr'], filespath)
                     tempStr1 = pdict['without']
                     tempStr2 = pdict['within']
@@ -316,10 +328,12 @@ def filterCustomOEM():
                         tempStr2 = str(withoutPermissionNo) + '. With Permission Package: ' + filename + tempStr2
                         withPermissionStr += tempStr2
 
-                    outDict = {}          
-                    generateOutPutDict(outDict, filespath, diff['customStr'])
-                    outDict['diff'] = diff['diffStr'] 
-                    outList.append(outDict)
+                    # outDict = {}          
+                    # outDict['packagename'] = getPackageName(filespath)
+                    # outDict['contentprovider'] = diff['customStr']
+                    # outDict['providername'] = getAttrValueByAttrTitle('android:name', diff['customStr'])
+                    # outDict['diff'] = diff['diffStr'] 
+                    # outList.append(outDict)
             else:
                 outAospFile = outAospDir + filespath
                 #print "Copy file:" + outAospDir+filespath
@@ -334,6 +348,9 @@ def filterCustomOEM():
                     customStr += '\n'
                     customStr += jrdProviderStr
                     customStr += '\n'
+
+                    for provider in splitProvider(jrdProviderStr):
+                        info.ContentProvider.append(getAttrValueByAttrTitle('android:name', provider))
 
                     pdict = filterPermissionContentProvider(jrdProviderStr, filespath)
                     tempStr1 = pdict['without']
@@ -350,9 +367,11 @@ def filterCustomOEM():
                         tempStr2 = str(withPermissionNo) + '. With Permission Package: ' + filename + tempStr2
                         withPermissionStr += tempStr2
 
-                    outDict = {}
-                    generateOutPutDict(outDict, filespath, jrdProviderStr)
-                    outList.append(outDict)
+                    # outDict = {}
+                    # outDict['packagename'] = getPackageName(filespath)
+                    # outDict['contentprovider'] = jrdProviderStr
+                    # outDict['providername'] = getAttrValueByAttrTitle('android:name', jrdProviderStr)
+                    # outList.append(outDict)
 
             fDiff = open(diffTxt, 'w')
             fCustom = open(customTxt, 'w')
@@ -425,11 +444,6 @@ def splitProvider(provider):
             providerlist.append(string.strip(' '))
     #print providerlist
     return providerlist
-
-def generateOutPutDict(outDict, filespath, string):  
-    outDict['packagename'] = getPackageName(filespath)
-    outDict['contentprovider'] = string
-    outDict['providername'] = getAttrValueByAttrTitle('android:name', string)
 
 def filterPermissionContentProvider(providers, filename):
     withPermissionStr = ''
