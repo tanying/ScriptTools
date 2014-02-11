@@ -1,6 +1,7 @@
 Usage:
 ./FilterSensitiveContentProvider.py
 
+
 1.  manifestList_emu取自原生Android代码, 
     运行脚本前必须保证Framework根目录之下有此文件夹.
 2.  PullAndroidManifestTool用于抓取手机apk中的AndroidManifest文件, 

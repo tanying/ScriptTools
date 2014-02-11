@@ -3,6 +3,8 @@
 #Email:jinshi.song@jrdcom.com
 #Updated-1:2013-12-23,12:26,support for multiple device's directory of adb pull
 #Updated-1:2013-12-27,17:56,disable automatic open nautilus
+#Updated-1:2014-01-24,12:41,Before you start to clean up
+#Updated-1:2014-02-11,10:36,copy the apktool.yml file
 
 
 function decodeApk(){
@@ -13,10 +15,12 @@ function decodeApk(){
 	for filelist in $(ls $tempapk)
 		do
 		./apktool d -f $tempapk/$filelist  $tempout/$filelist 
-                filename=$(echo $filelist | awk -F"." '{print $1}')
+                #filename=$(echo $filelist | awk -F"." '{print $1}')
                 #echo $filename
                 #echo $filename
-                cp $tempout/$filelist/AndroidManifest.xml $manifestList/$filename.AndroidManifest.xml
+                #cp $tempout/$filelist/AndroidManifest.xml $manifestList/$filename.AndroidManifest.xml
+                cp $tempout/$filelist/AndroidManifest.xml $manifestList/$filelist.AndroidManifest.xml
+                cp $tempout/$filelist/apktool.yml $manifestList/$filelist.apktool.yml
 		done
 }
 
@@ -42,6 +46,7 @@ function cpApk(){
 		fi
 	done	
 }
+
 
 if [ $# -lt 1 ]
 then
@@ -71,6 +76,19 @@ fi
 tempdirIndex=$#
 tempdir=$(eval echo \${${tempdirIndex}})
 
+echo "clean temp is beginning."
+rm -irf $tempdir
+#echo $2
+#chmod 777 $2
+#chmod 777 $2/*
+#sudo rm -irf $2
+##rm -irf $tempdir/temp
+#rm -irf /local/tempapk
+##rm -irf $tempdir/tempapk
+##rm -irf $tempdir/tempout
+##rm -irf $tempdir/manifestList
+echo "clean temp completed."
+
 mkdir -p $tempdir/temp
 mkdir -p $tempdir/manifestList
 mkdir -p $tempdir/tempapk
@@ -90,17 +108,6 @@ echo "copy file completed."
 echo "decode is beginning."
 decodeApk $tempdir
 echo "decode completed."
-
-echo "clean temp is beginning."
-#echo $2
-#chmod 777 $2
-#chmod 777 $2/*
-#sudo rm -irf $2
-rm -irf $tempdir/temp
-#rm -irf /local/tempapk
-rm -irf $tempdir/tempapk
-rm -irf $tempdir/tempout
-echo "clean temp completed."
 
 #if test -d $tempdir/manifestList
 #then
