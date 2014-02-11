@@ -58,6 +58,7 @@ class packageInfo:
         self.PackageMinSdkVersion = ''
         self.PackageTargetSdkVersion = ''
 
+
 def setStyles():
     fnt = Font()
     fnt.name = 'Times New Roman'
