@@ -32,6 +32,32 @@ outXls = outdir + "/out.xls"
 showDiff = True
 outList = []
 
+# define data structure of packageInfo
+class packageInfo:
+    def __init__(self):
+        self.ContentProvider = ''
+        self.Package = ''
+        self. 
+        self.
+        self.
+        self.
+        self.
+        self.
+        self.
+        self.
+        self.
+        self.
+        self. 
+        self.
+        self.
+        self.
+        self.
+        self.
+        self.
+        self.
+        self.
+        self.
+
 def setStyles():
     fnt = Font()
     fnt.name = 'Times New Roman'
@@ -76,7 +102,6 @@ def initWorkbook(style, list):
     _ws0.write(2, 21, u'Package min Sdk Version', style) #V
     _ws0.write(2, 22, u'Package target Sdk Version', style) #W
 
-    print list
     for itemDict in list:
         i = list.index(itemDict) + 3
         _ws0.write(i, 0, itemDict['packagename'], style)
@@ -236,7 +261,9 @@ def filterCustomOEM():
         for filespath in files:
             jrdfilepath = os.path.join(root,filespath)
             emufilepath = os.path.join(EmuListPath,filespath)
-            # Filter SharedUserIdPkg 
+            # Filter SharedUserIdPkg
+            print filespath
+            
             shareUserIdStr = filterSharedUserIdPkg(jrdfilepath) 
             if shareUserIdStr:
                 shareUserIdNo +=1
