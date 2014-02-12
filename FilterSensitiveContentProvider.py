@@ -19,8 +19,10 @@ EmuListPath = EnvPath + "/manifestList_emu"
 tempdir = EnvPath + "/temp"
 outdir = EnvPath + "/out"
 ManifestListPath = tempdir + "/manifestList"
+manifestPathTxt = tempdir + "/manifestPath.txt"
 inAospDir = tempdir + "/inAosp/"
 outAospDir = tempdir + "/outAosp/"
+ymlDir = tempdir + "/ymlDir/"
 customDir = outdir + "/custom/"
 diffTxt = outdir + "/diff.txt"
 customTxt = outdir + "/custom.txt"
@@ -31,38 +33,38 @@ outXls = outdir + "/out.xls"
 
 #showDiff = True
 outList = []
+pathDict = {}
+verDict = {}
 
 # define data structure of packageInfo
-class packageInfo:
+class PackageInfo:
     def __init__(self):
         self.ContentProvider = [] #A
         self.Package = '' #B
         self.PackageInstallationPath = '' #C
         self.PackageSharedUID = '' #D
         self.Source = '' #E
-       
         self.PackageMinSdkVersion = '' #V
         self.PackageTargetSdkVersion = '' #W
 
-class contentProvider:
+class ContentProvider:
     def __init__(self):
         self.name = ''
-        self.Permission = '' #F
-        self.PermissionProtectionLevel = '' #G
-        self.ReadPermission = '' #H
-        self.ReadPermissionProtectionLevel = '' #I
-        self.WritePermission = '' #J
-        self.WritePermissionProtectionLevel = '' #K
-        self.PathPermissionPath = '' #L
-        self.PathPermissionPermission = '' #M
-        self.PathPermissionPermissionProtectionLevel = '' #N
-        self.PathPermissionsReadPermission = '' #O
-        self.PathPermissionsReadPermissionProtectionLevel = '' #P
-        self.PathPermissionsWritePermission = '' #Q
-        self.PathPermissionsWritePermissionProtectionLevel = '' #R
-        self.GrantURIPermission = '' #S
+        self.Permission = None #F
+        self.PathPermission = []
         self.ProviderIsexported = '' #T
         self.ProviderExportValue = '' #U
+
+class Permission:
+    def __init__(self):
+        self.Path = '' #L
+        self.Permission = '' #M
+        self.PermissionProtectionLevel = '' #N
+        self.ReadPermission = '' #O
+        self.ReadPermissionProtectionLevel = '' #P
+        self.WritePermission = '' #Q
+        self.WritePermissionProtectionLevel = '' #R
+        self.GrantURIPermission = '' #S
 
 def setStyles():
     fnt = Font()
@@ -115,22 +117,94 @@ def initWorkbook(style, list):
         if info.ContentProvider:
             for cp in info.ContentProvider:
                 j = info.ContentProvider.index(cp)
-                _ws0.write(i+j, 0, cp, style)
+                _ws0.write(i+j, 0, cp.name, style)
                 _ws0.write(i+j, 1, info.Package, style)
+                _ws0.write(i+j, 2, info.PackageInstallationPath, style)
+                _ws0.write(i+j, 3, info.PackageSharedUID, style)
                 _ws0.write(i+j, 4, info.Source, style)
+                _ws0.write(i+j, 19, cp.ProviderIsexported, style)
+                _ws0.write(i+j, 20, cp.ProviderExportValue, style)
+                _ws0.write(i+j, 21, info.PackageMinSdkVersion, style)
+                _ws0.write(i+j, 22, info.PackageTargetSdkVersion, style)
                 
             count += len(info.ContentProvider) - 1
         else:
             _ws0.write(i, 0, '...No Providers', style)
         #print str(len(info.ContentProvider)) + " | " + str(count) + " | " + str(i) + " | " + str(list.index(info))
-        _ws0.write(i, 3, info.PackageSharedUID, style)
     
     #Set column width
-    for i in range(0, 22):
+    for i in range(0, 20):
         _ws0.col(i).width = 8000   
 
     _wb.save(outXls) 
     print "Generate xls table successed!! --> %s" % outXls       
+
+def splitPathPermission(string):
+    templist = string.split('<path-permission')
+    pathPermissionList = []
+    for item in templist:
+        if item != '':
+            string = '<path-permission' + item
+            pathPermissionList.append(string.strip(' '))
+    #print providerlist
+    return pathPermissionList
+
+def setPermissionValue(permission, string):
+    permission.Permission = getAttrValueByAttrTitle('android:permission', string)
+    permission.ReadPermission = getAttrValueByAttrTitle('android:readPermission', string)
+    permission.writePermission = getAttrValueByAttrTitle('android:writePermission', string)
+    return permission
+
+def generatePermissionInfo(cp, provider):
+    permission = Permission()
+    if provider.find('<path-permission') > -1:
+        idx1 = provider.find('<path-permission')
+        idx2 = provider.find('</provider>')
+        providerStr = provider[:idx1]
+        pathPermissionStr = provider[idx1:idx2]
+        pathPermissionList = splitPathPermission(pathPermissionStr)
+        setPermissionValue(permission, providerStr)
+
+        for item in pathPermissionList:
+            pathPermission = Permission()
+
+def generatePackageInstallationToPathDict():
+    f = open(manifestPathTxt, 'r')
+    while True:
+        line = f.readline()
+        if not line:
+            break
+        if line.find('package:') > -1:
+            list = line.split('=')
+            idx1 = list[1].find('\r\n')
+            package = list[1][:idx1]
+            idx2 = list[0].find(':') + 1
+            path = list[0][idx2:]
+            pathDict[package] = path
+
+def generateVersionToVerDict():
+    for root,dirs,files in os.walk(ymlDir):
+        for fileName in files:
+            filePath = os.path.join(root,fileName)
+            f = open(filePath, 'r')
+            while True:
+                line = f.readline()
+                if not line:
+                    break
+                if line.find('orig_package:') > -1:
+                    idx1 = line.find(':') + 1
+                    idx2 = line.find('\n')
+                    key = line[idx1:idx2].strip(' ')
+
+                if line.find('minSdkVersion:') > -1:
+                    idx1 = line.rfind(':') + 1
+                    idx2 = line.rfind('\n')
+                    minSdkVersion = line[idx1:idx2].strip(' ').strip("'")
+                if line.find('targetSdkVersion') > -1:
+                    idx1 = line.rfind(':') + 1
+                    idx2 = line.rfind('\n')
+                    targetSdkVersion = line[idx1:idx2].strip(' ').strip("'")
+            verDict[key] = [minSdkVersion, targetSdkVersion]
 
 def getPackageName(path):
     lastIdx = path.find(".")
@@ -145,6 +219,10 @@ def pullAndroidManifestsFromPhone(path1, path2, path3):
     os.system("pwd")
     os.system("%s %s %s %s %s" % (command, path1, path2, path3, tempdir))
     os.chdir("%s" % EnvPath)
+
+def getManifestPathFromPhone():
+    command = "adb shell pm list packages -f "
+    os.system("%s > %s" % (command, manifestPathTxt)) 
 
 #Find Content Provider in android manifest, return a contentProvider String.
 def filterContentProvider(path):
@@ -281,20 +359,37 @@ def filterCustomOEM():
             jrdfilepath = os.path.join(root,filespath)
             emufilepath = os.path.join(EmuListPath,filespath)
             #generate package info
-            info = packageInfo()
+            info = PackageInfo()
             manifestStr = getNodeByTag('manifest', jrdfilepath)
             pkg = getAttrValueByAttrTitle('package', manifestStr)
             shareUserId = getAttrValueByAttrTitle('android:sharedUserId', manifestStr)
             
             info.Package = pkg
             info.PackageSharedUID = shareUserId.strip(' ')
+            if pathDict.has_key(pkg):
+                info.PackageInstallationPath = pathDict[pkg]
+            if verDict.has_key(pkg):
+                info.PackageMinSdkVersion = verDict[pkg][0]
+                info.PackageTargetSdkVersion = verDict[pkg][1]
             print info.Package + '---------------------'
 
             #Filter All Content Provider
             providerStr = filterContentProvider(jrdfilepath)
             for provider in splitProvider(providerStr):
-                info.ContentProvider.append(getAttrValueByAttrTitle('android:name', provider))
+                cp = ContentProvider()
+                cp.name = getAttrValueByAttrTitle('android:name', provider)
+                cp.ProviderExportValue = getAttrValueByAttrTitle('android:exported', provider)
+                if cp.ProviderExportValue:
+                    cp.ProviderIsexported = cp.ProviderExportValue + '-explicit'
+                elif info.PackageMinSdkVersion and info.PackageTargetSdkVersion:
+                    if int(info.PackageMinSdkVersion) < 17 or int(info.PackageTargetSdkVersion) < 17:
+                        cp.ProviderIsexported = 'true-default'
+                    else:
+                        cp.ProviderIsexported = 'false-default'
 
+                generatePermissionInfo(cp, provider)
+                
+                info.ContentProvider.append(cp)
             # Filter SharedUserIdPkg
             shareUserIdStr = filterSharedUserIdPkg(jrdfilepath)
             if shareUserIdStr:
@@ -392,7 +487,6 @@ def filterCustomOEM():
                     # outDict['providername'] = getAttrValueByAttrTitle('android:name', jrdProviderStr)
                     # outList.append(outDict)
             outList.append(info)
-            print info.ContentProvider
             fDiff = open(diffTxt, 'w')
             fCustom = open(customTxt, 'w')
             fWithoutPermission = open(withoutPermissionTxt, 'w')
@@ -527,12 +621,27 @@ def checkSdkVersion(path):
             print 'targetSdkVersion ' + targetSdkVersion
             break
 
+def splitXmlAndYml():
+    for root,dirs,files in os.walk(ManifestListPath):
+        for filespath in files:
+            if filespath.rfind('.yml') > 0:
+                ymlPath = os.path.join(root,filespath)
+                shutil.copy(ymlPath, ymlDir)
+                os.remove(ymlPath) 
+                
 def main():
+    #getManifestPathFromPhone()
     #if never excute pull Android manifest, get android.manifest from phone.
     #if need to pull again, should manually remove jrd_ManifestList directory first.
     if not os.path.exists(ManifestListPath):
         print "Begin to pull android.manifest from phone..."
         pullAndroidManifestsFromPhone("/system/app/", "/system/framework/", "/custpack/app/")
+        if os.path.exists(ymlDir):   
+            shutil.rmtree(ymlDir)
+        os.mkdir(ymlDir)
+        splitXmlAndYml()
+        #get Manfest Path From Phone
+        getManifestPathFromPhone()
     else:
         print "You have already pulled android.manifest from phone, if need to pull again, you should manually remove manifestList_jrd directory first."
     #Create inAospDir, outAospDir, customDir.
@@ -543,7 +652,8 @@ def main():
     if os.path.exists(outAospDir):
         shutil.rmtree(outAospDir)
     if os.path.exists(customDir):
-        shutil.rmtree(customDir)    
+        shutil.rmtree(customDir)
+
     os.mkdir(outdir)
     os.mkdir(inAospDir)
     os.mkdir(outAospDir)
@@ -553,6 +663,9 @@ def main():
         print "Please copy emu android manifest running this script! Directory path is:\n" +     EmuListPath
     else:
         #work through the Jrd_ManifestList to filter Custom and OEM Content Provider.
+        generatePackageInstallationToPathDict()
+        generateVersionToVerDict()
+
         filterCustomOEM()
         print "Filter CustomOEM content provider successed!!!\n"
 
