@@ -35,29 +35,34 @@ outList = []
 # define data structure of packageInfo
 class packageInfo:
     def __init__(self):
-        self.ContentProvider = []
-        self.Package = ''
-        self.PackageInstallationPath = ''
-        self.PackageSharedUID = ''
-        self.Source = ''
-        self.Permission = ''
-        self.PermissionProtectionLevel = ''
-        self.ReadPermission = ''
-        self.ReadPermissionProtectionLevel = ''
-        self.WritePermission = ''
-        self.WritePermissionProtectionLevel = ''
-        self.PathPermissionPath = ''
-        self.PathPermissionPermission = ''
-        self.PathPermissionsReadPermission = ''
-        self.PathPermissionsReadPermissionProtectionLevel = ''
-        self.PathPermissionsWritePermission = ''
-        self.PathPermissionsWritePermissionProtectionLevel = ''
-        self.GrantURIPermission = ''
-        self.ProviderIsexported = ''
-        self.ProviderExportValue = ''
-        self.PackageMinSdkVersion = ''
-        self.PackageTargetSdkVersion = ''
+        self.ContentProvider = [] #A
+        self.Package = '' #B
+        self.PackageInstallationPath = '' #C
+        self.PackageSharedUID = '' #D
+        self.Source = '' #E
+       
+        self.PackageMinSdkVersion = '' #V
+        self.PackageTargetSdkVersion = '' #W
 
+class contentProvider:
+    def __init__(self):
+        self.name = ''
+        self.Permission = '' #F
+        self.PermissionProtectionLevel = '' #G
+        self.ReadPermission = '' #H
+        self.ReadPermissionProtectionLevel = '' #I
+        self.WritePermission = '' #J
+        self.WritePermissionProtectionLevel = '' #K
+        self.PathPermissionPath = '' #L
+        self.PathPermissionPermission = '' #M
+        self.PathPermissionPermissionProtectionLevel = '' #N
+        self.PathPermissionsReadPermission = '' #O
+        self.PathPermissionsReadPermissionProtectionLevel = '' #P
+        self.PathPermissionsWritePermission = '' #Q
+        self.PathPermissionsWritePermissionProtectionLevel = '' #R
+        self.GrantURIPermission = '' #S
+        self.ProviderIsexported = '' #T
+        self.ProviderExportValue = '' #U
 
 def setStyles():
     fnt = Font()
@@ -103,11 +108,26 @@ def initWorkbook(style, list):
     _ws0.write(2, 21, u'Package min Sdk Version', style) #V
     _ws0.write(2, 22, u'Package target Sdk Version', style) #W
 
-    for itemDict in list:
-        i = list.index(itemDict) + 3
-        _ws0.write(i, 0, itemDict['packagename'], style)
-        _ws0.write(i, 1, itemDict['providername'], style)
-        _ws0.write(i, 2, itemDict['contentprovider'], style)
+    count = 0
+    for info in list:
+        i = list.index(info) + 3 + count
+        _ws0.write(i, 1, info.Package, style)
+        if info.ContentProvider:
+            for cp in info.ContentProvider:
+                j = info.ContentProvider.index(cp)
+                _ws0.write(i+j, 0, cp, style)
+                _ws0.write(i+j, 1, info.Package, style)
+                _ws0.write(i+j, 4, info.Source, style)
+                
+            count += len(info.ContentProvider) - 1
+        else:
+            _ws0.write(i, 0, '...No Providers', style)
+        #print str(len(info.ContentProvider)) + " | " + str(count) + " | " + str(i) + " | " + str(list.index(info))
+        _ws0.write(i, 3, info.PackageSharedUID, style)
+    
+    #Set column width
+    for i in range(0, 22):
+        _ws0.col(i).width = 8000   
 
     _wb.save(outXls) 
     print "Generate xls table successed!! --> %s" % outXls       
@@ -226,9 +246,6 @@ def filterSharedUserIdPkg(path):
         sharedUserIdPkgStr = 'android:sharedUserId="'+shareUserId + '  ' + 'package="'+pkg+'"\n'
     return sharedUserIdPkgStr
 
-def appendContentProviderList(list, string):
-    print splitProvider(string)
-
 # get xml node by tag name of each manifest file
 def getNodeByTag(tag, path):
     file = open(path, 'r')
@@ -273,6 +290,11 @@ def filterCustomOEM():
             info.PackageSharedUID = shareUserId.strip(' ')
             print info.Package + '---------------------'
 
+            #Filter All Content Provider
+            providerStr = filterContentProvider(jrdfilepath)
+            for provider in splitProvider(providerStr):
+                info.ContentProvider.append(getAttrValueByAttrTitle('android:name', provider))
+
             # Filter SharedUserIdPkg
             shareUserIdStr = filterSharedUserIdPkg(jrdfilepath)
             if shareUserIdStr:
@@ -286,10 +308,11 @@ def filterCustomOEM():
                 emuProviderStr = filterContentProvider(emufilepath)
                 if jrdProviderStr == emuProviderStr:
                     #print "++++++++++same+++++++++++"
+                    info.Source = 'AOSP-unmodified'
                     pass
                 else:
                     shutil.copy(jrdfilepath, customDir)
-
+                    info.Source = 'OEM-modified AOSP'
                     #print "++++++++++not same+++++++++++"
                     #print filespath
                     itemNo += 1
@@ -310,9 +333,6 @@ def filterCustomOEM():
                     customStr += '        '
                     customStr += diff['customStr']
                     customStr += '\n'
-
-                    for provider in splitProvider(diff['customStr']):
-                        info.ContentProvider.append(getAttrValueByAttrTitle('android:name', provider))
 
                     pdict = filterPermissionContentProvider(diff['customStr'], filespath)
                     tempStr1 = pdict['without']
@@ -339,6 +359,7 @@ def filterCustomOEM():
                 outAospFile = outAospDir + filespath
                 #print "Copy file:" + outAospDir+filespath
                 shutil.copy(jrdfilepath, outAospDir)
+                info.Source = 'OEM-sourced/Google/3rd party'
                 jrdProviderStr = filterContentProvider(outAospFile)
                 if jrdProviderStr != '':
                     itemNo += 1
@@ -349,9 +370,6 @@ def filterCustomOEM():
                     customStr += '\n'
                     customStr += jrdProviderStr
                     customStr += '\n'
-
-                    for provider in splitProvider(jrdProviderStr):
-                        info.ContentProvider.append(getAttrValueByAttrTitle('android:name', provider))
 
                     pdict = filterPermissionContentProvider(jrdProviderStr, filespath)
                     tempStr1 = pdict['without']
@@ -373,7 +391,8 @@ def filterCustomOEM():
                     # outDict['contentprovider'] = jrdProviderStr
                     # outDict['providername'] = getAttrValueByAttrTitle('android:name', jrdProviderStr)
                     # outList.append(outDict)
-
+            outList.append(info)
+            print info.ContentProvider
             fDiff = open(diffTxt, 'w')
             fCustom = open(customTxt, 'w')
             fWithoutPermission = open(withoutPermissionTxt, 'w')
