@@ -132,7 +132,7 @@ def initWorkbook(style, list):
                         _ws0.write(i+j+k, 5, cp.Permission.Permission, style)
                         _ws0.write(i+j+k, 7, cp.Permission.ReadPermission, style)
                         _ws0.write(i+j+k, 9, cp.Permission.WritePermission, style)
-                        _ws0.write(i+j+k, 11,  pp.Path, style)
+                        _ws0.write(i+j+k, 11, pp.Path, style)
                         _ws0.write(i+j+k, 12, pp.Permission, style)
                         _ws0.write(i+j+k, 14, pp.ReadPermission, style)
                         _ws0.write(i+j+k, 16, pp.WritePermission, style)
@@ -203,21 +203,27 @@ def splitPathPermission(string):
     return pathPermissionList
 
 def setPermissionValue(string, isPathPermission):
+    print string
     permissionValue = getAttrValueByAttrTitle('android:permission', string).strip(' ')
     readPermissionValue = getAttrValueByAttrTitle('android:readPermission', string).strip(' ')
     writePermissionValue = getAttrValueByAttrTitle('android:writePermission', string).strip(' ')
-    if permissionValue or readPermissionValue or writePermissionValue:
-        # print "$$$$$$"
-        # print permissionValue + '-' + readPermissionValue + '-' + writePermissionValue
-        permission = Permission()
-        permission.Permission = permissionValue
-        permission.ReadPermission = readPermissionValue
-        permission.WritePermission = writePermissionValue
-        if isPathPermission:
-            permission.Path = getAttrValueByAttrTitle('android:path', string).strip(' ')
-        return permission
-    else:
-        return False
+        
+    permission = Permission()
+    permission.Permission = permissionValue
+    permission.ReadPermission = readPermissionValue
+    permission.WritePermission = writePermissionValue
+        
+    if isPathPermission:
+        path = getAttrValueByAttrTitle('android:path', string).strip(' ')
+        pathPrefix = getAttrValueByAttrTitle('android:pathPrefix', string).strip(' ')
+        pathPattern = getAttrValueByAttrTitle('android:pathPattern', string).strip(' ')
+        if path:
+            permission.Path = path
+        elif pathPrefix:
+            permission.Path = 'pathPrefix:' + pathPrefix
+        elif pathPattern:
+            permission.Path = 'pathPattern:' + pathPattern
+    return permission
 
 def generatePermissionInfo(provider):
     cp = ContentProvider()
@@ -228,6 +234,7 @@ def generatePermissionInfo(provider):
         pathPermissionStr = provider[idx1:idx2]
         pathPermissionList = splitPathPermission(pathPermissionStr)
         permission = setPermissionValue(providerStr, False)
+        print permission
         if permission:
             cp.Permission = permission
             #print cp.Permission.Permission+'-'+ cp.Permission.ReadPermission+ '-'+cp.Permission.WritePermission

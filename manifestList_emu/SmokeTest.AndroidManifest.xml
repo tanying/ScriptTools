@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="17" android:versionName="4.2-526865" package="com.android.smoketest.tests"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <application>
-        <uses-library android:name="android.test.runner" />
-    </application>
-    <instrumentation android:label="System Smoke Tests" android:name="android.test.InstrumentationTestRunner" android:targetPackage="com.android.smoketest" />
-    <instrumentation android:label="System Smoke Tests" android:name="com.android.smoketest.SmokeTestRunner" android:targetPackage="com.android.smoketest" />
-</manifest>
