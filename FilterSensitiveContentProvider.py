@@ -50,21 +50,21 @@ class PackageInfo:
 class ContentProvider:
     def __init__(self):
         self.name = ''
-        self.Permission = None #F
+        self.Permission = '' #F
         self.PathPermission = []
+        self.GrantURIPermission = '' #S
         self.ProviderIsexported = '' #T
         self.ProviderExportValue = '' #U
 
 class Permission:
     def __init__(self):
         self.Path = '' #L
-        self.Permission = '' #M
+        self.Permission = None #M
         self.PermissionProtectionLevel = '' #N
         self.ReadPermission = '' #O
         self.ReadPermissionProtectionLevel = '' #P
         self.WritePermission = '' #Q
         self.WritePermissionProtectionLevel = '' #R
-        self.GrantURIPermission = '' #S
 
 def setStyles():
     fnt = Font()
@@ -111,17 +111,54 @@ def initWorkbook(style, list):
     _ws0.write(2, 22, u'Package target Sdk Version', style) #W
 
     count = 0
+    ppcount = 0
     for info in list:
-        i = list.index(info) + 3 + count
-        _ws0.write(i, 1, info.Package, style)
+        i = list.index(info) + 3 + count 
+        #print info.Package + ' ------'+str(i)
+        
         if info.ContentProvider:
             for cp in info.ContentProvider:
-                j = info.ContentProvider.index(cp)
+                j = info.ContentProvider.index(cp) + ppcount
+                if cp.PathPermission:
+                    for pp in cp.PathPermission:
+                        k = cp.PathPermission.index(pp)
+                        #print '       '+str(i+j+k)
+
+                        _ws0.write(i+j+k, 0, cp.name, style)
+                        _ws0.write(i+j+k, 1, info.Package, style)
+                        _ws0.write(i+j+k, 2, info.PackageInstallationPath, style)
+                        _ws0.write(i+j+k, 3, info.PackageSharedUID, style)
+                        _ws0.write(i+j+k, 4, info.Source, style)
+                        _ws0.write(i+j+k, 5, cp.Permission.Permission, style)
+                        _ws0.write(i+j+k, 7, cp.Permission.ReadPermission, style)
+                        _ws0.write(i+j+k, 9, cp.Permission.WritePermission, style)
+                        _ws0.write(i+j+k, 11,  pp.Path, style)
+                        _ws0.write(i+j+k, 12, pp.Permission, style)
+                        _ws0.write(i+j+k, 14, pp.ReadPermission, style)
+                        _ws0.write(i+j+k, 16, pp.WritePermission, style)
+                        _ws0.write(i+j+k, 18, cp.GrantURIPermission, style)
+                        _ws0.write(i+j+k, 19, cp.ProviderIsexported, style)
+                        _ws0.write(i+j+k, 20, cp.ProviderExportValue, style)
+                        _ws0.write(i+j+k, 21, info.PackageMinSdkVersion, style)
+                        _ws0.write(i+j+k, 22, info.PackageTargetSdkVersion, style)
+                        
+                    ppcount += len(cp.PathPermission) - 1 
+                    #print '       '+str(j)+'-'+str(len(cp.PathPermission))+'-'+str(ppcount)
+                    #print '       ' + str(len(cp.PathPermission))+'-'+str(ppcount)
+
+                #print '  ' + cp.name + '-'+str(i+j)
                 _ws0.write(i+j, 0, cp.name, style)
                 _ws0.write(i+j, 1, info.Package, style)
                 _ws0.write(i+j, 2, info.PackageInstallationPath, style)
                 _ws0.write(i+j, 3, info.PackageSharedUID, style)
                 _ws0.write(i+j, 4, info.Source, style)
+
+                if cp.Permission:
+                    _ws0.write(i+j, 5, cp.Permission.Permission, style)
+                    _ws0.write(i+j, 7, cp.Permission.ReadPermission, style)
+                    _ws0.write(i+j, 9, cp.Permission.WritePermission, style)
+                    _ws0.write(i+j, 18, cp.GrantURIPermission, style)
+
                 _ws0.write(i+j, 19, cp.ProviderIsexported, style)
                 _ws0.write(i+j, 20, cp.ProviderExportValue, style)
                 _ws0.write(i+j, 21, info.PackageMinSdkVersion, style)
@@ -129,12 +166,28 @@ def initWorkbook(style, list):
                 
             count += len(info.ContentProvider) - 1
         else:
+            i = list.index(info) + 3 + count + ppcount
             _ws0.write(i, 0, '...No Providers', style)
-        #print str(len(info.ContentProvider)) + " | " + str(count) + " | " + str(i) + " | " + str(list.index(info))
+            _ws0.write(i, 1, info.Package, style)
+            _ws0.write(i, 2, info.PackageInstallationPath, style)
+            _ws0.write(i, 3, info.PackageSharedUID, style)
+            _ws0.write(i, 4, info.Source, style)
+            _ws0.write(i, 19, cp.ProviderIsexported, style)
+            _ws0.write(i, 20, cp.ProviderExportValue, style)
+            _ws0.write(i, 21, info.PackageMinSdkVersion, style)
+            _ws0.write(i, 22, info.PackageTargetSdkVersion, style)
+
+        #print str(i)+'|'+str(count)+"|"+str(ppcount)
     
     #Set column width
-    for i in range(0, 20):
-        _ws0.col(i).width = 8000   
+    for i in range(0, 19):
+        _ws0.col(i).width = 8000 
+    _ws0.col(6).width = 3000  
+    _ws0.col(8).width = 3000
+    _ws0.col(10).width = 3000  
+    _ws0.col(13).width = 3000
+    _ws0.col(15).width = 3000
+    _ws0.col(17).width = 3000     
 
     _wb.save(outXls) 
     print "Generate xls table successed!! --> %s" % outXls       
@@ -149,24 +202,44 @@ def splitPathPermission(string):
     #print providerlist
     return pathPermissionList
 
-def setPermissionValue(permission, string):
-    permission.Permission = getAttrValueByAttrTitle('android:permission', string)
-    permission.ReadPermission = getAttrValueByAttrTitle('android:readPermission', string)
-    permission.writePermission = getAttrValueByAttrTitle('android:writePermission', string)
-    return permission
+def setPermissionValue(string, isPathPermission):
+    permissionValue = getAttrValueByAttrTitle('android:permission', string).strip(' ')
+    readPermissionValue = getAttrValueByAttrTitle('android:readPermission', string).strip(' ')
+    writePermissionValue = getAttrValueByAttrTitle('android:writePermission', string).strip(' ')
+    if permissionValue or readPermissionValue or writePermissionValue:
+        # print "$$$$$$"
+        # print permissionValue + '-' + readPermissionValue + '-' + writePermissionValue
+        permission = Permission()
+        permission.Permission = permissionValue
+        permission.ReadPermission = readPermissionValue
+        permission.WritePermission = writePermissionValue
+        if isPathPermission:
+            permission.Path = getAttrValueByAttrTitle('android:path', string).strip(' ')
+        return permission
+    else:
+        return False
 
-def generatePermissionInfo(cp, provider):
-    permission = Permission()
+def generatePermissionInfo(provider):
+    cp = ContentProvider()
     if provider.find('<path-permission') > -1:
         idx1 = provider.find('<path-permission')
         idx2 = provider.find('</provider>')
         providerStr = provider[:idx1]
         pathPermissionStr = provider[idx1:idx2]
         pathPermissionList = splitPathPermission(pathPermissionStr)
-        setPermissionValue(permission, providerStr)
-
-        for item in pathPermissionList:
-            pathPermission = Permission()
+        permission = setPermissionValue(providerStr, False)
+        if permission:
+            cp.Permission = permission
+            #print cp.Permission.Permission+'-'+ cp.Permission.ReadPermission+ '-'+cp.Permission.WritePermission
+            for item in pathPermissionList:
+                pathPermission = Permission()
+                pathPermission = setPermissionValue(item, True)
+                cp.PathPermission.append(pathPermission)
+    else:
+        permission = setPermissionValue(provider, False)
+        if permission:
+            cp.Permission = permission
+    return cp
 
 def generatePackageInstallationToPathDict():
     f = open(manifestPathTxt, 'r')
@@ -366,18 +439,21 @@ def filterCustomOEM():
             
             info.Package = pkg
             info.PackageSharedUID = shareUserId.strip(' ')
+            #print pkg + "$$$$$$"
             if pathDict.has_key(pkg):
                 info.PackageInstallationPath = pathDict[pkg]
+                #print info.PackageInstallationPath
             if verDict.has_key(pkg):
                 info.PackageMinSdkVersion = verDict[pkg][0]
                 info.PackageTargetSdkVersion = verDict[pkg][1]
-            print info.Package + '---------------------'
+            print ' <' + info.Package + ' output successed>'
 
             #Filter All Content Provider
             providerStr = filterContentProvider(jrdfilepath)
             for provider in splitProvider(providerStr):
-                cp = ContentProvider()
+                cp = generatePermissionInfo(provider)
                 cp.name = getAttrValueByAttrTitle('android:name', provider)
+                cp.GrantURIPermission = getAttrValueByAttrTitle('android:grantUriPermissions', provider)
                 cp.ProviderExportValue = getAttrValueByAttrTitle('android:exported', provider)
                 if cp.ProviderExportValue:
                     cp.ProviderIsexported = cp.ProviderExportValue + '-explicit'
@@ -386,8 +462,6 @@ def filterCustomOEM():
                         cp.ProviderIsexported = 'true-default'
                     else:
                         cp.ProviderIsexported = 'false-default'
-
-                generatePermissionInfo(cp, provider)
                 
                 info.ContentProvider.append(cp)
             # Filter SharedUserIdPkg
