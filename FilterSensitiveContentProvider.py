@@ -35,6 +35,7 @@ outXls = outdir + "/out.xls"
 outList = []
 pathDict = {}
 verDict = {}
+protectionLevelDict = {}
 
 # define data structure of packageInfo
 class PackageInfo:
@@ -180,14 +181,14 @@ def initWorkbook(style, list):
         #print str(i)+'|'+str(count)+"|"+str(ppcount)
     
     #Set column width
-    for i in range(0, 19):
+    for i in range(0, 18):
         _ws0.col(i).width = 8000 
-    _ws0.col(6).width = 3000  
-    _ws0.col(8).width = 3000
-    _ws0.col(10).width = 3000  
-    _ws0.col(13).width = 3000
-    _ws0.col(15).width = 3000
-    _ws0.col(17).width = 3000     
+    _ws0.col(6).width = 4000  
+    _ws0.col(8).width = 4000
+    _ws0.col(10).width = 4000  
+    _ws0.col(13).width = 4000
+    _ws0.col(15).width = 4000
+    _ws0.col(17).width = 4000     
 
     _wb.save(outXls) 
     print "Generate xls table successed!! --> %s" % outXls       
@@ -203,7 +204,7 @@ def splitPathPermission(string):
     return pathPermissionList
 
 def setPermissionValue(string, isPathPermission):
-    print string
+    #print string
     permissionValue = getAttrValueByAttrTitle('android:permission', string).strip(' ')
     readPermissionValue = getAttrValueByAttrTitle('android:readPermission', string).strip(' ')
     writePermissionValue = getAttrValueByAttrTitle('android:writePermission', string).strip(' ')
@@ -234,7 +235,7 @@ def generatePermissionInfo(provider):
         pathPermissionStr = provider[idx1:idx2]
         pathPermissionList = splitPathPermission(pathPermissionStr)
         permission = setPermissionValue(providerStr, False)
-        print permission
+        #print permission
         if permission:
             cp.Permission = permission
             #print cp.Permission.Permission+'-'+ cp.Permission.ReadPermission+ '-'+cp.Permission.WritePermission
@@ -285,6 +286,13 @@ def generateVersionToVerDict():
                     idx2 = line.rfind('\n')
                     targetSdkVersion = line[idx1:idx2].strip(' ').strip("'")
             verDict[key] = [minSdkVersion, targetSdkVersion]
+
+def generatePermissionProtectionLevelToProtectionLevelDict():
+    for root,dirs,files in os.walk(ManifestListPath):
+        for fileName in files:
+            filepath = os.path.join(root,fileName)
+            # permissionStr = getNodeByTag('permission', filepath)
+            # print '   ' + permissionStr
 
 def getPackageName(path):
     lastIdx = path.find(".")
@@ -746,6 +754,7 @@ def main():
         #work through the Jrd_ManifestList to filter Custom and OEM Content Provider.
         generatePackageInstallationToPathDict()
         generateVersionToVerDict()
+        generatePermissionProtectionLevelToProtectionLevelDict()
 
         filterCustomOEM()
         print "Filter CustomOEM content provider successed!!!\n"
