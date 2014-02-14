@@ -20,6 +20,7 @@ tempdir = EnvPath + "/temp"
 outdir = EnvPath + "/out"
 ManifestListPath = tempdir + "/manifestList"
 manifestPathTxt = tempdir + "/manifestPath.txt"
+protectionLevelTxt = tempdir + "/protectionLevel.txt"
 inAospDir = tempdir + "/inAosp/"
 outAospDir = tempdir + "/outAosp/"
 ymlDir = tempdir + "/ymlDir/"
@@ -131,18 +132,24 @@ def initWorkbook(style, list):
                         _ws0.write(i+j+k, 3, info.PackageSharedUID, style)
                         _ws0.write(i+j+k, 4, info.Source, style)
                         _ws0.write(i+j+k, 5, cp.Permission.Permission, style)
+                        _ws0.write(i+j+k, 6, cp.Permission.PermissionProtectionLevel, style) 
                         _ws0.write(i+j+k, 7, cp.Permission.ReadPermission, style)
+                        _ws0.write(i+j+k, 8, cp.Permission.ReadPermissionProtectionLevel, style) 
                         _ws0.write(i+j+k, 9, cp.Permission.WritePermission, style)
+                        _ws0.write(i+j+k, 10, cp.Permission.WritePermissionProtectionLevel, style) 
                         _ws0.write(i+j+k, 11, pp.Path, style)
                         _ws0.write(i+j+k, 12, pp.Permission, style)
+                        _ws0.write(i+j+k, 13, pp.PermissionProtectionLevel, style)
                         _ws0.write(i+j+k, 14, pp.ReadPermission, style)
+                        _ws0.write(i+j+k, 15, pp.ReadPermissionProtectionLevel, style) 
                         _ws0.write(i+j+k, 16, pp.WritePermission, style)
+                        _ws0.write(i+j+k, 17, pp.WritePermissionProtectionLevel, style) 
                         _ws0.write(i+j+k, 18, cp.GrantURIPermission, style)
                         _ws0.write(i+j+k, 19, cp.ProviderIsexported, style)
                         _ws0.write(i+j+k, 20, cp.ProviderExportValue, style)
                         _ws0.write(i+j+k, 21, info.PackageMinSdkVersion, style)
                         _ws0.write(i+j+k, 22, info.PackageTargetSdkVersion, style)
-                        
+
                     ppcount += len(cp.PathPermission) - 1 
                     #print '       '+str(j)+'-'+str(len(cp.PathPermission))+'-'+str(ppcount)
                     #print '       ' + str(len(cp.PathPermission))+'-'+str(ppcount)
@@ -156,8 +163,11 @@ def initWorkbook(style, list):
 
                 if cp.Permission:
                     _ws0.write(i+j, 5, cp.Permission.Permission, style)
+                    _ws0.write(i+j, 6, cp.Permission.PermissionProtectionLevel, style) 
                     _ws0.write(i+j, 7, cp.Permission.ReadPermission, style)
+                    _ws0.write(i+j, 8, cp.Permission.ReadPermissionProtectionLevel, style) 
                     _ws0.write(i+j, 9, cp.Permission.WritePermission, style)
+                    _ws0.write(i+j, 10, cp.Permission.WritePermissionProtectionLevel, style) 
                     _ws0.write(i+j, 18, cp.GrantURIPermission, style)
 
                 _ws0.write(i+j, 19, cp.ProviderIsexported, style)
@@ -214,6 +224,16 @@ def setPermissionValue(string, isPathPermission):
     permission.ReadPermission = readPermissionValue
     permission.WritePermission = writePermissionValue
         
+    if protectionLevelDict.has_key(permissionValue):
+        permission.PermissionProtectionLevel = protectionLevelDict[permissionValue]
+    if protectionLevelDict.has_key(readPermissionValue):
+        permission.ReadPermissionProtectionLevel = protectionLevelDict[readPermissionValue]
+    if protectionLevelDict.has_key(writePermissionValue):
+        permission.WritePermissionProtectionLevel = protectionLevelDict[writePermissionValue]
+    # print permissionValue+'---'+permission.PermissionProtectionLevel
+    # print readPermissionValue+'---'+permission.ReadPermissionProtectionLevel
+    # print writePermissionValue+'---'+permission.WritePermissionProtectionLevel
+    # print '-----------------'
     if isPathPermission:
         path = getAttrValueByAttrTitle('android:path', string).strip(' ')
         pathPrefix = getAttrValueByAttrTitle('android:pathPrefix', string).strip(' ')
@@ -287,12 +307,16 @@ def generateVersionToVerDict():
                     targetSdkVersion = line[idx1:idx2].strip(' ').strip("'")
             verDict[key] = [minSdkVersion, targetSdkVersion]
 
-def generatePermissionProtectionLevelToProtectionLevelDict():
-    for root,dirs,files in os.walk(ManifestListPath):
-        for fileName in files:
-            filepath = os.path.join(root,fileName)
-            # permissionStr = getNodeByTag('permission', filepath)
-            # print '   ' + permissionStr
+def generateProtectionLevelToProtectionLevelDict():
+    f = open(protectionLevelTxt, 'r')
+    while True:
+        line = f.readline()
+        if not line:
+            break
+        if line.find('android:protectionLevel') > -1:
+            value = getAttrValueByAttrTitle('android:protectionLevel', line)
+            key = getAttrValueByAttrTitle('android:name', line)
+            protectionLevelDict[key] = value
 
 def getPackageName(path):
     lastIdx = path.find(".")
@@ -311,6 +335,11 @@ def pullAndroidManifestsFromPhone(path1, path2, path3):
 def getManifestPathFromPhone():
     command = "adb shell pm list packages -f "
     os.system("%s > %s" % (command, manifestPathTxt)) 
+
+def getProtectLevelFromManifest():
+    os.chdir(ManifestListPath)
+    command =  "grep -ri '<permission' ."
+    os.system("%s > %s" % (command, protectionLevelTxt)) 
 
 #Find Content Provider in android manifest, return a contentProvider String.
 def filterContentProvider(path):
@@ -731,6 +760,7 @@ def main():
         splitXmlAndYml()
         #get Manfest Path From Phone
         getManifestPathFromPhone()
+        getProtectLevelFromManifest()
     else:
         print "You have already pulled android.manifest from phone, if need to pull again, you should manually remove manifestList_jrd directory first."
     #Create inAospDir, outAospDir, customDir.
@@ -754,8 +784,8 @@ def main():
         #work through the Jrd_ManifestList to filter Custom and OEM Content Provider.
         generatePackageInstallationToPathDict()
         generateVersionToVerDict()
-        generatePermissionProtectionLevelToProtectionLevelDict()
-
+        generateProtectionLevelToProtectionLevelDict()
+        
         filterCustomOEM()
         print "Filter CustomOEM content provider successed!!!\n"
 
