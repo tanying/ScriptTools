@@ -680,7 +680,7 @@ def splitProvider(provider):
 def separateOEMsourcedGoogleAnd3rdparty(pkg):
     if pkg.find('google') > -1:
         return 'Google'
-    elif pkg.find('jrdcom') > -1 or pkg.find('tcl') > -1 or pkg.find('mediatek') > -1:
+    elif pkg.find('jrdcom') > -1 or pkg.find('tcl') > -1 or pkg.find('mediatek') > -1 or pkg.find('com.android') > -1:
         return 'OEM-sourced'
     else:
         return '3rd party'
