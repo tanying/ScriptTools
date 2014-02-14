@@ -572,7 +572,7 @@ def filterCustomOEM():
                 outAospFile = outAospDir + filespath
                 #print "Copy file:" + outAospDir+filespath
                 shutil.copy(jrdfilepath, outAospDir)
-                info.Source = 'OEM-sourced/Google/3rd party'
+                info.Source = separateOEMsourcedGoogleAnd3rdparty(info.Package.lower())
                 jrdProviderStr = filterContentProvider(outAospFile)
                 if jrdProviderStr != '':
                     itemNo += 1
@@ -676,6 +676,15 @@ def splitProvider(provider):
             providerlist.append(string.strip(' '))
     #print providerlist
     return providerlist
+
+def separateOEMsourcedGoogleAnd3rdparty(pkg):
+    if pkg.find('google') > -1:
+        return 'Google'
+    elif pkg.find('jrdcom') > -1 or pkg.find('tcl') > -1 or pkg.find('mediatek') > -1:
+        return 'OEM-sourced'
+    else:
+        return '3rd party'
+
 
 def filterPermissionContentProvider(providers, filename):
     withPermissionStr = ''
