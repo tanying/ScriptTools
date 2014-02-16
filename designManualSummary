@@ -1,0 +1,11 @@
+Design Manual Summary
+
+1. pyExcelerator
+
+PyExcelerator是一个第三方库，用来处理Excel文件。
+官方主页是http://sourceforge.net/projects/pyexcelerator/
+引用方式from PyExcelerator import *
+
+
+
+2. Class 

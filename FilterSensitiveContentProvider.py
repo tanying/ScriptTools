@@ -2,14 +2,13 @@
 #Filter Sensitive Content Providers
 #ying.tan@tcl.com
 
-
 import os
 import sys
 import re
 import time
 import shutil
 import codecs
-from pyXls import *
+from PyExcelerator import *
 
 result = "Pass"
 EnvPath = sys.path[0]
@@ -32,7 +31,6 @@ withPermissionTxt = outdir + "/withPermission.txt"
 shareUserIdPkgTxt = outdir + "/shareUserIdPkg.txt"
 outXls = outdir + "/out.xls"
 
-#showDiff = True
 outList = []
 pathDict = {}
 verDict = {}
@@ -68,49 +66,53 @@ class Permission:
         self.WritePermission = '' #Q
         self.WritePermissionProtectionLevel = '' #R
 
-def setStyles():
+def setStyles(bool):
     fnt = Font()
-    fnt.name = 'Times New Roman'
+    #fnt.name = 'Times New Roman'
+    fnt.bold = bool
+    # pt = Pattern()
+    # pt.pattern_back_colour = 0x7F
     al = Alignment()
     al.horz = Alignment.HORZ_LEFT
     al.vert = Alignment.VERT_CENTER
     style = XFStyle()
     style.font = fnt
     style.alignment = al
+    # style.pattern = pt
     return style
 
-def initWorkbook(style, list):
+def initWorkbook(style, style_title, list):
     _wb = Workbook()
     _ws0 = _wb.add_sheet(u'5.5 Providers')
-    # initial title of workbook
-    _ws0.write(0, 0, u'General Package Information', style)
-    _ws0.write(0, 5, u'Global Provider Permission Information', style)
-    _ws0.write(0, 11, u'Path-Permission Information', style)
-    _ws0.write(0, 19, u'Provider Export Information', style)
+    # initial title of workbook , Merge Cells
+    _ws0.write_merge(0, 1, 0, 4, u'General Package Information',style_title)
+    _ws0.write_merge(0, 1, 5, 10, u'Global Provider Permission Information',style_title)
+    _ws0.write_merge(0, 1, 11, 18, u'Path-Permission Information',style_title)
+    _ws0.write_merge(0, 1, 19, 22, u'Provider Export Information',style_title)
    
-    _ws0.write(2, 0, u'Content Provider', style) #A
-    _ws0.write(2, 1, u'Package', style) #B
-    _ws0.write(2, 2, u'Package Installation Path', style) #C
-    _ws0.write(2, 3, u'Package Shared UID', style) #D
-    _ws0.write(2, 4, u'Source', style) #E
-    _ws0.write(2, 5, u'Permission', style) #F
-    _ws0.write(2, 6, u'Permission Protection Level', style) #G
-    _ws0.write(2, 7, u'Read Permission', style) #H
-    _ws0.write(2, 8, u'Read Permission Protection Level', style) #I
-    _ws0.write(2, 9, u'Write Permission', style) #J
-    _ws0.write(2, 10, u'Write Permission Protection Level', style) #K
-    _ws0.write(2, 11, u'Path-Permission Path', style) #L
-    _ws0.write(2, 12, u'Path-Permission Permission', style) #M
-    _ws0.write(2, 13, u'Path-Permission Permission Protection Level', style) #N
-    _ws0.write(2, 14, u'Path-Permissions Read Permission', style) #O
-    _ws0.write(2, 15, u'Path-Permissions Read Permission Protection Level', style) #P
-    _ws0.write(2, 16, u'Path-Permissions Write Permission', style) #Q
-    _ws0.write(2, 17, u'Path-Permissions Write Permission Protection Level', style) #R
-    _ws0.write(2, 18, u'Grant URI Permission', style) #S
-    _ws0.write(2, 19, u'Provider is exported?', style) #T
-    _ws0.write(2, 20, u'Provider Export Value', style) #U
-    _ws0.write(2, 21, u'Package min Sdk Version', style) #V
-    _ws0.write(2, 22, u'Package target Sdk Version', style) #W
+    _ws0.write(2, 0, u'Content Provider', style_title) #A
+    _ws0.write(2, 1, u'Package', style_title) #B
+    _ws0.write(2, 2, u'Package Installation Path', style_title) #C
+    _ws0.write(2, 3, u'Package Shared UID', style_title) #D
+    _ws0.write(2, 4, u'Source', style_title) #E
+    _ws0.write(2, 5, u'Permission', style_title) #F
+    _ws0.write(2, 6, u'Permission Protection Level', style_title) #G
+    _ws0.write(2, 7, u'Read Permission', style_title) #H
+    _ws0.write(2, 8, u'Read Permission Protection Level', style_title) #I
+    _ws0.write(2, 9, u'Write Permission', style_title) #J
+    _ws0.write(2, 10, u'Write Permission Protection Level', style_title) #K
+    _ws0.write(2, 11, u'Path-Permission Path', style_title) #L
+    _ws0.write(2, 12, u'Path-Permission Permission', style_title) #M
+    _ws0.write(2, 13, u'Path-Permission Permission Protection Level', style_title) #N
+    _ws0.write(2, 14, u'Path-Permissions Read Permission', style_title) #O
+    _ws0.write(2, 15, u'Path-Permissions Read Permission Protection Level', style_title) #P
+    _ws0.write(2, 16, u'Path-Permissions Write Permission', style_title) #Q
+    _ws0.write(2, 17, u'Path-Permissions Write Permission Protection Level', style_title) #R
+    _ws0.write(2, 18, u'Grant URI Permission', style_title) #S
+    _ws0.write(2, 19, u'Provider is exported?', style_title) #T
+    _ws0.write(2, 20, u'Provider Export Value', style_title) #U
+    _ws0.write(2, 21, u'Package min Sdk Version', style_title) #V
+    _ws0.write(2, 22, u'Package target Sdk Version', style_title) #W
 
     count = 0
     ppcount = 0
@@ -191,14 +193,19 @@ def initWorkbook(style, list):
         #print str(i)+'|'+str(count)+"|"+str(ppcount)
     
     #Set column width
-    for i in range(0, 18):
+    for i in range(1, 18):
         _ws0.col(i).width = 8000 
+
+    _ws0.col(0).width = 10000
+    _ws0.col(2).width = 15000
+    _ws0.col(3).width = 5000
+    _ws0.col(4).width = 5000
     _ws0.col(6).width = 4000  
     _ws0.col(8).width = 4000
     _ws0.col(10).width = 4000  
     _ws0.col(13).width = 4000
     _ws0.col(15).width = 4000
-    _ws0.col(17).width = 4000     
+    _ws0.col(17).width = 4000 
 
     _wb.save(outXls) 
     print "Generate xls table successed!! --> %s" % outXls       
@@ -798,8 +805,9 @@ def main():
         filterCustomOEM()
         print "Filter CustomOEM content provider successed!!!\n"
 
-        style = setStyles()
-        initWorkbook(style, outList)
+        style = setStyles(False)
+        style_title = setStyles(True)
+        initWorkbook(style, style_title, outList)
 
         # #Filter Sensitive Content Provider.
         # for root,dirs,files in os.walk(customDir):
