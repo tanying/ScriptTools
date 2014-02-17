@@ -6,6 +6,27 @@ PyExcelerator是一个第三方库，用来处理Excel文件。
 官方主页是http://sourceforge.net/projects/pyexcelerator/
 引用方式from PyExcelerator import *
 
+2. Class
 
+PackageInfo: 每个Manifest对应一个Package, 每个Package包含若干个ContentProvider对象
+ContentProvider: 每个ContentProvider包含若干个Path-Permission
+Permission
 
-2. Class 
+3. Functions
+
+main()
+
+[检测是否存在temp/manifestList/文件夹]
+如果不存在此文件夹则首先需要连接手机,将手机中的manifest文件pull出来.
+并同时生成manifestPath.txt 和 protectionLevel.txt 两个文件.
+pullAndroidManifestsFromPhone("/system/app/", "/system/framework/", "/custpack/app/")
+目前pull手机的三个路径分别是:
+/system/app/
+/system/framework/
+/custpack/app/
+如果存在此文件夹, 则直接进行后续的分离操作
+
+[检测是否存在manifestList_emu文件夹]
+如果不存在此文件夹, 则脚本中断.
+否则开始创建out, temp/inAosp和temp/outAosp文件夹,以及out文件夹下的custom文件夹
+并且开始遍历manifestList并过滤出Custom OEM Content Provider
