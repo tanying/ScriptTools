@@ -77,6 +77,21 @@ def splitPathPermission(string):
     #print providerlist
     return pathPermissionList
 
+def checkProtectionLevelValue(string):
+    string = string.lower()
+    if string.find('|') > -1:
+        if string.find('normal') > -1:
+            result = 'normal'
+        elif string.find('dangerous') > -1:
+            result = 'dangerous'
+        elif string.find('signatureorsystem') > -1:
+            result = 'signatureOrSystem'
+        elif string.find('signature') > -1:
+            result = 'signature'
+    else:
+        result = string
+    return result
+
 def setPermissionValue(string, isPathPermission):
     #print string
     permissionValue = getAttrValueByAttrTitle('android:permission', string).strip(' ')
@@ -89,11 +104,11 @@ def setPermissionValue(string, isPathPermission):
     permission.WritePermission = writePermissionValue
         
     if protectionLevelDict.has_key(permissionValue):
-        permission.PermissionProtectionLevel = protectionLevelDict[permissionValue]
+        permission.PermissionProtectionLevel = checkProtectionLevelValue(protectionLevelDict[permissionValue])
     if protectionLevelDict.has_key(readPermissionValue):
-        permission.ReadPermissionProtectionLevel = protectionLevelDict[readPermissionValue]
+        permission.ReadPermissionProtectionLevel = checkProtectionLevelValue(protectionLevelDict[readPermissionValue])
     if protectionLevelDict.has_key(writePermissionValue):
-        permission.WritePermissionProtectionLevel = protectionLevelDict[writePermissionValue]
+        permission.WritePermissionProtectionLevel = checkProtectionLevelValue(protectionLevelDict[writePermissionValue])
     # print permissionValue+'---'+permission.PermissionProtectionLevel
     # print readPermissionValue+'---'+permission.ReadPermissionProtectionLevel
     # print writePermissionValue+'---'+permission.WritePermissionProtectionLevel
