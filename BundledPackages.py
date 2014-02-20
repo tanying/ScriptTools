@@ -78,8 +78,10 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict):
                     permission.name = per
                     print per
                     if P.protectionLevelDict.has_key(per):
-                        permission.protectionLevel = P.protectionLevelDict[per]
+                        permission.protectionLevel = checkProtectionLevelValue(P.protectionLevelDict[per])
                         print permission.protectionLevel
+                    else:
+                        permission.protectionLevel = 'Not Found'
                     pkg.permission.append(permission)
  
             if pkgUsesPermissionDict.has_key(filespath):
@@ -87,11 +89,26 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict):
                     permission = Permission()
                     permission.name = per
                     if P.protectionLevelDict.has_key(per):
-                        permission.protectionLevel = P.protectionLevelDict[per]
+                        permission.protectionLevel = checkProtectionLevelValue(P.protectionLevelDict[per])
+                    else:
+                        permission.protectionLevel = 'Not Found'
                     pkg.usesPermission.append(permission)
 
             outList.append(pkg)
     return outList
+
+def checkProtectionLevelValue(string):
+    string = string.lower()
+    if string.find('normal') > -1:
+        result = '0 - normal'
+    elif string.find('dangerous') > -1:
+        result = '1 - dangerous'
+    elif string.find('signatureorsystem') > -1:
+        result = '3 - signatureOrSystem'
+    elif string.find('signature') > -1:
+        result = '2 - signature'
+
+    return result
 
 def genPkgAndPermssionDict(fIn):
     outdict = {}
@@ -204,14 +221,14 @@ def generateProtectionLevelToProtectionLevelDict():
 
 def main():
     P.prepareFilesFromPhone()
-    P.getProtectLevelFromManifest('permission', P.protectionLevelTxt)
+    P.getProtectLevelFromManifest('permission ', P.protectionLevelTxt)
     P.getProtectLevelFromManifest('uses-permission', usesProtectionLevelTxt)
     if not os.path.exists(P.EmuListPath):
         print "Please copy emu android manifest running this script! Directory path is:\n" +     EmuListPath
         return
     else:
         #P.prepareDirsAndDicts()
-        P.getProtectLevelFromManifest('permission', protectionLevelTxt)
+        #P.getProtectLevelFromManifest('permission ', protectionLevelTxt)
         P.generatePackageInstallationToPathDict()
         P.generateProtectionLevelToProtectionLevelDict()
         #print  generateProtectionLevelToProtectionLevelDict()
