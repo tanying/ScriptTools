@@ -419,10 +419,11 @@ def getManifestPathFromPhone():
     command = "adb shell pm list packages -f "
     os.system("%s > %s" % (command, manifestPathTxt)) 
 
-def getProtectLevelFromManifest():
+def getProtectLevelFromManifest(tag, output):
     os.chdir(ManifestListPath)
-    command =  "grep -ri '<permission' ."
-    os.system("%s > %s" % (command, protectionLevelTxt))
+    # command =  "grep -ri '<permission' ."
+    # os.system("%s > %s" % (command, protectionLevelTxt))
+    os.system("grep -ri '<%s' . > %s" % (tag, output))
 
 def generatePackageInstallationToPathDict():
     f = open(manifestPathTxt, 'r')
@@ -470,7 +471,7 @@ def generateProtectionLevelToProtectionLevelDict():
         if line.find('android:protectionLevel') > -1:
             value = getAttrValueByAttrTitle('android:protectionLevel', line)
             key = getAttrValueByAttrTitle('android:name', line)
-            protectionLevelDict[key] = value              
+            protectionLevelDict[key] = value           
 
 def filterCustomOEM():
     diffStr = ''
@@ -777,8 +778,7 @@ def initWorkbook(style, style_title, list):
     _wb.save(outXls) 
     print "Generate xls table successed!! --> %s" % outXls       
 
-def main():
-    #getManifestPathFromPhone()
+def prepareFilesFromPhone():
     #if never excute pull Android manifest, get android.manifest from phone.
     #if need to pull again, should manually remove jrd_ManifestList directory first.
     if not os.path.exists(ManifestListPath):
@@ -790,35 +790,41 @@ def main():
         #get Manfest Path From Phone --> OutPut file: manifestPathTxt
         getManifestPathFromPhone()
         #get Protection Level From ManifestListPath --> protectionLevelTxt
-        getProtectLevelFromManifest()
+        getProtectLevelFromManifest('permission', protectionLevelTxt)
     else:
         print "You have already pulled android.manifest from phone, if need to pull again, you should manually remove manifestList_jrd directory first."
 
+def prepareDirsAndDicts():
+    #Create inAospDir, outAospDir, customDir.
+    if os.path.exists(outdir):
+        shutil.rmtree(outdir)
+    if os.path.exists(inAospDir):
+        shutil.rmtree(inAospDir)
+    if os.path.exists(outAospDir):
+        shutil.rmtree(outAospDir)
+    if os.path.exists(customDir):
+        shutil.rmtree(customDir)
+
+    os.mkdir(outdir)
+    os.mkdir(inAospDir)
+    os.mkdir(outAospDir)
+    os.mkdir(customDir)
+    
+    #work through the Jrd_ManifestList to filter Custom and OEM Content Provider.
+    #manifestPath.txt to PathDict
+    generatePackageInstallationToPathDict()
+    #ymlDir to VerDict
+    generateVersionToVerDict()
+    #protectionLevel.txt to ProtectionLevelDict
+    generateProtectionLevelToProtectionLevelDict()
+
+def main():
+    prepareFilesFromPhone()
     if not os.path.exists(EmuListPath):
         print "Please copy emu android manifest running this script! Directory path is:\n" +     EmuListPath
         return
     else:
-        #Create inAospDir, outAospDir, customDir.
-        if os.path.exists(outdir):
-            shutil.rmtree(outdir)
-        if os.path.exists(inAospDir):
-            shutil.rmtree(inAospDir)
-        if os.path.exists(outAospDir):
-            shutil.rmtree(outAospDir)
-        if os.path.exists(customDir):
-            shutil.rmtree(customDir)
-
-        os.mkdir(outdir)
-        os.mkdir(inAospDir)
-        os.mkdir(outAospDir)
-        os.mkdir(customDir)
-        #work through the Jrd_ManifestList to filter Custom and OEM Content Provider.
-        #manifestPath.txt to PathDict
-        generatePackageInstallationToPathDict()
-        #ymlDir to VerDict
-        generateVersionToVerDict()
-        #protectionLevel.txt to ProtectionLevelDict
-        generateProtectionLevelToProtectionLevelDict()
+        prepareDirsAndDicts()
         
         filterCustomOEM()
         print "Filter CustomOEM content provider successed!!!\n"
