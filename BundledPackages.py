@@ -14,8 +14,6 @@ import FilterSensitiveContentProvider as P
 outXls = P.outdir + "/out2.xls"
 usesProtectionLevelTxt = P.tempdir + "/usesProtectionLevel.txt"
 protectionLevelTxt = P.tempdir + "/protectionLevel.txt"
-# pkgPermissionDict = {}
-# pkgUsesPermissionDict = {}
 
 class Package:
     def __init__(self):
@@ -45,10 +43,11 @@ def setPkgStyle():
     style.alignment = al
     return style
 
-def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict):
+def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict):
     outList = []
 
-    print P.protectionLevelDict
+    #print pkgSourceDict
+    #print P.protectionLevelDict
     # print P.pathDict
     # print pkgPermissionDict
     # print pkgUsesPermissionDict
@@ -72,14 +71,17 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict):
                 pkg.location = tmpStr[:idx]
                 pkg.apkname = tmpStr[idx+1:]
 
+            if pkgSourceDict.has_key(name):
+                pkg.source = pkgSourceDict[name]
+
             if pkgPermissionDict.has_key(filespath):
                 for per in pkgPermissionDict[filespath]:
                     permission = Permission()
                     permission.name = per
-                    print per
+                    #print per
                     if P.protectionLevelDict.has_key(per):
                         permission.protectionLevel = checkProtectionLevelValue(P.protectionLevelDict[per])
-                        print permission.protectionLevel
+                        #print permission.protectionLevel
                     else:
                         permission.protectionLevel = 'Not Found'
                     pkg.permission.append(permission)
@@ -155,7 +157,7 @@ def initWorkbook(style, style_title, style_pkg, list):
         _ws1.write(i, 6, pkg.location, style_pkg)
         _ws1.write(i, 7, pkg.apkname, style_pkg)
         _ws1.write(i, 8, pkg.packageUID, style_pkg)
-        _ws1.write(i, 9, '', style_pkg)
+        _ws1.write(i, 9, pkg.source, style)
 
         #print pkg.permission
         
@@ -172,7 +174,7 @@ def initWorkbook(style, style_title, style_pkg, list):
                 _ws1.write(i+j, 6, pkg.location, style)
                 _ws1.write(i+j, 7, pkg.apkname, style)
                 _ws1.write(i+j, 8, pkg.packageUID, style)
-                _ws1.write(i+j, 9, '', style)
+                _ws1.write(i+j, 9, pkg.source, style)
 
             count += len(pkg.permission)
 
@@ -189,7 +191,7 @@ def initWorkbook(style, style_title, style_pkg, list):
                 _ws1.write(i+k, 6, pkg.location, style)
                 _ws1.write(i+k, 7, pkg.apkname, style)
                 _ws1.write(i+k, 8, pkg.packageUID, style)
-                _ws1.write(i+k, 9, '', style)
+                _ws1.write(i+k, 9, pkg.source, style)
 
             count += len(pkg.usesPermission)
 
@@ -216,7 +218,7 @@ def generateProtectionLevelToProtectionLevelDict():
             key = P.getAttrValueByAttrTitle('android:name', line)
             protectionLevelDict[key] = value 
 
-    print protectionLevelDict
+    #print protectionLevelDict
     return protectionLevelDict
 
 def main():
@@ -236,7 +238,11 @@ def main():
         pkgPermissionDict = genPkgAndPermssionDict(P.protectionLevelTxt)
         pkgUsesPermissionDict = genPkgAndPermssionDict(usesProtectionLevelTxt)
 
-        outList = genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict)
+        P.filterCustomOEM()
+        pkgSourceDict = P.genPkgSourceDict(P.outList)
+        #print pkgSourceDict
+
+        outList = genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict)
         style = P.setStyles(False)
         style_title = P.setStyles(True)
         style_pkg = setPkgStyle()

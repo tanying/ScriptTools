@@ -67,6 +67,22 @@ class Permission:
         self.WritePermission = '' #Q
         self.WritePermissionProtectionLevel = '' #R
 
+def genPkgSourceDict(list):
+    sdict = {}
+    for info in list:
+        key = info.Package
+        if info.Source.find('OEM') > -1:
+            value = 'OEM'
+        elif info.Source.find('Google') > -1:
+            value = 'Google'
+        elif info.Source.find('AOSP') > -1:
+            value = 'AOSP'
+        elif info.Source.find('3rd') > -1:
+            value = '3rd party'
+
+        sdict[key] = value
+    return sdict
+
 def splitPathPermission(string):
     templist = string.split('<path-permission')
     pathPermissionList = []
