@@ -157,7 +157,7 @@ def initWorkbook(style, style_title, style_pkg, list):
         _ws1.write(i, 6, pkg.location, style_pkg)
         _ws1.write(i, 7, pkg.apkname, style_pkg)
         _ws1.write(i, 8, pkg.packageUID, style_pkg)
-        _ws1.write(i, 9, pkg.source, style)
+        _ws1.write(i, 9, pkg.source, style_pkg)
 
         #print pkg.permission
         
