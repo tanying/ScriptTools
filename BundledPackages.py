@@ -43,14 +43,17 @@ def setPkgStyle():
     style.alignment = al
     return style
 
-def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict):
+def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, pkgProtectionLevelDict):
     outList = []
 
     #print pkgSourceDict
     #print P.protectionLevelDict
-    # print P.pathDict
-    # print pkgPermissionDict
-    # print pkgUsesPermissionDict
+    #print P.pathDict
+    #print pkgPermissionDict
+    #print pkgUsesPermissionDict
+    #print pkgProtectionLevelDict
+    #pkgPermissionDict = sorted(pkgPermissionDict.items(), key=lambda e:e[0], reverse=False)
+
     for root,dirs,files in os.walk(P.ManifestListPath):
         for filespath in files:
             jrdfilepath = os.path.join(root,filespath)
@@ -78,10 +81,8 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict):
                 for per in pkgPermissionDict[filespath]:
                     permission = Permission()
                     permission.name = per
-                    #print per
-                    if P.protectionLevelDict.has_key(per):
-                        permission.protectionLevel = checkProtectionLevelValue(P.protectionLevelDict[per])
-                        #print permission.protectionLevel
+                    if pkgProtectionLevelDict[filespath].has_key(per):
+                        permission.protectionLevel = checkProtectionLevelValue(pkgProtectionLevelDict[filespath][per])
                     else:
                         permission.protectionLevel = 'Not Found'
                     pkg.permission.append(permission)
@@ -90,10 +91,24 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict):
                 for per in pkgUsesPermissionDict[filespath]:
                     permission = Permission()
                     permission.name = per
-                    if P.protectionLevelDict.has_key(per):
-                        permission.protectionLevel = checkProtectionLevelValue(P.protectionLevelDict[per])
+                    tmpProtectionLevel = ''
+                    if pkgProtectionLevelDict.has_key(filespath):
+                        if pkgProtectionLevelDict[filespath].has_key(per):
+                            #permission.protectionLevel = checkProtectionLevelValue()
+                            tmpProtectionLevel = pkgProtectionLevelDict[filespath][per]
+                        elif P.protectionLevelDict.has_key(per):
+                            #permission.protectionLevel = checkProtectionLevelValue(P.protectionLevelDict[per])
+                            tmpProtectionLevel = P.protectionLevelDict[per]
+                            #print '@@@  ' + tmpProtectionLevel
+                        else:
+                            tmpProtectionLevel = 'Not Found'                       
+                    elif P.protectionLevelDict.has_key(per):
+                        #permission.protectionLevel = checkProtectionLevelValue(P.protectionLevelDict[per])
+                        tmpProtectionLevel = P.protectionLevelDict[per]
+                        #print '@@@  ' + tmpProtectionLevel
                     else:
-                        permission.protectionLevel = 'Not Found'
+                        tmpProtectionLevel = 'Not Found'
+                    permission.protectionLevel = checkProtectionLevelValue(tmpProtectionLevel)
                     pkg.usesPermission.append(permission)
 
             outList.append(pkg)
@@ -101,6 +116,7 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict):
 
 def checkProtectionLevelValue(string):
     string = string.lower()
+    result = ''
     if string.find('normal') > -1:
         result = '0 - normal'
     elif string.find('dangerous') > -1:
@@ -109,7 +125,8 @@ def checkProtectionLevelValue(string):
         result = '3 - signatureOrSystem'
     elif string.find('signature') > -1:
         result = '2 - signature'
-
+    else:
+        result = 'Not Found'
     return result
 
 def genPkgAndPermssionDict(fIn):
@@ -127,6 +144,26 @@ def genPkgAndPermssionDict(fIn):
             if not outdict.has_key(key):
                 outdict[key] = []
             outdict[key].append(value)
+    return outdict
+
+def genPkgPermissionProtectionLevelDict(fIn):
+    outdict = {}
+    f = open(fIn, 'r')
+    while True:
+        line = f.readline()
+        if not line:
+            break
+        if line.find('.xml:') > -1:
+            idx1 = line.find('/') + 1
+            idx2 = line.find(':')
+            key = line[idx1:idx2]
+            permissionName = P.getAttrValueByAttrTitle('android:name', line)
+            protectionLevel = P.getAttrValueByAttrTitle('android:protectionLevel', line)
+            if not protectionLevel:
+                protectionLevel = 'Not Found'             
+            if not outdict.has_key(key):
+                outdict[key] = {}
+            outdict[key][permissionName] = protectionLevel
     return outdict
 
 def initWorkbook(style, style_title, style_pkg, list):
@@ -233,8 +270,8 @@ def main():
         #P.getProtectLevelFromManifest('permission ', protectionLevelTxt)
         P.generatePackageInstallationToPathDict()
         P.generateProtectionLevelToProtectionLevelDict()
-        #print  generateProtectionLevelToProtectionLevelDict()
 
+        pkgProtectionLevelDict = genPkgPermissionProtectionLevelDict(P.protectionLevelTxt)
         pkgPermissionDict = genPkgAndPermssionDict(P.protectionLevelTxt)
         pkgUsesPermissionDict = genPkgAndPermssionDict(usesProtectionLevelTxt)
 
@@ -242,7 +279,7 @@ def main():
         pkgSourceDict = P.genPkgSourceDict(P.outList)
         #print pkgSourceDict
 
-        outList = genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict)
+        outList = genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, pkgProtectionLevelDict)
         style = P.setStyles(False)
         style_title = P.setStyles(True)
         style_pkg = setPkgStyle()
