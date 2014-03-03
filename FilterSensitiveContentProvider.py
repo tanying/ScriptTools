@@ -30,7 +30,13 @@ customTxt = outdir + "/custom.txt"
 withoutPermissionTxt = outdir + "/withoutPermission.txt"
 withPermissionTxt = outdir + "/withPermission.txt"
 shareUserIdPkgTxt = outdir + "/shareUserIdPkg.txt"
-outXls = outdir + "/out.xls"
+outXls = outdir + "/contentProvider.xls"
+
+#add by jinshi.song
+ProtectedBroadcastTxt=tempdir + "/ProtectedBroadcast.txt"
+emuProtectedBroadcastTxt=tempdir + "/emuProtectedBroadcast.txt"
+SystemServiceTxt=tempdir+"/SystemServiceList.txt"
+DictXls=EnvPath+"/SystemServiceAndBundlePackageDict.xls"
 
 outList = []
 pathDict = {}
@@ -437,6 +443,12 @@ def getManifestPathFromPhone():
 
 def getProtectLevelFromManifest(tag, output):
     os.chdir(ManifestListPath)
+    # command =  "grep -ri '<permission' ."
+    # os.system("%s > %s" % (command, protectionLevelTxt))
+    os.system("grep -ri '<%s' . > %s" % (tag, output))
+
+def grepTagToOutputByPath(path,tag, output):
+    os.chdir(path)
     # command =  "grep -ri '<permission' ."
     # os.system("%s > %s" % (command, protectionLevelTxt))
     os.system("grep -ri '<%s' . > %s" % (tag, output))
