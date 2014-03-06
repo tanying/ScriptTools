@@ -47,8 +47,11 @@ def getProtectedBroadcastDict(fIn,fInEmu):
                 	outdict[key] = emuDict[key]
     return outdict
 
-def initWorkbook(style, style_title, Dict):
-    _wb = Workbook()
+def initWorkbook(style, style_title, Dict,wb=0):
+    if wb==0:
+    	_wb = Workbook()
+    else:
+    	_wb=wb
     _ws1 = _wb.add_sheet(u'5.1 ProtectedBroadcasts')
 
     _ws1.write(0, 0, u'Protected Broadcast', style_title) 
@@ -69,8 +72,26 @@ def initWorkbook(style, style_title, Dict):
     _ws1.col(0).width = 15000
     _ws1.col(3).width = 12000
 
-    _wb.save(outXls)
-    print "Generate xls table successed!! --> %s" % outXls
+    if wb==0:
+    	_wb.save(outXls)
+    	print "Generate xls table successed!! --> %s" % outXls
+
+def Output(_wb):
+    #P.prepareFilesFromPhone()
+    #get ProtectedBroadcast From EmuManifestListPath --> emuProtectedBroadcastTxt
+    P.grepTagToOutputByPath(P.EmuListPath,'protected-broadcast', P.emuProtectedBroadcastTxt)
+    #get ProtectedBroadcast From ManifestListPath --> protectedBroadcastTxt
+    P.grepTagToOutputByPath(P.ManifestListPath,'protected-broadcast', P.ProtectedBroadcastTxt)
+
+    if not os.path.exists(P.EmuListPath):
+        print "Please copy emu android manifest running this script! Directory path is:\n" +     EmuListPath
+        return
+    else:
+        protectedBroadcastDict = getProtectedBroadcastDict(P.ProtectedBroadcastTxt,P.emuProtectedBroadcastTxt)
+
+        style = P.setStyles(False)
+        style_title = P.setStyles(True)
+        initWorkbook(style, style_title, protectedBroadcastDict,_wb)
 
 def main():
     P.prepareFilesFromPhone()

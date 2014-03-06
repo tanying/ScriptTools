@@ -170,8 +170,11 @@ def genPkgPermissionProtectionLevelDict(fIn):
             outdict[key][permissionName] = protectionLevel
     return outdict
 
-def initWorkbook(style, style_title, style_pkg, list,Dict):
-    _wb = Workbook()
+def initWorkbook(style, style_title, style_pkg, list,Dict,wb=0):
+    if wb==0:
+        _wb = Workbook()
+    else:
+        _wb=wb
     _ws1 = _wb.add_sheet(u'5.8 BundledPackages')
 
     _ws1.write(0, 0, u'Package No.', style_title) 
@@ -263,8 +266,9 @@ def initWorkbook(style, style_title, style_pkg, list,Dict):
     _ws1.col(3).width = 12000
     _ws1.col(6).width = 10000
 
-    _wb.save(outXls)
-    print "Generate xls table successed!! --> %s" % outXls
+    if wb==0:
+        _wb.save(outXls)
+        print "Generate xls table successed!! --> %s" % outXls
 
 def generateProtectionLevelToProtectionLevelDict():
     protectionLevelDict = {}
@@ -281,6 +285,45 @@ def generateProtectionLevelToProtectionLevelDict():
     #print protectionLevelDict
     return protectionLevelDict
 
+def Output(_wb):
+    #P.prepareFilesFromPhone()
+    P.getProtectLevelFromManifest('permission ', P.protectionLevelTxt)
+    P.getProtectLevelFromManifest('uses-permission', usesProtectionLevelTxt)
+    if not os.path.exists(P.EmuListPath):
+        print "Please copy emu android manifest running this script! Directory path is:\n" +     EmuListPath
+        return
+    else:
+
+        #add by jinshi.song 
+        DictExcel = xlrd.open_workbook(P.DictXls)
+        #print DictExcel.sheet_names()
+        BundlePackageSheet = DictExcel.sheet_by_name(u'bundlepackage')
+
+        for rownum in range(BundlePackageSheet.nrows):
+            #print BundlePackageSheet.row_values(rownum)
+            key=BundlePackageSheet.row(rownum)[1].value
+            #print key
+            if not BundlePackageDict.has_key(key):
+                BundlePackageDict[key]=BundlePackageSheet.row_values(rownum)
+        #P.prepareDirsAndDicts()
+        #P.getProtectLevelFromManifest('permission ', protectionLevelTxt)
+        P.generatePackageInstallationToPathDict()
+        P.generateProtectionLevelToProtectionLevelDict()
+
+        pkgProtectionLevelDict = genPkgPermissionProtectionLevelDict(P.protectionLevelTxt)
+        pkgPermissionDict = genPkgAndPermssionDict(P.protectionLevelTxt)
+        pkgUsesPermissionDict = genPkgAndPermssionDict(usesProtectionLevelTxt)
+
+        P.filterCustomOEM()
+        pkgSourceDict = P.genPkgSourceDict(P.outList)
+        #print pkgSourceDict
+
+        outList = genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, pkgProtectionLevelDict)
+        style = P.setStyles(False)
+        style_title = P.setStyles(True)
+        style_pkg = setPkgStyle()
+        initWorkbook(style, style_title, style_pkg, outList,BundlePackageDict,_wb)
+
 def main():
     P.prepareFilesFromPhone()
     P.getProtectLevelFromManifest('permission ', P.protectionLevelTxt)
@@ -292,13 +335,13 @@ def main():
 
         #add by jinshi.song 
         DictExcel = xlrd.open_workbook(P.DictXls)
-        print DictExcel.sheet_names()
+        #print DictExcel.sheet_names()
         BundlePackageSheet = DictExcel.sheet_by_name(u'bundlepackage')
 
         for rownum in range(BundlePackageSheet.nrows):
             #print BundlePackageSheet.row_values(rownum)
             key=BundlePackageSheet.row(rownum)[1].value
-            print key
+            #print key
             if not BundlePackageDict.has_key(key):
                 BundlePackageDict[key]=BundlePackageSheet.row_values(rownum)
         #P.prepareDirsAndDicts()

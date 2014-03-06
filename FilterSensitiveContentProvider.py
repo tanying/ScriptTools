@@ -528,6 +528,10 @@ def filterCustomOEM():
             #print pkg + "$$$$$$"
             if pathDict.has_key(pkg):
                 info.PackageInstallationPath = pathDict[pkg]
+            else:
+            	pkg=pkg[:pkg.rfind('.')]
+            	if pathDict.has_key(pkg):
+            		info.PackageInstallationPath=pathDict[pkg]
                 #print info.PackageInstallationPath
             if verDict.has_key(pkg):
                 info.PackageMinSdkVersion = verDict[pkg][0]
@@ -677,8 +681,12 @@ def setStyles(bool):
     # style.pattern = pt
     return style
 
-def initWorkbook(style, style_title, list):
-    _wb = Workbook()
+def initWorkbook(style, style_title, list,wb=0):
+    #_wb = Workbook()
+    if wb==0:
+        _wb = Workbook()
+    else:
+        _wb=wb
     _ws0 = _wb.add_sheet(u'5.5 Providers')
     # initial title of workbook , Merge Cells
     _ws0.write_merge(0, 1, 0, 4, u'General Package Information',style_title)
@@ -803,8 +811,9 @@ def initWorkbook(style, style_title, list):
     _ws0.col(15).width = 4000
     _ws0.col(17).width = 4000 
 
-    _wb.save(outXls) 
-    print "Generate xls table successed!! --> %s" % outXls       
+    if wb==0:
+        _wb.save(outXls)
+        print "Generate xls table successed!! --> %s" % outXls      
 
 def prepareFilesFromPhone():
     #if never excute pull Android manifest, get android.manifest from phone.
@@ -820,7 +829,7 @@ def prepareFilesFromPhone():
         #get Protection Level From ManifestListPath --> protectionLevelTxt
         getProtectLevelFromManifest('permission', protectionLevelTxt)
     else:
-        print "You have already pulled android.manifest from phone, if need to pull again, you should manually remove manifestList_jrd directory first."
+        print "You have already pulled android.manifest from phone, if need to pull again, you should manually remove temp directory first."
 
 def prepareDirsAndDicts():
     #Create inAospDir, outAospDir, customDir.
@@ -845,6 +854,14 @@ def prepareDirsAndDicts():
     generateVersionToVerDict()
     #protectionLevel.txt to ProtectionLevelDict
     generateProtectionLevelToProtectionLevelDict()
+
+def Output(_wb):
+        filterCustomOEM()
+        #print "Filter CustomOEM content provider successed!!!\n"
+
+        style = setStyles(False)
+        style_title = setStyles(True)
+        initWorkbook(style, style_title, outList,_wb)
 
 def main():
     prepareFilesFromPhone()

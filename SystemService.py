@@ -18,8 +18,11 @@ SystemSerivceList=[]
 SystemSerivceDict={}
 
 
-def initWorkbook(style, style_title,list, Dict):
-    _wb = Workbook()
+def initWorkbook(style, style_title,list, Dict,wb=0):
+    if wb==0:
+        _wb = Workbook()
+    else:
+        _wb=wb
     _ws1 = _wb.add_sheet(u'5.6 SystemServices')
 
     _ws1.write(0, 0, u'System Service', style_title) 
@@ -47,8 +50,49 @@ def initWorkbook(style, style_title,list, Dict):
     _ws1.col(2).width = 7000
     _ws1.col(3).width = 12000
 
-    _wb.save(outXls)
-    print "Generate xls table successed!! --> %s" % outXls
+    if wb==0:
+        _wb.save(outXls)
+        print "Generate xls table successed!! --> %s" % outXls 
+
+def Output(_wb):
+    #P.prepareFilesFromPhone()
+    os.system("adb shell service list > %s" % (P.SystemServiceTxt))
+    f = open(P.SystemServiceTxt, 'r')
+    f.readline()
+    while True:
+    	line=f.readline()
+    	if not line:
+    		break
+    	if line.find(':') > -1:
+    		#print line
+    		idx1 = line.find(':')
+    		key=line[:idx1]
+    		idx1=key.index('	')
+    		key=key[idx1:]
+    		key=key.strip()
+    		SystemSerivceList.append(key)
+    		#print key
+
+    if not os.path.exists(P.EmuListPath):
+        print "Please copy emu android manifest running this script! Directory path is:\n" +     EmuListPath
+        return
+    else:
+        #protectedBroadcastDict = getProtectedBroadcastDict(P.ProtectedBroadcastTxt,P.emuProtectedBroadcastTxt)
+		DictExcel = xlrd.open_workbook(P.DictXls)
+		#print DictExcel.sheet_names()
+
+		SystemServiceSheet = DictExcel.sheet_by_name(u'systemservice')
+
+		for rownum in range(SystemServiceSheet.nrows):
+	    	#print SystemServiceSheet.row_values(rownum)
+			key=SystemServiceSheet.row(rownum)[0].value
+			#print key
+			if not SystemSerivceDict.has_key(key):
+				SystemSerivceDict[key]=SystemServiceSheet.row_values(rownum)
+		
+		style = P.setStyles(False)
+		style_title = P.setStyles(True)
+		initWorkbook(style, style_title, SystemSerivceList,SystemSerivceDict,_wb)
 
 def main():
     P.prepareFilesFromPhone()
@@ -67,7 +111,7 @@ def main():
     		key=key[idx1:]
     		key=key.strip()
     		SystemSerivceList.append(key)
-    		print key
+    		#print key
 
     if not os.path.exists(P.EmuListPath):
         print "Please copy emu android manifest running this script! Directory path is:\n" +     EmuListPath
@@ -75,14 +119,14 @@ def main():
     else:
         #protectedBroadcastDict = getProtectedBroadcastDict(P.ProtectedBroadcastTxt,P.emuProtectedBroadcastTxt)
 		DictExcel = xlrd.open_workbook(P.DictXls)
-		print DictExcel.sheet_names()
+		#print DictExcel.sheet_names()
 
 		SystemServiceSheet = DictExcel.sheet_by_name(u'systemservice')
 
 		for rownum in range(SystemServiceSheet.nrows):
 	    	#print SystemServiceSheet.row_values(rownum)
 			key=SystemServiceSheet.row(rownum)[0].value
-			print key
+			#print key
 			if not SystemSerivceDict.has_key(key):
 				SystemSerivceDict[key]=SystemServiceSheet.row_values(rownum)
 		
