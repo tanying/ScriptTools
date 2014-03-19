@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="1650059" android:versionName="31.0.1650.59" package="com.android.chrome"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <permission android:name="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:protectionLevel="signature" />
+    <uses-feature android:glEsVersion="0x20000" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_SYNC_STATS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="com.android.chrome.permission.READ_WRITE_BOOKMARK_FOLDERS" />
+    <permission android:name="com.android.chrome.permission.READ_WRITE_BOOKMARK_FOLDERS" android:protectionLevel="signatureOrSystem" />
+    <uses-permission android:name="com.android.chrome.TOS_ACKED" />
+    <permission android:name="com.android.chrome.TOS_ACKED" android:protectionLevel="signatureOrSystem" />
+    <permission android:name="com.android.chrome.PRERENDER_URL" />
+    <uses-permission android:name="com.android.chrome.PRERENDER_URL" />
+    <permission android:name="com.android.chrome.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.android.chrome.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <application android:label="@string/app_name" android:icon="@mipmap/app_icon" android:name="com.google.android.apps.chrome.ChromeMobileApplication" android:allowBackup="true" android:largeHeap="false" android:supportsRtl="true">
+        <activity android:theme="@style/MainTheme" android:name="com.google.android.apps.chrome.Main" android:launchMode="singleTask" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:windowSoftInputMode="adjustResize" android:hardwareAccelerated="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.APP_BROWSER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="googlechrome" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:scheme="about" />
+                <data android:scheme="javascript" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="googlechrome" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:scheme="about" />
+                <data android:scheme="javascript" />
+                <data android:mimeType="text/html" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="application/xhtml+xml" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="multipart/related" android:scheme="file" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.speech.action.VOICE_SEARCH_RESULTS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="-101">
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable" />
+        </activity>
+        <activity-alias android:name="com.android.chrome.Main" android:targetActivity="com.google.android.apps.chrome.Main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:theme="@*android:style/Theme.Holo.Light" android:name="com.google.android.apps.chrome.sync.ui.PassphraseActivity" />
+        <activity android:theme="@style/DialogWhenLarge" android:label="@string/save_bookmark" android:name="com.google.android.apps.chrome.ManageBookmarkActivity" android:windowSoftInputMode="stateHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="chrome" android:host="editbookmark" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.chrome.ADDBOOKMARK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/FirstRunTheme" android:label="@string/fre_label" android:name="com.google.android.apps.chrome.firstrun.FirstRunExperienceActivity" android:launchMode="singleTop" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:theme="@style/FirstRunTheme" android:label="@string/fre_label" android:name="com.google.android.apps.chrome.firstrun.FirstRunExperienceActivityPhone" android:launchMode="singleTop" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:theme="@style/FirstRunTabletTheme" android:label="@string/fre_label" android:name="com.google.android.apps.chrome.firstrun.FirstRunExperienceActivityTablet" android:launchMode="singleTop" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:windowSoftInputMode="stateHidden|adjustPan" android:hardwareAccelerated="true" />
+        <activity android:theme="@*android:style/Theme.Holo.Light" android:label="@string/preferences" android:name="com.google.android.apps.chrome.preferences.PreferenceHeaders" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:uiOptions="splitActionBarWhenNarrow" />
+        <activity android:theme="@*android:style/Theme.Holo.Light" android:name="com.google.android.apps.chrome.EmbedContentViewActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:hardwareAccelerated="true" />
+        <activity android:theme="@*android:style/Theme.Holo.Light.NoActionBar" android:name="com.google.android.apps.chrome.prerender.PrerenderAPITestActivity" android:exported="true" />
+        <activity android:theme="@*android:style/Theme.Holo.Light.NoActionBar" android:label="Chrome.FullscreenMediaActivity" android:name="com.google.android.apps.chrome.fullscreenmedia.FullScreenMediaActivity" android:permission="android.permission.INTERNET" android:enabled="false" android:exported="true" android:taskAffinity=".FullScreenMediaActivity" android:excludeFromRecents="true" android:launchMode="singleTask" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:noHistory="true" android:hardwareAccelerated="true" />
+        <provider android:name="com.google.android.apps.chrome.snapshot.SnapshotProvider" android:exported="false" android:authorities="com.android.chrome.snapshot" />
+        <provider android:name="com.google.android.apps.chrome.ChromeBrowserProvider" android:readPermission="com.android.browser.permission.READ_HISTORY_BOOKMARKS" android:writePermission="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS" android:exported="true" android:authorities="com.android.chrome.ChromeBrowserProvider;com.android.chrome.browser;com.android.chrome">
+            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:path="/bookmarks/search_suggest_query" />
+        </provider>
+        <provider android:name="com.google.android.apps.chrome.icing.IcingProvider" android:exported="false" android:authorities="com.android.chrome.icing" android:grantUriPermissions="true" />
+        <provider android:name="com.google.android.apps.chrome.AutofillDataProvider" android:exported="true" android:authorities="com.android.chrome.AutofillDataProvider" />
+        <service android:name="com.google.android.apps.chrome.sync.ChromeBrowserSyncAdapterService" android:exported="false">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data android:name="android.content.SyncAdapter" android:resource="@xml/syncadapter" />
+        </service>
+        <receiver android:name="com.google.android.apps.chrome.services.AccountsChangedReceiver">
+            <intent-filter>
+                <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.google.android.apps.chrome.ToSAckedReceiver" android:permission="com.android.chrome.TOS_ACKED">
+            <intent-filter>
+                <action android:name="com.android.chrome.TOS_ACKED" />
+            </intent-filter>
+        </receiver>
+        <activity android:label="@string/bookmark_shortcut_name" android:icon="@mipmap/bookmark_shortcut_icon" android:name="com.google.android.apps.chrome.ShortcutActivity" android:enabled="true" android:hardwareAccelerated="true">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <receiver android:label="@string/bookmarks" android:name="com.google.android.apps.chrome.appwidget.bookmarks.BookmarkThumbnailWidgetProvider" android:enabled="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name=".BOOKMARK_APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/bookmarkthumbnailwidget_info" />
+        </receiver>
+        <service android:name="com.google.android.apps.chrome.appwidget.bookmarks.BookmarkThumbnailWidgetService" android:permission="android.permission.BIND_REMOTEVIEWS" android:exported="false" />
+        <receiver android:name="com.google.android.apps.chrome.appwidget.bookmarks.BookmarkWidgetProxy" android:exported="false" />
+        <receiver android:name="com.google.ipc.invalidation.external.client.contrib.MultiplexingGcmListener$GCMReceiver" android:permission="com.google.android.c2dm.permission.SEND" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.android.chrome" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.google.ipc.invalidation.external.client.contrib.MultiplexingGcmListener" android:exported="false">
+            <meta-data android:name="sender_ids" android:value="cloudprint.c2dm@gmail.com,ipc.invalidation@gmail.com" />
+        </service>
+        <meta-data android:name="ipc.invalidation.ticl.listener_service_class" android:value="org.chromium.sync.notifier.InvalidationService" />
+        <service android:name="org.chromium.sync.notifier.InvalidationService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.ipc.invalidation.AUTH_TOKEN_REQUEST" />
+            </intent-filter>
+        </service>
+        <service android:name="com.google.ipc.invalidation.ticl.android2.TiclService" android:exported="false" />
+        <service android:name="com.google.ipc.invalidation.ticl.android2.channel.AndroidMessageSenderService" android:exported="false" />
+        <receiver android:name="com.google.ipc.invalidation.ticl.android2.AndroidInternalScheduler$AlarmReceiver" android:exported="false" />
+        <receiver android:name="com.google.ipc.invalidation.external.client2.contrib.AndroidListener$AlarmReceiver" android:exported="false" />
+        <service android:name="com.google.ipc.invalidation.ticl.android2.channel.AndroidMessageReceiverService" android:enabled="true" android:exported="false" />
+        <receiver android:name="com.google.ipc.invalidation.ticl.android2.channel.AndroidMessageReceiverService$Receiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.ipc.invalidation.gcmmplex.EVENT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.google.android.apps.chrome.snapshot.SnapshotDownloadReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.google.android.apps.chrome.snapshot.SnapshotArchiveManager" android:exported="false" />
+        <service android:name="com.google.android.apps.chrome.ChromeBrowserPrerenderService" android:permission="com.android.chrome.PRERENDER_URL" android:exported="true" />
+        <service android:name="com.google.android.apps.chrome.snapshot.cloudprint.CloudPrintService" android:exported="false" />
+        <service android:name="com.google.android.apps.chrome.crash.MinidumpUploadService" android:exported="false" />
+        <service android:name="com.google.android.apps.chrome.omaha.OmahaClient" android:exported="false" />
+        <receiver android:name="com.google.android.apps.chrome.snapshot.gcm.GcmReceiver$Receiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.ipc.invalidation.gcmmplex.EVENT" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.google.android.apps.chrome.snapshot.gcm.GcmReceiver" android:exported="false" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService0" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process0" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService1" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process1" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService2" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process2" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService3" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process3" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService4" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process4" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService5" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process5" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService6" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process6" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService7" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process7" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService8" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process8" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService9" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process9" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService10" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process10" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService11" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process11" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.SandboxedProcessService12" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":sandboxed_process12" android:isolatedProcess="true" />
+        <service android:name="org.chromium.content.app.PrivilegedProcessService0" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":privileged_process0" android:isolatedProcess="false" />
+        <service android:name="org.chromium.content.app.PrivilegedProcessService1" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":privileged_process1" android:isolatedProcess="false" />
+        <service android:name="org.chromium.content.app.PrivilegedProcessService2" android:permission="com.google.android.apps.chrome.permission.CHILD_SERVICE" android:exported="false" android:process=":privileged_process2" android:isolatedProcess="false" />
+        <receiver android:name="com.google.android.apps.chrome.OpenDownloadReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="org.chromium.base.PowerStatusReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.no.real.class.needed.receiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wallet.ENABLE_WALLET_OPTIMIZATION" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.google.android.apps.chrome.videofling.NotificationTransportControl$ListenerService" />
+        <meta-data android:name="com.google.android.partnersetup.RLZ_ACCESS_POINT" android:value="@string/rlz_access_point" />
+        <meta-data android:name="org.chromium.sync.notifier.IMPLEMENTING_CLASS_NAME" android:value="org.chromium.sync.notifier.InvalidationService" />
+        <service android:name="com.google.android.apps.chrome.MediaCaptureNotificationService" android:exported="false" android:stopWithTask="true" />
+    </application>
+</manifest>

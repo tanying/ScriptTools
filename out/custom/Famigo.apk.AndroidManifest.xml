@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="1300000634" android:versionName="2.20.634 Preload" package="com.famigo.sandbox"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <supports-screens android:smallScreens="false" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <permission android:name="com.famigo.sandbox.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.famigo.sandbox.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_SYNC_STATS" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <application android:label="@string/app_name" android:icon="@drawable/icon" android:name="com.famigo.sandbox.base.Famigo" android:largeHeap="true">
+        <activity android:theme="@style/Theme.FamigoBackground" android:label="Famigo" android:name="com.famigo.sandbox.base.Main" android:configChanges="orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="http" />
+                <data android:host="www.famigo.com" />
+                <data android:path="/google_play/" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.base.AppInstaller" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.fun.SoundBoardSandbox" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.fun.FamigoTube" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.fun.FamigoYouTubeActivity" android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.base.SetupAccount" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:label="com.famigo.sandbox.setupaccount.SetupAccountActivity" android:name="com.famigo.sandbox.setupaccount.SetupAccountActivity" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.util.SubAppDownloader" android:configChanges="orientation|screenSize" />
+        <activity android:theme="@*android:style/Theme.Light.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.base.Preferences" />
+        <activity android:theme="@style/Theme.FamigoBackground" android:name="com.famigo.sandbox.base.SandboxActivity" android:launchMode="singleTop" />
+        <activity android:theme="@style/Theme.FamigoBackground" android:name="com.famigo.sandbox.base.SandboxManagement" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.base.ParentDashboard" android:configChanges="orientation|screenSize" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.base.SandboxFullStoreActivity" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.dialog.ScreenShotDialog" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.AppSelectionDialog" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.base.CreateLockPattern" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.base.ResetLockPattern" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.NotSubscribedToVideoDialog" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.NotSubscribedToContentDialog" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.SandboxPrefsDialog" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.dialog.ManageAppListDialog" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.dialog.AppInfoDialog" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.dialog.UnlockDialog" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.ShareSandboxDialog" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.dialog.InAppBillingDialog" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.dialog.AttCarrierBillingDialog" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.dialog.PurchaseSuccessDialog" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.TimeExpiredGrandfatherDialog" android:launchMode="singleTask" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.MigrationDialog" android:launchMode="singleTask" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.UpdateAvailableDialog" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.RateUsDialog" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.dialog.ContextMenuDialog" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.BlockedPopupDialog" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar" android:name="com.famigo.sandbox.dialog.recurly.NewAccountDialog" android:windowSoftInputMode="adjustResize" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.browser.dialog.CantGoThereDialog" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.FamigoProgressDialog" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.dialog.DownloadSubscAppPopup" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.dialog.MonthlySubscPopup" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.FamigoLoadingScreen" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.crash.FamigoCrashDialog" android:launchMode="singleInstance" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.base.HomeCaptureSetup" android:launchMode="singleTop" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.base.CaptureHomeActivity" android:enabled="false" android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.timer.TimerActivity" />
+        <activity android:theme="@style/player_style" android:label="@string/player_activity" android:name="com.mobo.mobilemumandroid.Player" android:clearTaskOnLaunch="true" android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@style/main_style" android:label="@string/splash_activity" android:name="com.mobo.mobilemumandroid.Splash" android:clearTaskOnLaunch="true" android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@style/main_style" android:label="@string/newmoreagain_activity" android:name="com.mobo.mobilemumandroid.NewMoreAgain" android:clearTaskOnLaunch="true" android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@style/main_style" android:label="@string/newmoreagain_activity" android:name="com.mobo.mobilemumandroid.Login" android:clearTaskOnLaunch="true" android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.famigo.sandbox.animalpiano.PianoActivityFreeFamigo" />
+        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:label="Famigo Browser" android:name="com.famigo.sandbox.browser.FamigoBrowserActivity" android:launchMode="singleTask" android:configChanges="locale|keyboard|keyboardHidden|orientation|screenSize" android:hardwareAccelerated="true" />
+        <activity android:theme="@*android:style/Theme.Dialog" android:name="com.famigo.sandbox.dialog.AnswerPhoneDialog" android:taskAffinity="" android:excludeFromRecents="true" android:launchMode="singleInstance" />
+        <service android:name="com.famigo.sandbox.service.DirectedPopupService" android:enabled="true" />
+        <service android:name="com.famigo.sandbox.syncadapter.FamigoSyncService" android:exported="false">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data android:name="android.content.SyncAdapter" android:resource="@xml/metricssyncadapter" />
+        </service>
+        <service android:name="com.famigo.sandbox.service.ProtectionService" />
+        <service android:name="com.famigo.sandbox.service.UsageSampleService" />
+        <receiver android:name="com.famigo.sandbox.receiver.UsageSamplesCollector" android:enabled="true" />
+        <receiver android:name="com.famigo.sandbox.receiver.OnBootReceiver" android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.famigo.sandbox.receiver.OnShutdownReceiver" android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.famigo.sandbox.receiver.HomeGuard" android:enabled="true" />
+        <receiver android:name="com.famigo.sandbox.receiver.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.famigo.sandbox" />
+            </intent-filter>
+        </receiver>
+        <meta-data android:name="APP_NAME" android:value="com.famigo.sandbox" />
+        <meta-data android:name="ADX_CLIENT_ID" android:value="attandtfamigo8926jo" />
+        <receiver android:name="com.AdX.tag.AdXAppTracker" android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+            <meta-data android:name="forward.InstallReferrer" android:value="com.famigo.sandbox.receiver.InstallReferrerReceiver" />
+        </receiver>
+        <provider android:label="Famigo Data" android:name="com.famigo.sandbox.data.FamigoContentProvider" android:exported="false" android:authorities="com.famigo.sandbox.data.contentprovider" android:syncable="true" />
+        <meta-data android:name="OTHERSTORE" android:value="PRELOAD" />
+    </application>
+</manifest>

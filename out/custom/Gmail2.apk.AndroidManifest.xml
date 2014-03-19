@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="4710000" android:versionName="4.7.1 (946962)" package="com.google.android.gm"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <permission android:label="@string/read_perm_label" android:name="com.google.android.gm.permission.READ_GMAIL" android:protectionLevel="signature" android:permissionGroup="android.permission-group.MESSAGES" android:description="@string/read_perm_desc" />
+    <permission android:label="@string/write_perm_label" android:name="com.google.android.gm.permission.WRITE_GMAIL" android:protectionLevel="signature" android:permissionGroup="android.permission-group.MESSAGES" android:description="@string/write_perm_desc" />
+    <permission android:label="@string/auto_send_perm_label" android:name="com.google.android.gm.permission.AUTO_SEND" android:protectionLevel="signature" android:permissionGroup="android.permission-group.MESSAGES" android:description="@string/auto_send_perm_desc" />
+    <permission android:label="@string/read_provider_perm_label" android:name="com.google.android.gm.permission.READ_CONTENT_PROVIDER" android:protectionLevel="dangerous" android:permissionGroup="android.permission-group.MESSAGES" android:description="@string/read_provider_perm_desc" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_SYNC_STATS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SUBSCRIBED_FEEDS_READ" />
+    <uses-permission android:name="android.permission.SUBSCRIBED_FEEDS_WRITE" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.gm.permission.READ_GMAIL" />
+    <uses-permission android:name="com.google.android.gm.permission.WRITE_GMAIL" />
+    <uses-permission android:name="com.google.android.googleapps.permission.GOOGLE_AUTH" />
+    <uses-permission android:name="com.google.android.googleapps.permission.GOOGLE_AUTH.mail" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="com.google.android.gm.permission.AUTO_SEND" />
+    <uses-permission android:name="com.google.android.voicesearch.AUDIO_FILE_ACCESS" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.NFC" />
+    <application android:theme="@style/UnifiedEmailTheme" android:label="@string/activity_gmail" android:icon="@mipmap/ic_launcher_mail" android:name="GmailApplication" android:backupAgent=".persistence.GmailBackupAgent" android:restoreAnyVersion="true" android:hardwareAccelerated="true" android:supportsRtl="false" android:requiredAccountType="com.google">
+        <meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAIkytnZ4PrTy4SJw_gpIJ4LR5rOSKKM2vm9a68Ew" />
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        <meta-data android:name="android.app.default_searchable" android:value="com.google.android.gm.ui.MailActivityGmail" />
+        <activity android:theme="@style/ComposeTheme" android:label="@string/activity_gmail" android:name="com.google.android.gm.ComposeActivityGmail">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SENDTO" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="mailto" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="mailto" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:host="gmail-ls" />
+                <data android:scheme="gmail2from" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.google.android.voicesearch.SELF_NOTE" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@*android:style/Theme.Translucent" android:label="" android:name="com.google.android.gm.AutoSendActivity" android:permission="com.google.android.gm.permission.AUTO_SEND" android:taskAffinity="" android:screenOrientation="user">
+            <intent-filter android:label="@string/activity_gmail">
+                <action android:name="com.google.android.gm.action.AUTO_SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:theme="@style/ComposeTheme" android:name="com.android.mail.compose.ComposeActivity" android:targetActivity="com.google.android.gm.ComposeActivityGmail" />
+        <activity android:theme="@style/ShortcutWidgetTheme" android:label="@string/shortcut_name_title" android:name="com.android.mail.ui.ShortcutNameActivity" />
+        <activity android:label="@string/activity_gmail" android:name="com.google.android.gm.ui.MailboxSelectionActivityGmail">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:label="@string/activity_gmail" android:name="com.android.mail.ui.MailboxSelectionActivity" android:targetActivity="com.google.android.gm.ui.MailboxSelectionActivityGmail">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:theme="@style/ShortcutWidgetTheme" android:label="@string/activity_create_label_shortcut" android:icon="@mipmap/ic_launcher_shortcut_gmail_label" android:name="CreateShortcutActivityGmail">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:theme="@style/ShortcutWidgetTheme" android:label="@string/activity_create_label_shortcut" android:icon="@mipmap/ic_launcher_shortcut_gmail_label" android:name="CreateShortcutActivityGoogleMail" android:targetActivity="CreateShortcutActivityGmail">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:theme="@style/ShortcutWidgetTheme" android:label="@string/activity_folder_selection" android:name="com.google.android.gm.ui.FolderSelectionActivityGmail" android:exported="false" />
+        <activity android:theme="@style/UnifiedEmailTheme" android:label="@string/menu_manage_folders" android:name="LabelsActivity" android:exported="false" />
+        <activity android:theme="@*android:style/Theme.Holo.Light.Dialog" android:name="LabelSynchronizationActivity" android:exported="false" />
+        <activity android:label="@string/activity_preferences" android:name=".preference.GmailPreferenceActivity" android:exported="false" />
+        <activity android:label="@string/activity_preferences" android:name=".preference.PublicPreferenceActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:label="@string/activity_preferences" android:name="Gmail2PreferenceActivity" android:exported="false" android:targetActivity="com.google.android.gm.preference.GmailPreferenceActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:host="gmail" />
+                <data android:scheme="setting" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:theme="@*android:style/Theme.Holo.Light.NoActionBar" android:label="" android:name="GviewActivity" android:permission="com.google.android.gm.permission.READ_GMAIL" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:host="preview" />
+                <data android:scheme="gview" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/open_source_licenses_title" android:name="LicenseActivity" android:exported="false" />
+        <activity android:theme="@*android:style/Theme.Translucent" android:label="@string/activity_gmail" android:name="ReauthenticateActivity" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:host="gmail" />
+                <data android:scheme="auth" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/activity_gmail" android:name="AddAccountActivity" android:exported="false" />
+        <activity android:theme="@style/PlainUnifiedEmailTheme" android:label="@string/activity_gmail" android:name="com.google.android.gm.ui.MailActivityGmail" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable" />
+        </activity>
+        <activity android:theme="@style/PhotoViewTheme" android:label="@string/app_name" android:name="com.google.android.gm.photo.GmailPhotoViewActivity" android:exported="false" />
+        <activity-alias android:theme="@style/PhotoViewTheme" android:name="com.android.mail.photo.MailPhotoViewActivity" android:targetActivity="com.google.android.gm.photo.GmailPhotoViewActivity" />
+        <activity-alias android:label="@string/activity_gmail" android:name="ConversationListActivityGmail" android:enabled="true" android:targetActivity="com.google.android.gm.ui.MailActivityGmail">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.APP_EMAIL" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:host="gmail-ls" />
+                <data android:scheme="content" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:label="@string/activity_gmail" android:name="ConversationListActivityGoogleMail" android:enabled="false" android:targetActivity="com.google.android.gm.ui.MailActivityGmail">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.APP_EMAIL" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:host="gmail-ls" />
+                <data android:scheme="content" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:label="@string/activity_gmail" android:name="GmailActivity" android:enabled="true" android:targetActivity="com.google.android.gm.ui.MailActivityGmail">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:label="@string/activity_gmail" android:name="PublicGmailActivity" android:permission="com.google.android.gm.permission.READ_CONTENT_PROVIDER" android:enabled="true" android:exported="true" android:targetActivity="com.google.android.gm.ui.MailActivityGmail">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:host="com.google.android.gm" />
+                <data android:mimeType="vnd.android.cursor.item/vnd.com.google.android.gm.label" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:theme="@*android:style/Theme.NoDisplay" android:label="@string/activity_gmail" android:name="ViewProxyActivity" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:host="com.android.gmail.ui" />
+                <data android:scheme="content" />
+                <data android:path="/proxy" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/UnifiedEmailTheme" android:label="@string/app_name" android:name="com.android.mail.browse.EmlViewerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="message/rfc822" />
+                <data android:mimeType="application/eml" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/VacationResponderTheme" android:label="@string/app_name" android:name=".vacation.VacationResponderActivity" android:exported="false" android:windowSoftInputMode="stateHidden" />
+        <provider android:label="@string/provider_label" android:name=".provider.MailProvider" android:readPermission="com.google.android.gm.permission.READ_GMAIL" android:writePermission="com.google.android.gm.permission.WRITE_GMAIL" android:exported="true" android:multiprocess="false" android:authorities="gmail-ls">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:label="@string/public_provider_label" android:name=".provider.PublicContentProvider" android:readPermission="com.google.android.gm.permission.READ_CONTENT_PROVIDER" android:exported="true" android:multiprocess="false" android:authorities="com.google.android.gm">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:label="@string/ui_provider_label" android:name=".provider.GmailProvider" android:readPermission="com.google.android.gm.permission.READ_GMAIL" android:writePermission="com.google.android.gm.permission.WRITE_GMAIL" android:exported="false" android:multiprocess="false" android:authorities="com.android.gmail.ui">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:name="com.google.android.gm.SuggestionsProvider" android:exported="false" android:authorities="com.google.android.gmail.SuggestionsProvider" />
+        <receiver android:name=".GoogleMailDeviceStartupReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".GoogleMailPackageReplaceReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".GoogleMailSwitchService" />
+        <receiver android:name="AccountsChangedReceiver">
+            <intent-filter>
+                <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="GmailReceiver">
+            <intent-filter>
+                <action android:name="com.android.mail.action.update_notification" android:priority="-10" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".provider.MailSyncAdapterService" android:exported="true">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data android:name="android.content.SyncAdapter" android:resource="@xml/syncadapter" />
+        </service>
+        <receiver android:name=".MailIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <action android:name="com.google.android.gm.intent.CLEAR_ALL_NEW_MAIL_NOTIFICATIONS" />
+                <action android:name="com.google.android.gm.intent.ACTION_POST_SEND_ERROR" />
+                <action android:name="com.google.android.gm.intent.ACTION_PROVIDER_CREATED" />
+                <action android:name="com.google.android.gm.intent.ACTION_UPGRADE_SYNC_WINDOW" />
+                <action android:name="com.google.android.gm.intent.VALIDATE_ACCOUNT_NOTIFICATIONS" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".GmailIntentService" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+                <action android:name="com.android.mail.action.RESEND_NOTIFICATIONS" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.mail.action.CLEAR_NEW_MAIL_NOTIFICATIONS" />
+                <data android:scheme="content" />
+            </intent-filter>
+        </service>
+        <service android:name=".provider.MailIndexerService" />
+        <provider android:label="@string/conversation_content_provider" android:name="com.android.mail.browse.GmailConversationProvider" android:exported="false" android:multiprocess="false" android:authorities="com.google.android.gm2.conversation.provider">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:label="@string/account_cache_provider" android:name="com.android.mail.providers.GmailAccountCacheProvider" android:exported="false" android:multiprocess="false" android:authorities="com.google.android.gm2.accountcache">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <provider android:name="com.android.mail.providers.EmlAttachmentProvider" android:exported="false" android:multiprocess="false" android:authorities="@string/eml_attachment_provider">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+        <service android:name="com.android.mail.compose.EmptyService" />
+        <receiver android:label="@string/activity_gmail" android:name=".widget.GmailWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.mail.ACTION_NOTIFY_DATASET_CHANGED" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.mail.ACTION_UPDATE_WIDGET" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.mail.ACTION_VALIDATE_ALL_WIDGETS" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/gmail_widget_info" />
+        </receiver>
+        <receiver android:label="@string/activity_gmail" android:name=".widget.GoogleMailWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.mail.ACTION_NOTIFY_DATASET_CHANGED" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.mail.ACTION_UPDATE_WIDGET" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.mail.ACTION_VALIDATE_ALL_WIDGETS" />
+                <data android:mimeType="application/gmail-ls" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/gmail_widget_info" />
+        </receiver>
+        <service android:name="com.android.mail.widget.GmailWidgetService" android:permission="android.permission.BIND_REMOTEVIEWS" android:exported="false" />
+        <service android:name="com.android.mail.NotificationActionIntentService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.mail.action.notification.MARK_READ" />
+                <action android:name="com.android.mail.action.notification.ARCHIVE" />
+                <action android:name="com.android.mail.action.notification.DELETE" />
+                <action android:name="com.android.mail.action.notification.UNDO" />
+                <action android:name="com.android.mail.action.notification.DESTRUCT" />
+                <action android:name="com.android.mail.action.notification.UNDO_TIMEOUT" />
+                <action android:name="com.android.mail.action.notification.REPLY" />
+                <action android:name="com.android.mail.action.notification.REPLY_ALL" />
+                <action android:name="com.android.mail.action.notification.FORWARD" />
+            </intent-filter>
+        </service>
+        <service android:name="com.android.mail.MailLogService" />
+        <service android:name="com.android.mail.browse.EmlTempFileDeletionService" />
+    </application>
+</manifest>

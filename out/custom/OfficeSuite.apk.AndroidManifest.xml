@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="1648" android:versionName="7.4.1648" android:installLocation="auto" package="com.mobisystems.office"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:name="com.mobisystems.MSApp" android:debuggable="false" android:taskAffinity="" android:largeHeap="true">
+        <provider android:name="com.mobisystems.office.io.HelpContentProvider" android:exported="true" android:authorities="com.mobisystems.office.help" />
+        <provider android:name="com.mobisystems.office.search.FileSearchProvider" android:exported="true" android:process=":search" android:multiprocess="false" android:authorities="com.mobisystems.office.search" />
+        <provider android:name="com.mobisystems.zip.ZipProvider" android:permission="com.mobisystems.office.permissions.zipprovider" android:exported="true" android:process=":browser" android:authorities="com.mobisystems.office.zip" android:grantUriPermissions="true" />
+        <provider android:name="com.mobisystems.office.mail.provider.AttachmentProvider" android:exported="true" android:process="com.mobisystems.office.mail" android:authorities="com.mobisystems.office.mail.provider.attachmentprovider" />
+        <provider android:name="com.mobisystems.provider.ProviderWrapper" android:permission="com.mobisystems.wrapper.permission" android:exported="true" android:authorities="com.mobisystems.office.wrapper" android:grantUriPermissions="true" />
+        <provider android:name="com.mobisystems.provider.AssetsProvider" android:exported="true" android:authorities="com.mobisystems.office.assets" />
+        <meta-data android:name="to.dualscreen" android:value="true" />
+        <meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
+        <meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:resource="@dimen/app_minimumsize_w" />
+        <meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:resource="@dimen/app_minimumsize_h" />
+        <activity android:theme="@style/Theme.SplashScreen" android:label="@string/app_name" android:name="com.mobisystems.office.splashScreen.SplashScreenActivity" android:process=":browser" android:taskAffinity="com.mobisystems.office.filebrowser" android:configChanges="locale|mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|fontScale" android:windowSoftInputMode="adjustNothing">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/Theme.FileBrowser" android:label="@string/app_name" android:name="com.mobisystems.office.FileBrowser" android:process=":browser" android:taskAffinity="com.mobisystems.office.filebrowser" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" android:windowSoftInputMode="adjustNothing">
+            <meta-data android:name="android.app.default_searchable" android:value="com.mobisystems.office.search.FileSearchActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:mimeType="vnd.android.cursor.item/file" android:scheme="file" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.openintents.action.PICK_FILE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.openintents.action.PICK_FILE" />
+                <data android:mimeType="*/*" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.openintents.action.PICK_FILE" />
+                <data android:scheme="file" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:mimeType="application/zip" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:mimeType="application/x-zip" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:mimeType="application/x-zip-compressed" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:mimeType="application/x-compress" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:mimeType="application/x-compressed" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/settings" android:name="com.mobisystems.office.FileBrowserSettings" android:process=":browser" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" />
+        <activity android:theme="@style/Theme.FileBrowser" android:label="@string/app_name" android:name="com.mobisystems.office.WelcomeScreenActivity" android:process="com.mobisystems.office" android:taskAffinity="com.mobisystems.filebrowser" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" android:windowSoftInputMode="adjustNothing" />
+        <activity android:theme="@style/Theme.Editors" android:label="@string/app_name" android:name="com.mobisystems.office.word.WordEditor" android:process=":word" android:excludeFromRecents="true" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" android:windowSoftInputMode="adjustResize" android:hardwareAccelerated="false" />
+        <activity android:theme="@style/ms_translucent" android:label="@string/app_name" android:name="com.mobisystems.office.EditorLauncher" android:process=":launcher" android:excludeFromRecents="true" android:configChanges="locale|mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" android:windowSoftInputMode="adjustResize" />
+        <activity android:theme="@style/Theme.Editors" android:label="@string/app_name" android:name="com.mobisystems.office.mail.viewer.MessageViewer" android:process="com.mobisystems.office.mail" android:excludeFromRecents="true" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:mimeType="message/rfc822" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:mimeType="text/plain" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/ms_translucent" android:label="@string/app_name" android:name="com.mobisystems.office.word.WordEditorLauncher" android:process=":launcher" android:excludeFromRecents="true" android:configChanges="locale|mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="com.mobisystems.office.Intent.NEW_DOCUMENT" />
+                <data android:mimeType="application/msword" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/msword" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/doc" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.msword" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-word" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/winword" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/word" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/x-msw6" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/x-msword" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.template" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <data android:mimeType="application/vnd.ms-word.document.macroEnabled.12" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-word.document.macroenabled.12" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-word.document.macroenabled" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="appl/text" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="text/rtf" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/rtf" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="text/x-log" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.oasis.opendocument.text" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.oasis.opendocument.text-template" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/settings" android:name="com.mobisystems.office.excel.ExcelSettings" android:process=":excel" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/app_name" android:name="com.mobisystems.office.exceptions.ErrorActivity" android:process=":error" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/Theme.Editors" android:label="@string/app_name" android:name="com.mobisystems.office.excel.ExcelViewer" android:process=":excel" android:excludeFromRecents="true" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" android:windowSoftInputMode="stateHidden" />
+        <activity android:theme="@style/ms_translucent" android:label="@string/app_name" android:name="com.mobisystems.office.excel.ExcelEditorLauncher" android:process=":launcher" android:excludeFromRecents="true" android:configChanges="locale|mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize">
+            <intent-filter>
+                <action android:name="com.mobisystems.office.Intent.NEW_DOCUMENT" />
+                <data android:mimeType="application/msexcel" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-excel" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/msexcel" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/x-msexcel" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/x-ms-excel" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-excel" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/x-excel" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/x-dos_ms_excel" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/xls" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroEnabled.12" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroenabled.12" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroenabled" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/x-xls" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="text/csv" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="text/comma-separated-values" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <data android:mimeType="application/csv" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.oasis.opendocument.spreadsheet" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.oasis.opendocument.spreadsheet-template" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/Theme.Editors" android:label="@string/app_name" android:name="com.mobisystems.office.pdf.PdfViewerV2" android:process=":pdf" android:excludeFromRecents="true" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" android:windowSoftInputMode="adjustResize" />
+        <activity android:theme="@style/Theme.Editors" android:label="@string/app_name" android:name="com.mobisystems.office.pdf.PdfViewer" android:process=":pdf" android:excludeFromRecents="true" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" android:windowSoftInputMode="adjustResize" />
+        <activity android:theme="@style/ms_translucent" android:label="@string/app_name" android:name="com.mobisystems.office.pdf.PdfViewerLauncher" android:process=":launcher" android:excludeFromRecents="true" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:mimeType="application/pdf" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/Theme.Editors" android:label="@string/app_name" android:name="com.mobisystems.office.powerpoint.PowerPointViewer" android:process=":powerpoint" android:excludeFromRecents="true" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize" />
+        <activity android:theme="@style/ms_translucent" android:label="@string/app_name" android:name="com.mobisystems.office.powerpoint.PowerPointEditorLauncher" android:process=":launcher" android:excludeFromRecents="true" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize">
+            <intent-filter>
+                <action android:name="com.mobisystems.office.Intent.NEW_DOCUMENT" />
+                <data android:mimeType="application/mspowerpoint" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-powerpoint" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/mspowerpoint" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/ms-powerpoint" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/mspowerpnt" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd-mspowerpoint" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/powerpoint" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/x-powerpoint" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/x-mspowerpoint" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.oasis.opendocument.presentation" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.oasis.opendocument.presentation-template" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.slideshow" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-powerpoint.presentation.macroEnabled.12" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-powerpoint.slideshow.macroEnabled.12" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-powerpoint.presentation.macroenabled.12" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-powerpoint.slideshow.macroenabled.12" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-powerpoint.presentation.macroenabled" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="ACTION_PRINT" />
+                <data android:mimeType="application/vnd.ms-powerpoint.slideshow.macroenabled" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/settings" android:name="com.mobisystems.office.word.WordPreferences" android:process=":word" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" />
+        <receiver android:name="com.mobisystems.office.BootCompletedReceiver" android:process=":launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <activity android:theme="@style/Theme.FileBrowser" android:label="@string/select_account_title" android:name="com.mobisystems.office.onlineDocs.SelectAccountActivity" android:process=":browser" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.mobisystems.office.onlineDocs.PlayServicesActivity" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" />
+        <activity android:theme="@style/Theme.FileBrowser" android:name="com.mobisystems.office.search.FileSearchActivity" android:process=":search" android:taskAffinity="com.mobisystems.office.filebrowser" android:multiprocess="false" android:excludeFromRecents="true" android:launchMode="standard" android:configChanges="locale|mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" android:allowTaskReparenting="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable" />
+        </activity>
+        <activity android:theme="@style/MailRegisterTheme" android:name="com.mobisystems.office.mailRegister.MailRegisterActivity" android:process=":browser" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize" />
+        <activity android:name="com.box.boxandroidlibv2.activities.OAuthActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@*android:style/Theme.Translucent" android:icon="@drawable/wifi_icon" android:name="com.mobisystems.wifi_direct.AskToOverwriteDialog" android:launchMode="singleTask" />
+        <activity android:label="@string/wifi_direct_activity_tittle" android:icon="@drawable/wifi_icon" android:name="com.mobisystems.wifi_direct.WiFiDirectActivity" android:enabled="false" android:launchMode="singleTask" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <data android:mimeType="*/*" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <data android:mimeType="*/*" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <receiver android:name="com.mobisystems.wifi_direct.StartWifiDirectReceiver" android:enabled="@bool/wifi_direct_enabled">
+            <intent-filter>
+                <action android:name="android.net.wifi.p2p.STATE_CHANGED" />
+                <action android:name="android.net.wifi.p2p.CONNECTION_STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <activity android:theme="@style/Theme.FileBrowser" android:name="com.mobisystems.gcp.ui.PrintActivity" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize|fontScale" />
+        <activity android:theme="@style/Theme.FileBrowser" android:name="com.mobisystems.gcp.ui.PrintersActivity" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize|fontScale" />
+        <activity android:theme="@style/Theme.FileBrowser" android:name="com.mobisystems.gcp.ui.SelectPrinterActivity" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize|fontScale" />
+        <activity android:theme="@style/Theme.FileBrowser" android:name="com.mobisystems.gcp.ui.PrinterDetailsActivity" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize|fontScale" />
+        <activity android:theme="@style/Theme.FileBrowser" android:name="com.mobisystems.gcp.ui.PrintSettingsActivity" android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenSize|fontScale" />
+        <activity android:name="com.dropbox.client2.android.AuthActivity" android:enabled="false" android:process=":browser" android:launchMode="singleTask" android:configChanges="keyboard|orientation">
+            <intent-filter>
+                <data android:scheme="db-9yxnzauq42xtpq5" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.mobisystems.office.InstallOtherProductActivity" />
+        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar" android:name="com.mobisystems.office.OfferOtherProductActivity" android:excludeFromRecents="true" />
+        <activity android:label="@string/app_name" android:name="com.mobisystems.office.OfficeSuitePreferenceActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <service android:name="com.sonymobile.smartconnect.extension.officesuite.Sw2ExtensionService">
+            <intent-filter>
+                <action android:name="com.mobisystems.office.Sw2ExtensionService" />
+            </intent-filter>
+        </service>
+        <receiver android:name="com.sonymobile.smartconnect.extension.officesuite.ExtensionReceiver">
+            <intent-filter>
+                <action android:name="com.sonyericsson.extras.liveware.aef.registration.EXTENSION_REGISTER_REQUEST" />
+                <action android:name="com.sonyericsson.extras.liveware.aef.registration.ACCESSORY_CONNECTION" />
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+                <action android:name="com.sonyericsson.extras.liveware.aef.notification.VIEW_EVENT_DETAIL" />
+                <action android:name="com.sonyericsson.extras.liveware.aef.notification.REFRESH_REQUEST" />
+                <action android:name="com.sonyericsson.extras.aef.widget.START_REFRESH_IMAGE_REQUEST" />
+                <action android:name="com.sonyericsson.extras.aef.widget.STOP_REFRESH_IMAGE_REQUEST" />
+                <action android:name="com.sonyericsson.extras.aef.widget.ONTOUCH" />
+                <action android:name="com.sonyericsson.extras.liveware.extension.util.widget.scheduled.refresh" />
+                <action android:name="com.sonyericsson.extras.aef.control.START" />
+                <action android:name="com.sonyericsson.extras.aef.control.STOP" />
+                <action android:name="com.sonyericsson.extras.aef.control.PAUSE" />
+                <action android:name="com.sonyericsson.extras.aef.control.RESUME" />
+                <action android:name="com.sonyericsson.extras.aef.control.ERROR" />
+                <action android:name="com.sonyericsson.extras.aef.control.KEY_EVENT" />
+                <action android:name="com.sonyericsson.extras.aef.control.TOUCH_EVENT" />
+                <action android:name="com.sonyericsson.extras.aef.control.SWIPE_EVENT" />
+                <action android:name="com.sonyericsson.extras.aef.control.OBJECT_CLICK_EVENT" />
+                <action android:name="com.sonyericsson.extras.aef.control.LIST_REFERESH_REQUEST" />
+                <action android:name="com.sonyericsson.extras.aef.control.LIST_REQUEST_ITEM" />
+                <action android:name="com.sonyericsson.extras.aef.control.LIST_ITEM_CLICK" />
+                <action android:name="com.sonyericsson.extras.aef.control.LIST_ITEM_SELECTED" />
+                <action android:name="com.sonyericsson.extras.aef.control.MENU_ITEM_SELECTED" />
+                <action android:name="com.sonyericsson.extras.aef.control.MENU_SHOW" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.mobisystems.wifi_direct.FileSenderService" android:enabled="true" />
+        <service android:name="com.mobisystems.wifi_direct.FileReceiverService" android:enabled="true" />
+        <service android:name="com.mobisystems.office.search.EnumerateFilesService" android:exported="false" android:process=":search" />
+        <service android:name="com.mobisystems.cache.DailyPruneService" android:exported="false" />
+        <service android:name="com.mobisystems.office.fonts.FontsDownloadService" android:enabled="true" />
+        <service android:name="com.mobisystems.office.pdf.fonts.PdfFontsDownloadService" android:enabled="true" />
+        <receiver android:label="@string/recent_files_widget_label" android:name="com.mobisystems.office.recentFiles.widget.Provider" android:enabled="@string/recent_widget_enabled" android:process="com.mobisystems.office.recentFiles">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/recentwidgetinfo" />
+        </receiver>
+        <service android:name="com.mobisystems.office.recentFiles.widget.Service" android:permission="android.permission.BIND_REMOTEVIEWS" android:enabled="@string/recent_widget_enabled" android:exported="false" android:process="com.mobisystems.office.recentFiles" />
+        <service android:name="com.mobisystems.office.recentFiles.RecentFilesService" android:exported="false" android:process="com.mobisystems.office.recentFiles" />
+        <service android:name="com.mobisystems.mediastore.MediaStoreUpdater" android:exported="false" android:process=":mediastore" />
+        <service android:name="com.mobisystems.office.excel.DrawChartIntent" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="com.mobisystems.office.DrawChartIntent" />
+            </intent-filter>
+        </service>
+        <service android:name="com.mobisystems.office.excel.DrawChartIntentXls" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="com.mobisystems.office.DrawChartIntentXls" />
+            </intent-filter>
+        </service>
+        <service android:name="com.google.analytics.tracking.android.CampaignTrackingService" />
+        <receiver android:name="com.google.analytics.tracking.android.CampaignTrackingReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <uses-library android:name="com.hp.pps.print.sdk" android:required="false" />
+        <uses-library android:name="com.amazon.device.print" android:required="false" />
+        <receiver android:name="com.mobisystems.boxonecloud.MSBoxOneCloudReceiver" android:process="com.mobisystems.office">
+            <intent-filter>
+                <action android:name="com.box.android.CREATE_FILE" />
+                <action android:name="com.box.android.EDIT_FILE" />
+                <action android:name="com.box.android.VIEW_FILE" />
+                <data android:mimeType="application/msword" />
+                <data android:mimeType="application/doc" />
+                <data android:mimeType="application/vnd.msword" />
+                <data android:mimeType="application/vnd.ms-word" />
+                <data android:mimeType="application/winword" />
+                <data android:mimeType="application/word" />
+                <data android:mimeType="application/x-msw6" />
+                <data android:mimeType="application/x-msword" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.template" />
+                <data android:mimeType="application/vnd.ms-word.document.macroenabled" />
+                <data android:mimeType="application/vnd.ms-word.document.macroEnabled.12" />
+                <data android:mimeType="application/vnd.ms-word.document.macroenabled.12" />
+                <data android:mimeType="application/rtf" />
+                <data android:mimeType="appl/text" />
+                <data android:mimeType="text/rtf" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="text/x-log" />
+                <data android:mimeType="application/vnd.ms-excel" />
+                <data android:mimeType="application/msexcel" />
+                <data android:mimeType="application/x-msexcel" />
+                <data android:mimeType="application/x-ms-excel" />
+                <data android:mimeType="application/vnd.ms-excel" />
+                <data android:mimeType="application/x-excel" />
+                <data android:mimeType="application/x-dos_ms_excel" />
+                <data android:mimeType="application/xls" />
+                <data android:mimeType="application/x-xls" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroEnabled.12" />
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroenabled.12" />
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroenabled" />
+                <data android:mimeType="text/csv" />
+                <data android:mimeType="application/vnd.ms-powerpoint" />
+                <data android:mimeType="application/mspowerpoint" />
+                <data android:mimeType="application/ms-powerpoint" />
+                <data android:mimeType="application/mspowerpnt" />
+                <data android:mimeType="application/vnd-mspowerpoint" />
+                <data android:mimeType="application/powerpoint" />
+                <data android:mimeType="application/x-powerpoint" />
+                <data android:mimeType="application/x-mspowerpoint" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.slideshow" />
+                <data android:mimeType="application/vnd.ms-powerpoint.presentation.macroEnabled.12" />
+                <data android:mimeType="application/vnd.ms-powerpoint.presentation.macroenabled.12" />
+                <data android:mimeType="application/vnd.ms-powerpoint.slideshow.macroEnabled.12" />
+                <data android:mimeType="application/vnd.ms-powerpoint.slideshow.macroenabled.12" />
+                <data android:mimeType="application/vnd.ms-powerpoint.presentation.macroenabled" />
+                <data android:mimeType="application/vnd.ms-powerpoint.slideshow.macroenabled" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.box.android.EDIT_FILE" />
+                <action android:name="com.box.android.VIEW_FILE" />
+                <data android:mimeType="application/pdf" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.box.android.VIEW_FILE" />
+                <data android:mimeType="application/vnd.oasis.opendocument.text" />
+                <data android:mimeType="application/vnd.oasis.opendocument.text-template" />
+                <data android:mimeType="application/vnd.oasis.opendocument.presentation" />
+                <data android:mimeType="application/vnd.oasis.opendocument.presentation-template" />
+                <data android:mimeType="application/vnd.oasis.opendocument.spreadsheet" />
+                <data android:mimeType="application/vnd.oasis.opendocument.spreadsheet-template" />
+                <data android:mimeType="application/zip" />
+                <data android:mimeType="application/x-zip" />
+                <data android:mimeType="application/x-zip-compressed" />
+                <data android:mimeType="application/x-compress" />
+                <data android:mimeType="application/x-compressed" />
+                <data android:mimeType="message/rfc822" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.box.android.LAUNCH" />
+            </intent-filter>
+        </receiver>
+        <activity android:theme="@style/Theme.Empty" android:name="com.sec.android.iap.lib.activity.InboxActivity" android:multiprocess="true" android:configChanges="orientation|screenSize" />
+        <activity android:theme="@style/Theme.Empty" android:name="com.sec.android.iap.lib.activity.PaymentActivity" android:multiprocess="true" android:configChanges="orientation|screenSize" />
+        <activity android:theme="@style/Theme.Empty" android:name="com.sec.android.iap.lib.activity.ItemActivity" android:multiprocess="true" android:configChanges="orientation|screenSize" />
+    </application>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gmail.permission.READ_GMAIL" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY" />
+    <uses-permission android:name="com.sonyericsson.extras.liveware.aef.EXTENSION_PERMISSION" />
+    <uses-permission android:name="com.sec.android.iap.permission.BILLING" />
+    <uses-permission android:name="com.mobisystems.office.permissions.zipprovider" />
+    <uses-feature android:name="android.hardware.wifi" android:required="false" />
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <permission android:name="com.mobisystems.office.permissions.zipprovider" />
+    <supports-screens android:anyDensity="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:resizeable="true" android:xlargeScreens="true" />
+</manifest>

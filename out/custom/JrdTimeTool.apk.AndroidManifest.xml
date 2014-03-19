@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="1" android:versionName="0.1" package="com.android.deskclock"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <original-package android:name="com.jrdcom.timetool" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.DEVICE_POWER" />
+    <uses-permission android:name="android.permission.SHUTDOWN" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <permission android:name="com.jrd.permission.SWITCH_JRDTHEME" />
+    <uses-permission android:name="com.jrd.permission.SWITCH_JRDTHEME" />
+    <permission android:name="com.jrdcom.timetool.alarm.READ_ALARM" />
+    <permission android:name="com.jrdcom.timetool.alarm.WRITE_ALARM" />
+    <permission android:name="com.jrdcom.timetool.worldclock.READ_TIMEZONE" />
+    <permission android:name="com.jrdcom.timetool.worldclock.WRITE_TIMEZONE" />
+    <permission android:name="com.jrdcom.timetool.provider.READ_COUNTDOWN" />
+    <permission android:name="com.jrdcom.timetool.provider.WRITE_COUNTDOWN" />
+    <uses-permission android:name="com.jrdcom.timetool.alarm.READ_ALARM" />
+    <uses-permission android:name="com.jrdcom.timetool.alarm.WRITE_ALARM" />
+    <uses-permission android:name="com.jrdcom.timetool.worldclock.READ_TIMEZONE" />
+    <uses-permission android:name="com.jrdcom.timetool.worldclock.WRITE_TIMEZONE" />
+    <uses-permission android:name="com.jrdcom.timetool.provider.READ_COUNTDOWN" />
+    <uses-permission android:name="com.jrdcom.timetool.provider.WRITE_COUNTDOWN" />
+    <uses-permission android:name="android.permission.STOP_APP_SWITCHES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <application android:label="@2131361796" android:icon="@2130837545" android:screenOrientation="portrait" android:supportsRtl="true">
+        <activity android:theme="@2131427337" android:label="@2131361796" android:name="com.jrdcom.timetool.TimeToolActivity" android:launchMode="singleTask" android:screenOrientation="portrait" android:configChanges="locale|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:theme="@2131427337" android:label="@2131361796" android:name="DeskClock" android:launchMode="singleTask" android:screenOrientation="portrait" android:configChanges="locale|orientation|screenSize" android:targetActivity="com.jrdcom.timetool.TimeToolActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:label="@2131361798" android:name="com.jrdcom.timetool.alarm.activity.AlarmActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/set_alarm" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:label="@2131361798" android:name="AlarmClock" android:exported="true" android:targetActivity="com.jrdcom.timetool.TimeToolActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:label="@2131361798" android:name="WorldClock" android:exported="true" android:targetActivity="com.jrdcom.timetool.TimeToolActivity" />
+        <activity android:label="@2131361837" android:name="com.jrdcom.timetool.alarm.activity.SettingsActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:label="@2131361837" android:name="SettingsActivity" android:exported="true" android:screenOrientation="portrait" android:targetActivity="com.jrdcom.timetool.alarm.activity.SettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:label="@2131361832" android:name="com.jrdcom.timetool.alarm.activity.SetAlarm" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan" />
+        <activity android:label="@2131361838" android:name="com.jrdcom.timetool.alarm.activity.DeleteAlarm" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|navigation|orientation" />
+        <activity android:theme="@*android:style/Theme.Holo.Dialog" android:name="com.jrdcom.timetool.alarm.activity.AlarmAlert" android:taskAffinity="" android:excludeFromRecents="true" android:launchMode="singleInstance" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|navigation|orientation" />
+        <activity android:theme="@2131427338" android:name="com.jrdcom.timetool.alarm.activity.AlarmAlertFullScreen" android:taskAffinity="" android:excludeFromRecents="true" android:launchMode="singleInstance" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|navigation|orientation" />
+        <activity android:theme="@*android:style/Theme.NoDisplay" android:name="com.jrdcom.timetool.alarm.activity.HandleSetAlarm" android:permission="com.android.alarm.permission.SET_ALARM" android:excludeFromRecents="true" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SET_ALARM" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:theme="@*android:style/Theme.NoDisplay" android:name="HandleSetAlarm" android:permission="com.android.alarm.permission.SET_ALARM" android:exported="true" android:excludeFromRecents="true" android:screenOrientation="portrait" android:targetActivity="com.jrdcom.timetool.alarm.activity.HandleSetAlarm">
+            <intent-filter>
+                <action android:name="android.intent.action.SET_ALARM" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:theme="@*android:style/Theme.Holo.Dialog" android:name="com.jrdcom.timetool.alarm.activity.GotoRingtoneActivity" android:taskAffinity="" android:excludeFromRecents="true" android:launchMode="singleInstance" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|navigation|orientation">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.jrdcom.timetool.alarm.activity.SystemActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.jrdcom.timetool.alarm.activity.MusicActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <provider android:name="com.jrdcom.timetool.alarm.provider.AlarmProvider" android:readPermission="com.jrdcom.timetool.alarm.READ_ALARM" android:writePermission="com.jrdcom.timetool.alarm.WRITE_ALARM" android:exported="true" android:authorities="com.jrdcom.timetool.alarm" />
+        <receiver android:name="com.jrdcom.timetool.alarm.receiver.AlarmInitReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.jrdcom.timetool.alarm.receiver.AlarmReceiver">
+            <intent-filter>
+                <action android:name="com.android.deskclock.ALARM_ALERT" />
+                <action android:name="alarm_killed" />
+                <action android:name="cancel_snooze" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.jrdcom.timetool.alarm.receiver.ClearSnoozeReceiver">
+            <intent-filter>
+                <action android:name="com.android.deskclock.alarm.receiver.CLEAR_SNOOZE_DATA" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.jrdcom.timetool.alarm.service.AlarmKlaxon">
+            <intent-filter>
+                <action android:name="com.android.deskclock.ALARM_ALERT" />
+            </intent-filter>
+        </service>
+        <service android:name="com.jrdcom.timetool.alarm.service.PowerOffAlarmService">
+            <intent-filter>
+                <action android:name="android.intent.action.SNOOZE" />
+            </intent-filter>
+        </service>
+        <service android:name="com.jrdcom.timetool.alarm.service.ClearSnoozeService" />
+        <activity android:label="@2131361799" android:name="com.jrdcom.timetool.timer.activity.TimerActivity" android:screenOrientation="portrait" />
+        <service android:name="com.jrdcom.timetool.timer.service.EmptyService" />
+        <service android:name="com.jrdcom.timetool.timer.service.MediaPlayerServiceForButton" />
+        <activity android:label="@2131361800" android:name="com.jrdcom.timetool.countdown.activity.CountDownActivity" android:screenOrientation="portrait" />
+        <activity android:theme="@*android:style/Theme.Holo.Dialog" android:name="com.jrdcom.timetool.countdown.activity.CountDownAlarmAlert" android:taskAffinity="" android:excludeFromRecents="true" android:launchMode="singleInstance" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|navigation|orientation" />
+        <service android:name="com.jrdcom.timetool.countdown.service.BackgroundCountDownService" />
+        <service android:name="com.jrdcom.timetool.countdown.service.MediaPlayerService" />
+        <activity android:theme="@2131427338" android:name="com.jrdcom.timetool.countdown.activity.CountDownAlarmAlertFullScreen" android:taskAffinity="" android:excludeFromRecents="true" android:launchMode="singleInstance" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|navigation|orientation" />
+        <activity android:label="@2131361797" android:name="com.jrdcom.timetool.worldclock.activity.WorldClockActivity" android:screenOrientation="portrait" />
+        <activity android:label="@2131361871" android:name="com.jrdcom.timetool.worldclock.activity.TimeZoneChooseActivity" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize" />
+        <activity-alias android:label="@2131361871" android:name=".worldclock.CitiesActivity" android:exported="true" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize" android:targetActivity="com.jrdcom.timetool.worldclock.activity.TimeZoneChooseActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity-alias>
+        <activity android:label="@2131361879" android:name="com.jrdcom.timetool.worldclock.activity.DeleteWorldClockActivity" android:screenOrientation="portrait" android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize" />
+        <provider android:name="com.jrdcom.timetool.worldclock.provider.TimeZoneProvider" android:readPermission="com.jrdcom.timetool.worldclock.READ_TIMEZONE" android:writePermission="com.jrdcom.timetool.worldclock.WRITE_TIMEZONE" android:exported="true" android:authorities="com.jrdcom.timetool.worldclock" android:grantUriPermissions="true" />
+        <service android:label="@2131361895" android:name="com.jrdcom.timetool.dreamservice.Screensaver" android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="android.service.dream" android:resource="@2131034113" />
+        </service>
+        <activity android:theme="@*android:style/Theme.Holo.Light" android:label="@2131361894" android:name="com.jrdcom.timetool.dreamservice.ScreensaverSettingsActivity" android:exported="true" android:taskAffinity="" android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity-alias android:theme="@*android:style/Theme.Holo.Light" android:label="@2131361894" android:name=".dreamservice.ScreensaverSettingsActivity" android:exported="true" android:taskAffinity="" android:excludeFromRecents="true" android:targetActivity="com.jrdcom.timetool.dreamservice.ScreensaverSettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity-alias>
+        <receiver android:label="@2131361797" android:name="com.jrdcom.timetool.worldclock.widget.WorldClockProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE_VIEW" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@2131034117" />
+        </receiver>
+        <service android:name="com.jrdcom.timetool.worldclock.widget.UpdateService" android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service android:name="com.jrdcom.timetool.worldclock.widget.UpdateKeyguardService" android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <receiver android:label="@2131361797" android:name="com.jrdcom.timetool.worldclock.widget.WorldClockKeyguardProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE_VIEW" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@2131034118" />
+        </receiver>
+        <receiver android:name="com.jrdcom.timetool.alarm.receiver.PackageDataClearedReceiver">
+            <intent-filter>
+                <action android:name="com.mediatek.intent.action.SETTINGS_PACKAGE_DATA_CLEARED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <provider android:name="com.jrdcom.timetool.countdown.provider.CountDownProvider" android:readPermission="com.jrdcom.timetool.provider.READ_COUNTDOWN" android:writePermission="com.jrdcom.timetool.provider.WRITE_COUNTDOWN" android:exported="true" android:authorities="com.jrdcom.timetool.provider" />
+    </application>
+</manifest>

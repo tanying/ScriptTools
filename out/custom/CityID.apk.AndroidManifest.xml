@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:sharedUserId="com.cequint" android:versionCode="999999" android:versionName="@string/Version" package="com.cequint.ecid"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="@string/app_name" android:icon="@drawable/cityid_icon" android:name="com.cequint.cityid.CityIdApplication">
+        <activity android:label="@string/app_name" android:name="com.cequint.cityid.activity.UserLaunch" android:enabled="false" android:clearTaskOnLaunch="true" android:launchMode="standard">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <provider android:name="com.cequint.cityid.CityIdContentProvider" android:enabled="true" android:exported="true" android:authorities="com.cequint.cityid" />
+        <provider android:name="com.cequint.cityid.CallerIdContentProvider" android:enabled="true" android:exported="true" android:authorities="com.cequint.ecid" />
+        <activity android:name="com.cequint.cityid.activity.ScreenReview" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D02_DBReq_FreeTrial" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D03_DBReq" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D04_DBErrorUpdate" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D05_DBErrorSave" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D06_SMSFreeTrial" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D07_SMSSubscribe" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D08_SMSDelayedUnsub" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D09_SMSUnsubscribe" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D13_TimeoutRestart" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D14_TimeoutDisable" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D15_CityIDFreeTrialNotify" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D19_CityIDFreeTrialExpire" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D21_SubStatusEndOfTerm" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D23_Sub_FT" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D24_SubStatusDelayedUnsub" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D25_SubStatusSubscribed" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D29_DBAskRedownload" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D30_PurchaseOptions" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D31_PurchaseConfirm" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D32_PurchaseThankYou" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D33_UnsubscribeConfirm" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D39_UnsubscribeOptions" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D41_SMSMarketing" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D44_WorldPhoneError" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D48_ConfirmNetworkAction" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D20_Landing" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D23_Sub_FT" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D26_Lic_Waiting" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D27_ReverseLookup" android:launchMode="standard" android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|orientation|fontScale" android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name="com.cequint.cityid.activity.D35_DBDownload" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D36_DBCheckUpdates" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D37_About" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D46_SystemShutdown" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D53_CityIDFreeTrialNotify_ATT" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D54_ConfirmRemoval" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D55_RemoveCityID" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D58_ConfirmStopTrial" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D59_TrialStopped" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D60_SubWithFtStop" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D61_RemovingCityID" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D65_DBUpdateAvailable" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D66_DBErrorCheckUpdate" android:launchMode="standard" />
+        <activity android:name="com.cequint.cityid.activity.D67_DBConfirmCheckUpdates" android:launchMode="standard" />
+        <service android:name="com.cequint.cityid.LicenseRequestService" android:enabled="true" android:exported="false" />
+        <service android:name="com.cequint.cityid.LicenseResetService" android:enabled="true" android:exported="false" />
+        <service android:name="com.cequint.cityid.NotifyService" android:enabled="true" android:exported="false" />
+        <service android:name="com.cequint.cityid.AdminMessageService" android:enabled="true" android:exported="false" />
+        <service android:name="com.cequint.ecid.CallerIdLookupAsync" android:enabled="true" android:exported="true" />
+        <receiver android:name="com.cequint.cityid.CityIdBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.cequint.cityid.SMSReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.cequint.cityid.DataSMSReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.DATA_SMS_RECEIVED" />
+                <data android:scheme="sms" />
+                <data android:host="localhost" />
+                <data android:port="4074" />
+            </intent-filter>
+        </receiver>
+        <uses-library android:name="com.cequint.platform.1.20.332" />
+    </application>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>

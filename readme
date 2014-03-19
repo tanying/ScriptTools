@@ -1,5 +1,5 @@
 Usage:
-./FilterSensitiveContentProvider.py
+./OneKeyAndroidSecurity.py SWC62
 
 
 1.  manifestList_emu取自原生Android代码, 

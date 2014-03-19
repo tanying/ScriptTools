@@ -2,9 +2,14 @@ Design Manual Summary
 
 1. pyExcelerator
 
-PyExcelerator是一个第三方库，用来处理Excel文件。
+PyExcelerator是一个第三方库，用来处理Excel文件，它的主要优势是写入Excel文档，在相关接口上面提供的比较完善。
 官方主页是http://sourceforge.net/projects/pyexcelerator/
 引用方式from PyExcelerator import *
+
+2.xlrd-0.9.2
+xlrd-0.9.2是一个第三方库，用来处理Excel格式的文件，它的主要优势是读取Excel文档，在相关接口上面提供的比较完善。
+官方主页是https://pypi.python.org/pypi/xlrd
+引用方式是先按照官方的指导文档安装到本机，然后再使用import xlrd
 
 2. Class
 
