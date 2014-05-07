@@ -20,14 +20,14 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="com.google.android.gallery3d.permission.GALLERY_PROVIDER" />
-    <permission android:label="@2131231006" android:name="com.android.email.permission.READ_ATTACHMENT" android:protectionLevel="dangerous" android:permissionGroup="android.permission-group.MESSAGES" android:description="@2131231007" />
+    <permission android:label="@2131231008" android:name="com.android.email.permission.READ_ATTACHMENT" android:protectionLevel="dangerous" android:permissionGroup="android.permission-group.MESSAGES" android:description="@2131231009" />
     <uses-permission android:name="com.android.email.permission.READ_ATTACHMENT" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <permission android:label="@2131231008" android:name="com.android.email.permission.ACCESS_PROVIDER" android:protectionLevel="signature" android:description="@2131231009" />
+    <permission android:label="@2131231010" android:name="com.android.email.permission.ACCESS_PROVIDER" android:protectionLevel="signature" android:description="@2131231011" />
     <uses-permission android:name="com.android.email.permission.ACCESS_PROVIDER" />
     <uses-permission android:name="com.mediatek.calendarimporter.READ_CALENDAR_IMPORTER" />
     <uses-permission android:name="com.mediatek.calendarimporter.WRITE_CALENDAR_IMPORTER" />
-    <application android:theme="@2131492865" android:label="@2131231010" android:icon="@2130903040" android:name=".Email">
+    <application android:theme="@2131492865" android:label="@2131231012" android:icon="@2130903040" android:name=".Email">
         <activity android:name=".activity.Welcome" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|fontScale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,20 +53,20 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:label="@2131231182" android:name=".activity.setup.AccountSetupBasics" android:exported="true" android:configChanges="keyboard|keyboardHidden">
+        <activity android:label="@2131231184" android:name=".activity.setup.AccountSetupBasics" android:exported="true" android:configChanges="keyboard|keyboardHidden">
             <intent-filter>
                 <action android:name="com.android.email.CREATE_ACCOUNT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.setup.PreDefineAccountProvider" />
-        <activity android:label="@2131231205" android:name=".activity.setup.AccountSetupAccountType" />
-        <activity android:label="@2131231212" android:name=".activity.setup.AccountSetupIncoming" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:label="@2131231230" android:name=".activity.setup.AccountSetupOutgoing" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:label="@2131231238" android:name=".activity.setup.AccountSetupExchange" />
-        <activity android:label="@2131231250" android:name=".activity.setup.AccountSetupOptions" />
-        <activity android:label="@2131231200" android:name=".activity.setup.AccountSetupNames" android:configChanges="keyboardHidden" />
-        <activity android:theme="@*android:style/Theme.Holo.Light" android:label="@2131231372" android:name=".activity.setup.AccountSettings" android:configChanges="keyboardHidden|orientation|screenSize">
+        <activity android:label="@2131231207" android:name=".activity.setup.AccountSetupAccountType" />
+        <activity android:label="@2131231214" android:name=".activity.setup.AccountSetupIncoming" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:label="@2131231232" android:name=".activity.setup.AccountSetupOutgoing" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:label="@2131231240" android:name=".activity.setup.AccountSetupExchange" />
+        <activity android:label="@2131231252" android:name=".activity.setup.AccountSetupOptions" />
+        <activity android:label="@2131231202" android:name=".activity.setup.AccountSetupNames" android:configChanges="keyboardHidden" />
+        <activity android:theme="@android:style/Theme.Holo.Light" android:label="@2131231374" android:name=".activity.setup.AccountSettings" android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="com.android.email.activity.setup.ACCOUNT_MANAGER_ENTRY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -82,35 +82,35 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.setup.AccountSecurity" android.label="@string/account_security_title" />
-        <activity android:theme="@*android:style/Theme.Holo.Light.DialogWhenLarge" android:name=".activity.ShortcutPicker" android:enabled="false">
-            <intent-filter android:label="@2131231359">
+        <activity android:theme="@android:style/Theme.Holo.Light.DialogWhenLarge" android:name=".activity.ShortcutPicker" android:enabled="false">
+            <intent-filter android:label="@2131231361">
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.EmailActivity" android:configChanges="keyboard|keyboardHidden" android:hardwareAccelerated="true" android:uiOptions="splitActionBarWhenNarrow" />
         <activity android:name=".activity.MessageFileView" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|fontScale" android:hardwareAccelerated="true">
-            <intent-filter android:label="@2131231010">
+            <intent-filter android:label="@2131231012">
                 <action android:name="android.intent.action.VIEW" />
                 <data android:mimeType="application/eml" />
                 <data android:mimeType="message/rfc822" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:theme="@*android:style/Theme.Holo.Light" android:label="@2131231011" android:name=".activity.MessageCompose" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|fontScale" android:windowSoftInputMode="stateVisible|adjustResize">
-            <intent-filter android:label="@2131231010">
+        <activity android:theme="@android:style/Theme.Holo.Light" android:label="@2131231013" android:name=".activity.MessageCompose" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|fontScale" android:windowSoftInputMode="stateVisible|adjustResize">
+            <intent-filter android:label="@2131231012">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.SENDTO" />
                 <data android:scheme="mailto" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
-            <intent-filter android:label="@2131231010">
+            <intent-filter android:label="@2131231012">
                 <action android:name="android.intent.action.SEND" />
                 <data android:mimeType="*/*" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:label="@2131231010">
+            <intent-filter android:label="@2131231012">
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <data android:mimeType="*/*" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -129,7 +129,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:label="@2131231354" android:name=".activity.setup.MailboxSettings" />
+        <activity android:label="@2131231356" android:name=".activity.setup.MailboxSettings" />
         <activity android:name="com.mediatek.email.emailvip.activity.VipListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.EMAIL_VIP_ACTIVITY" />
@@ -159,7 +159,7 @@
             </intent-filter>
         </receiver>
         <service android:name=".service.EmailBroadcastProcessorService" />
-        <receiver android:label="@2131231369" android:name=".SecurityPolicy$PolicyAdmin" android:permission="android.permission.BIND_DEVICE_ADMIN" android:description="@2131231370">
+        <receiver android:label="@2131231371" android:name=".SecurityPolicy$PolicyAdmin" android:permission="android.permission.BIND_DEVICE_ADMIN" android:description="@2131231372">
             <meta-data android:name="android.app.device_admin" android:resource="@2131034115" />
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
@@ -225,12 +225,12 @@
         </service>
         <provider android:name="com.mediatek.email.provider.EmailSuggestionsProvider" android:exported="false" android:authorities="com.mediatek.email.provider.EmailSuggestionsProvider" />
         <provider android:name=".provider.AttachmentProvider" android:readPermission="com.android.email.permission.READ_ATTACHMENT" android:exported="true" android:multiprocess="true" android:authorities="com.android.email.attachmentprovider" android:grantUriPermissions="true" />
-        <provider android:label="@2131231010" android:name=".provider.EmailProvider" android:permission="com.android.email.permission.ACCESS_PROVIDER" android:exported="true" android:multiprocess="true" android:authorities="com.android.email.provider;com.android.email.notifier" android:grantUriPermissions="true" />
-        <provider android:label="@2131231010" android:name="com.mediatek.email.provider.history.EmailAddressHisProviders" android:exported="false" android:authorities="com.mediatek.email.provider.history">
+        <provider android:label="@2131231012" android:name=".provider.EmailProvider" android:permission="com.android.email.permission.ACCESS_PROVIDER" android:exported="true" android:multiprocess="true" android:authorities="com.android.email.provider;com.android.email.notifier" android:grantUriPermissions="true" />
+        <provider android:label="@2131231012" android:name="com.mediatek.email.provider.history.EmailAddressHisProviders" android:exported="false" android:authorities="com.mediatek.email.provider.history">
             <meta-data android:name="android.content.ContactDirectory" android:value="true" />
         </provider>
-        <activity android:theme="@*android:style/Theme.Holo.Light.DialogWhenLarge" android:name=".widget.WidgetConfiguration" android:enabled="true">
-            <intent-filter android:label="@2131231359">
+        <activity android:theme="@android:style/Theme.Holo.Light.DialogWhenLarge" android:name=".widget.WidgetConfiguration" android:enabled="true">
+            <intent-filter android:label="@2131231361">
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

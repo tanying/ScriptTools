@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest android:sharedUserId="com.android.uid.cellbroadcastreceiver" android:versionCode="17" android:versionName="4.2.2-vC62-0" package="com.android.cellbroadcastreceiver"
+<manifest android:sharedUserId="com.android.uid.cellbroadcastreceiver" android:versionCode="17" android:versionName="4.2.2-vC80-0" package="com.android.cellbroadcastreceiver"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <original-package android:name="com.android.cellbroadcastreceiver" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
@@ -28,7 +28,7 @@
         </activity>
         <activity android:theme="@2131558403" android:label="@2131361811" android:name="CellBroadcastMainSettings" android:exported="true" android:taskAffinity="android.task.mms" android:launchMode="singleTask" android:configChanges="orientation|screenSize" />
         <activity android:theme="@2131558403" android:label="@2131361799" android:name="CellBroadcastSubSettings" android:exported="true" android:launchMode="singleTask" android:configChanges="orientation|screenSize" />
-        <activity android:theme="@*android:style/Theme.Holo.Dialog" android:name="CellBroadcastAlertDialog" android:exported="false" android:launchMode="singleTask" android:configChanges="keyboard|keyboardHidden|navigation|orientation" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog" android:name="CellBroadcastAlertDialog" android:exported="false" android:launchMode="singleTask" android:configChanges="keyboard|keyboardHidden|navigation|orientation" />
         <activity android:theme="@2131558400" android:name="CellBroadcastAlertFullScreen" android:exported="false" android:excludeFromRecents="true" android:launchMode="singleTask" android:configChanges="keyboard|keyboardHidden|navigation|orientation" />
         <activity android:name="CellBroadcastOptOutActivity" android:exported="false" />
         <receiver android:name="PrivilegedCellBroadcastReceiver" android:permission="android.permission.BROADCAST_SMS">
@@ -57,6 +57,6 @@
             </intent-filter>
         </receiver>
         <service android:name="CMASPresentationService" />
-        <activity android:theme="@*android:style/Theme.Dialog" android:name="SelectDialog" />
+        <activity android:theme="@android:style/Theme.Dialog" android:name="SelectDialog" />
     </application>
 </manifest>

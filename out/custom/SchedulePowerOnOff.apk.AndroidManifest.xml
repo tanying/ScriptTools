@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest android:sharedUserId="android.uid.system" android:versionCode="17" android:versionName="4.2.2-vC62-0" package="com.mediatek.schpwronoff"
+<manifest android:sharedUserId="android.uid.system" android:versionCode="17" android:versionName="4.2.2-vC80-0" package="com.mediatek.schpwronoff"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -53,7 +53,7 @@
     <uses-permission android:name="android.permission.SET_KEYBOARD_LAYOUT" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <application android:theme="@*android:style/Theme.Holo.Light" android:label="@2131165184" android:icon="@2130903040" android:taskAffinity="" android:uiOptions="splitActionBarWhenNarrow" android:supportsRtl="true">
+    <application android:theme="@android:style/Theme.Holo.Light" android:label="@2131165184" android:icon="@2130903040" android:taskAffinity="" android:uiOptions="splitActionBarWhenNarrow" android:supportsRtl="true">
         <activity android:label="@2131165184" android:name="com.mediatek.schpwronoff.AlarmClock" android:configChanges="keyboard|keyboardHidden|navigation|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -90,7 +90,7 @@
                 <action android:name="android.intent.action.POWER_OFF_ALARM_ALERT" />
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.Holo.NoActionBar" android:name="com.mediatek.schpwronoff.ShutdownActivity" android:configChanges="keyboardHidden|orientation|screenSize">
+        <activity android:theme="@android:style/Theme.Holo.NoActionBar" android:name="com.mediatek.schpwronoff.ShutdownActivity" android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />

@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.READ_SYNCML" />
     <permission android:name="android.permission.WRITE_SYNCML" android:protectionLevel="normal" />
     <uses-permission android:name="android.permission.WRITE_SYNCML" />
-    <application android:label="@2131230720" android:icon="@2130837509" android:debuggable="false">
+    <application android:label="@2131296256" android:icon="@2130837524" android:debuggable="false">
         <receiver android:name=".receiver.SyncMLReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -43,8 +43,12 @@
                 <action android:name="syncml.intent.action.SERVER_ALERT_SYNC_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SIM_STATE_CHANGED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </receiver>
-        <receiver android:label="@2131230720" android:name=".receiver.AABTestReceiver">
+        <receiver android:label="@2131296256" android:name=".receiver.AABTestReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
@@ -64,8 +68,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
-        <activity android:label="@2131230720" android:name=".activity.SyncMLClientActivity" />
-        <activity android:label="@2131230720" android:name=".activity.ProfileEditActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation">
+        <activity android:label="@2131296256" android:name=".activity.SyncMLClientActivity" />
+        <activity android:label="@2131296256" android:name=".activity.ProfileEditActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="syncml.intent.action.EDIT_PROFILE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -75,19 +79,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:theme="@*android:style/Theme.Translucent" android:label="@2131230720" android:name=".activity.SyncRequestHandler" android:taskAffinity="aab.SyncRequestHandler" android:excludeFromRecents="true" android:allowTaskReparenting="true">
+        <activity android:theme="@android:style/Theme.Translucent" android:label="@2131296256" android:name=".activity.SyncRequestHandler" android:taskAffinity="aab.SyncRequestHandler" android:excludeFromRecents="true" android:allowTaskReparenting="true">
             <intent-filter>
                 <action android:name="syncml.intent.action.SYNC_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:theme="@*android:style/Theme.Holo.Light.DarkActionBar" android:label="@2131230913" android:name=".activity.SyncProgressActivity" android:launchMode="singleTop" android:screenOrientation="nosensor" android:configChanges="keyboardHidden|orientation">
+        <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:label="@2131296449" android:name=".activity.SyncProgressActivity" android:launchMode="singleTop" android:screenOrientation="nosensor" android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="syncml.intent.action.SYNC_PROGRESS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:theme="@*android:style/Theme.Holo.Light.DarkActionBar" android:label="@2131230720" android:name=".activity.SyncReportActivity" android:screenOrientation="nosensor">
+        <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:label="@2131296256" android:name=".activity.SyncReportActivity" android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="syncml.intent.action.SYNC_REPORT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -105,7 +109,7 @@
                 <data android:mimeType="application/com.mediatek.omacp-w5" />
             </intent-filter>
         </receiver>
-        <activity android:theme="@2131296256" android:label="@2131230913" android:name=".activity.SyncMLSettingsActivity" android:launchMode="singleTask" android:screenOrientation="nosensor">
+        <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:label="@2131296449" android:name=".activity.SyncMLSettingsActivity" android:launchMode="singleTask" android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="syncml.intent.action.ABB_SYNC_SETTING" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -114,14 +118,14 @@
                 <action android:name="com.tcl.AABTest.changeSettings" />
             </intent-filter>
         </activity>
-        <activity android:theme="@2131296258" android:name=".activity.AttAddressBookSyncActivity" android:screenOrientation="nosensor">
+        <activity android:theme="@2131361794" android:name=".activity.AttAddressBookSyncActivity" android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="syncml.intent.action.ABB_SYNC" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:theme="@2131296256" android:label="@2131230913" android:name=".activity.AttSyncAboutActivity" android:screenOrientation="nosensor" />
-        <activity android:theme="@2131296256" android:label="@2131230913" android:name=".activity.AttSyncSettingsActivity" android:screenOrientation="nosensor" />
+        <activity android:theme="@android:style/Theme.Holo.Light.NoActionBar" android:label="@2131296449" android:name=".activity.AttSyncAboutActivity" android:screenOrientation="nosensor" />
+        <activity android:theme="@2131361792" android:label="@2131296449" android:name=".activity.AttSyncSettingsActivity" android:screenOrientation="nosensor" />
         <receiver android:name=".receiver.SyncSettingsReceiver">
             <intent-filter>
                 <action android:name="syncml.intent.action.SERVER_SYNC_SETTING" />

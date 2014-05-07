@@ -1,372 +1,371 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="20217130" android:versionName="2.0.217 (944332-30)" android:installLocation="internalOnly" package="com.google.android.talk"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <permission android:name="com.google.android.talk.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <permission android:name="com.google.android.hangouts.START_HANGOUT" android:protectionLevel="signature" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.NFC" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="com.google.android.talk.permission.C2D_MESSAGE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="com.google.android.providers.talk.permission.READ_ONLY" />
-    <uses-permission android:name="com.google.android.gtalkservice.permission.GTALK_SERVICE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_MMS" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    <uses-feature android:name="android.hardware.wifi" android:required="false" />
-    <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
-    <uses-feature android:name="android.hardware.nfc" android:required="false" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
-    <uses-feature android:name="android.hardware.microphone" android:required="false" />
-    <uses-feature android:name="android.hardware.telephony" android:required="false" />
-    <uses-feature android:name="android.hardware.location" android:required="false" />
-    <uses-feature android:name="android.hardware.location.network" android:required="false" />
-    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
-    <uses-feature android:name="android.hardware.screen.portrait" android:required="false" />
-    <supports-screens android:anyDensity="true" android:normalScreens="true" android:largeScreens="true" />
-    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher_babel" android:name="com.google.android.apps.babel.phone.EsApplication" android:backupAgent="com.google.android.apps.babel.service.BabelBackupAgent" android:logo="@drawable/ic_launcher_babel" android:hardwareAccelerated="true" android:requiredAccountType="com.google">
-        <meta-data android:name="com.google.android.gms.version" android:value="4033500" />
-        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyA_BPX8AEaKIhnxS6mVixDbYj_oy6Ez3kA" />
-        <meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAI3NzitEP5hYa8EeQOz-lFKpjiYd6a6uciwC6uEw" />
-        <service android:name="com.google.android.apps.babel.fragments.ConversationFragment$DraftService" />
-        <service android:name="com.google.android.apps.babel.realtimechat.GcmIntentService" />
-        <provider android:label="@string/babel_data" android:name="com.google.android.apps.babel.content.EsProvider" android:exported="false" android:authorities="com.google.android.apps.babel.content.EsProvider">
-            <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:path="/search_suggest_query" />
-            <grant-uri-permission android:pathPrefix="/imagescratchspace/" />
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="internalOnly" package="com.google.android.apps.babel">
+    <permission android:name="com.google.android.talk.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+    <permission android:name="com.google.android.hangouts.START_HANGOUT" android:protectionLevel="signature"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.google.android.talk.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="com.google.android.providers.talk.permission.READ_ONLY"/>
+    <uses-permission android:name="com.google.android.gtalkservice.permission.GTALK_SERVICE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_MMS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <uses-feature android:name="android.hardware.wifi" android:required="false"/>
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
+    <uses-feature android:name="android.hardware.nfc" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.front" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
+    <uses-feature android:name="android.hardware.telephony" android:required="false"/>
+    <uses-feature android:name="android.hardware.location" android:required="false"/>
+    <uses-feature android:name="android.hardware.location.network" android:required="false"/>
+    <uses-feature android:name="android.hardware.location.gps" android:required="false"/>
+    <uses-feature android:name="android.hardware.screen.portrait" android:required="false"/>
+    <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true"/>
+    <application android:backupAgent="com.google.android.apps.babel.service.BabelBackupAgent" android:hardwareAccelerated="true" android:icon="@drawable/ic_launcher_babel" android:label="@string/app_name" android:logo="@drawable/ic_launcher_babel" android:name="com.google.android.apps.babel.phone.EsApplication" android:requiredAccountType="com.google">
+        <meta-data android:name="com.google.android.gms.version" android:value="4033500"/>
+        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyA_BPX8AEaKIhnxS6mVixDbYj_oy6Ez3kA"/>
+        <meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAI3NzitEP5hYa8EeQOz-lFKpjiYd6a6uciwC6uEw"/>
+        <service android:name="com.google.android.apps.babel.fragments.ConversationFragment$DraftService"/>
+        <service android:name="com.google.android.apps.babel.realtimechat.GcmIntentService"/>
+        <provider android:authorities="com.google.android.apps.babel.content.EsProvider" android:exported="false" android:label="@string/babel_data" android:name="com.google.android.apps.babel.content.EsProvider">
+            <path-permission android:path="/search_suggest_query" android:readPermission="android.permission.GLOBAL_SEARCH"/>
+            <grant-uri-permission android:pathPrefix="/imagescratchspace/"/>
         </provider>
-        <activity android:theme="@style/Theme.EmeraldSea" android:name="com.google.android.apps.babel.phone.AccountSignInActivity" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:name="com.google.android.apps.babel.phone.ShareLocationActivity" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:label="@string/babel_settings_label" android:name="com.google.android.apps.babel.phone.BabelSettingsActivity" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:label="@string/babel_settings_label" android:name="com.google.android.apps.babel.phone.BabelSettingsActivityGingerbread" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:name="com.google.android.apps.babel.settings.SmsMmsSettingsActivityGingerbread" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:name="com.google.android.apps.babel.settings.AboutBabelSettingsActivityGingerbread" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:name="com.google.android.apps.babel.phone.ChatAclSettingsActivityGingerbread" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:name="com.google.android.apps.babel.phone.ApnSettingsActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:name="com.google.android.apps.babel.phone.ApnEditorActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:name="com.google.android.apps.babel.phone.RichStatusSettingsActivityGingerbread" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:name="com.google.android.apps.babel.phone.UlrOptInActivity" />
-        <activity android:name="com.google.android.apps.babel.phone.LicenseActivity" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:label="@string/home_screen_babel_label" android:icon="@mipmap/ic_launcher_babel" android:name="com.google.android.apps.babel.phone.BabelHomeActivity" android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation|screenSize" android:windowSoftInputMode="stateHidden|adjustResize" android:logo="@mipmap/ic_launcher_babel">
+        <activity android:name="com.google.android.apps.babel.phone.AccountSignInActivity" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:name="com.google.android.apps.babel.phone.ShareLocationActivity" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:label="@string/babel_settings_label" android:name="com.google.android.apps.babel.phone.BabelSettingsActivity" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:label="@string/babel_settings_label" android:name="com.google.android.apps.babel.phone.BabelSettingsActivityGingerbread" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:name="com.google.android.apps.babel.settings.SmsMmsSettingsActivityGingerbread" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:name="com.google.android.apps.babel.settings.AboutBabelSettingsActivityGingerbread" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:name="com.google.android.apps.babel.phone.ChatAclSettingsActivityGingerbread" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.google.android.apps.babel.phone.ApnSettingsActivity" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.google.android.apps.babel.phone.ApnEditorActivity" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:name="com.google.android.apps.babel.phone.RichStatusSettingsActivityGingerbread" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:name="com.google.android.apps.babel.phone.UlrOptInActivity" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:name="com.google.android.apps.babel.phone.LicenseActivity"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:icon="@mipmap/ic_launcher_babel" android:label="@string/home_screen_babel_label" android:launchMode="singleTop" android:logo="@mipmap/ic_launcher_babel" android:name="com.google.android.apps.babel.phone.BabelHomeActivity" android:theme="@style/Theme.EmeraldSea" android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.SENDTO" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="sms" />
-                <data android:scheme="smsto" />
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SENDTO"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="sms"/>
+                <data android:scheme="smsto"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.SENDTO" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="mms" />
-                <data android:scheme="mmsto" />
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SENDTO"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="mms"/>
+                <data android:scheme="mmsto"/>
             </intent-filter>
         </activity>
-        <activity-alias android:name="com.google.android.talk.SigningInActivity" android:launchMode="singleTop" android:targetActivity="com.google.android.apps.babel.phone.BabelHomeActivity">
+        <activity-alias android:launchMode="singleTop" android:name="com.google.android.talk.SigningInActivity" android:targetActivity="com.google.android.apps.babel.phone.BabelHomeActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.im.category.GTALK" />
-                <data android:mimeType="vnd.android.cursor.dir/gtalk-messages" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.android.im.category.GTALK"/>
+                <data android:mimeType="vnd.android.cursor.dir/gtalk-messages"/>
             </intent-filter>
         </activity-alias>
-        <activity android:theme="@style/Theme.EmeraldSea.NoTitle" android:name="com.google.android.apps.babel.fragments.SmsOobActivity" android:screenOrientation="portrait" />
-        <activity android:theme="@style/Theme.EmeraldSea.DialogWhenLarge" android:label="@string/new_huddle_label" android:icon="@mipmap/ic_launcher_babel" android:name="com.google.android.apps.babel.phone.EditAudienceActivity" android:windowSoftInputMode="adjustResize" android:logo="@mipmap/ic_launcher_babel" />
-        <activity android:name="com.google.android.apps.babel.phone.DebugActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <service android:name="com.google.android.apps.babel.phone.DebugActivity$RecordingService" />
-        <activity android:theme="@*android:style/Theme.Holo.Light.Dialog" android:label="@string/home_screen_babel_label" android:name="com.google.android.apps.babel.phone.ShareIntentActivity" android:configChanges="keyboardHidden|orientation|screenSize">
+        <activity android:name="com.google.android.apps.babel.fragments.SmsOobActivity" android:screenOrientation="portrait" android:theme="@style/Theme.EmeraldSea.NoTitle"/>
+        <activity android:icon="@mipmap/ic_launcher_babel" android:label="@string/new_huddle_label" android:logo="@mipmap/ic_launcher_babel" android:name="com.google.android.apps.babel.phone.EditAudienceActivity" android:theme="@style/Theme.EmeraldSea.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.google.android.apps.babel.phone.DebugActivity"/>
+        <service android:name="com.google.android.apps.babel.phone.DebugActivity$RecordingService"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/home_screen_babel_label" android:name="com.google.android.apps.babel.phone.ShareIntentActivity" android:theme="@android:style/Theme.Holo.Light.Dialog">
             <intent-filter android:label="@string/share_intent_label">
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
             </intent-filter>
             <intent-filter android:label="@string/share_intent_label">
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-        </activity>
-        <activity android:theme="@style/Theme.EmeraldSea.NoDisplay" android:name="com.google.android.apps.babel.phone.ConversationIntentSecureActivity" android:permission="com.google.android.hangouts.START_HANGOUT">
-            <intent-filter android:label="@string/share_intent_label">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="vnd.google.android.hangouts/vnd.google.android.hangout_privileged" />
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
-        <activity android:theme="@style/Theme.EmeraldSea.NoDisplay" android:name="com.google.android.apps.babel.phone.ConversationIntentWhitelistActivity">
+        <activity android:name="com.google.android.apps.babel.phone.ConversationIntentSecureActivity" android:permission="com.google.android.hangouts.START_HANGOUT" android:theme="@style/Theme.EmeraldSea.NoDisplay">
             <intent-filter android:label="@string/share_intent_label">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="vnd.google.android.hangouts/vnd.google.android.hangout_whitelist" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.google.android.hangouts/vnd.google.android.hangout_privileged"/>
             </intent-filter>
         </activity>
-        <activity android:theme="@style/Theme.EmeraldSea.NoDisplay" android:name="com.google.android.apps.babel.phone.BabelGatewayActivity" android:exported="false" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@*android:style/Theme.Holo.Light.Dialog" android:label="@string/upgrade_to_google_plus_activity_label" android:name="com.google.android.apps.babel.phone.GooglePlusUpgradeActivity" />
-        <activity android:theme="@*android:style/Theme.Holo.Light.Dialog" android:label="@string/upgrade_to_google_plus_full_screen_activity_label" android:name="com.google.android.apps.babel.phone.GooglePlusUpgradeFullScreenActivity" />
-        <activity android:theme="@style/Theme.EmeraldSea.NoDisplay" android:name="com.google.android.apps.babel.hangout.HangoutSupportInitializationActivity" android:exported="false" android:configChanges="keyboard|keyboardHidden" />
-        <activity android:theme="@style/Theme.Hangout" android:label="@string/hangout_activity_label" android:name="com.google.android.apps.babel.hangout.HangoutActivity" android:exported="false" android:configChanges="keyboard|keyboardHidden" />
-        <activity android:theme="@style/Theme.EmeraldSea.NoDisplay" android:name="com.google.android.apps.babel.phone.HangoutUrlHandlerActivity">
+        <activity android:name="com.google.android.apps.babel.phone.ConversationIntentWhitelistActivity" android:theme="@style/Theme.EmeraldSea.NoDisplay">
+            <intent-filter android:label="@string/share_intent_label">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.google.android.hangouts/vnd.google.android.hangout_whitelist"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="false" android:name="com.google.android.apps.babel.phone.BabelGatewayActivity" android:theme="@style/Theme.EmeraldSea.NoDisplay"/>
+        <activity android:label="@string/upgrade_to_google_plus_activity_label" android:name="com.google.android.apps.babel.phone.GooglePlusUpgradeActivity" android:theme="@android:style/Theme.Holo.Light.Dialog"/>
+        <activity android:label="@string/upgrade_to_google_plus_full_screen_activity_label" android:name="com.google.android.apps.babel.phone.GooglePlusUpgradeFullScreenActivity" android:theme="@android:style/Theme.Holo.Light.Dialog"/>
+        <activity android:configChanges="keyboard|keyboardHidden" android:exported="false" android:name="com.google.android.apps.babel.hangout.HangoutSupportInitializationActivity" android:theme="@style/Theme.EmeraldSea.NoDisplay"/>
+        <activity android:configChanges="keyboard|keyboardHidden" android:exported="false" android:label="@string/hangout_activity_label" android:name="com.google.android.apps.babel.hangout.HangoutActivity" android:theme="@style/Theme.Hangout"/>
+        <activity android:name="com.google.android.apps.babel.phone.HangoutUrlHandlerActivity" android:theme="@style/Theme.EmeraldSea.NoDisplay">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="plus.google.com" android:pathPrefix="/hangouts/_/" />
-                <data android:scheme="https" android:host="plus.google.com" android:pathPrefix="/hangouts/_/" />
-                <data android:scheme="content" android:host="plus.google.com" android:pathPrefix="/hangouts/_/" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="*talkgadget.google.com" android:pathPrefix="/hangouts/_/" />
-                <data android:scheme="https" android:host="*talkgadget.google.com" android:pathPrefix="/hangouts/_/" />
-                <data android:scheme="content" android:host="*talkgadget.google.com" android:pathPrefix="/hangouts/_/" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="plus.google.com" android:pathPrefix="/hangouts/_/" android:scheme="http"/>
+                <data android:host="plus.google.com" android:pathPrefix="/hangouts/_/" android:scheme="https"/>
+                <data android:host="plus.google.com" android:pathPrefix="/hangouts/_/" android:scheme="content"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="www.google.com" android:pathPrefix="/talk/meet" />
-                <data android:scheme="https" android:host="www.google.com" android:pathPrefix="/talk/meet" />
-                <data android:scheme="content" android:host="www.google.com" android:pathPrefix="/talk/meet" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="*talkgadget.google.com" android:pathPrefix="/hangouts/_/" android:scheme="http"/>
+                <data android:host="*talkgadget.google.com" android:pathPrefix="/hangouts/_/" android:scheme="https"/>
+                <data android:host="*talkgadget.google.com" android:pathPrefix="/hangouts/_/" android:scheme="content"/>
             </intent-filter>
-        </activity>
-        <activity android:theme="@style/Theme.EmeraldSea.NoDisplay" android:name="com.google.android.apps.babel.phone.NfcHangoutTransferActivity">
             <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="vnd.android.nfc" android:host="ext" android:pathPrefix="/com.google.android.apps.babel:hangoutrequest" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="www.google.com" android:pathPrefix="/talk/meet" android:scheme="http"/>
+                <data android:host="www.google.com" android:pathPrefix="/talk/meet" android:scheme="https"/>
+                <data android:host="www.google.com" android:pathPrefix="/talk/meet" android:scheme="content"/>
             </intent-filter>
         </activity>
-        <activity android:theme="@style/Theme.Hangout.IncomingRing" android:label="@string/hangout_activity_label" android:name="com.google.android.apps.babel.hangout.IncomingRingActivity" android:exported="false" android:taskAffinity="" android:excludeFromRecents="true" android:launchMode="singleInstance" android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize" />
-        <receiver android:name="com.google.android.apps.babel.hangout.HangoutUtils$JoinedHangoutReceiver" android:exported="false" />
-        <receiver android:name="com.google.android.apps.babel.hangout.HangoutUtils$NativeCrashReceiver" android:exported="false" android:process=":native_crash_to_java_exception" />
-        <uses-library android:name="com.google.android.media.effects" android:required="false" />
-        <service android:name="com.google.android.videochat.VideoChatService" android:exported="false" />
-        <service android:name="com.google.android.apps.babel.hangout.StressService" android:exported="false" />
-        <receiver android:name="com.google.android.apps.babel.hangout.StressService$StressReceiver" android:exported="false" />
-        <service android:name="com.google.android.apps.babel.realtimechat.RealTimeChatService" />
-        <service android:name="com.google.android.apps.babel.realtimechat.DebugService" />
-        <service android:name="com.google.android.apps.babel.realtimechat.RequestWriter" />
-        <service android:name="com.google.android.apps.babel.hangout.IncomingInviteService" />
-        <service android:name="com.google.android.apps.babel.realtimechat.ShemTestingIntentService" />
+        <activity android:name="com.google.android.apps.babel.phone.NfcHangoutTransferActivity" android:theme="@style/Theme.EmeraldSea.NoDisplay">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="ext" android:pathPrefix="/com.google.android.apps.babel:hangoutrequest" android:scheme="vnd.android.nfc"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize" android:excludeFromRecents="true" android:exported="false" android:label="@string/hangout_activity_label" android:launchMode="singleInstance" android:name="com.google.android.apps.babel.hangout.IncomingRingActivity" android:taskAffinity="" android:theme="@style/Theme.Hangout.IncomingRing"/>
+        <receiver android:exported="false" android:name="com.google.android.apps.babel.hangout.HangoutUtils$JoinedHangoutReceiver"/>
+        <receiver android:exported="false" android:name="com.google.android.apps.babel.hangout.HangoutUtils$NativeCrashReceiver" android:process=":native_crash_to_java_exception"/>
+        <uses-library android:name="com.google.android.media.effects" android:required="false"/>
+        <service android:exported="false" android:name="com.google.android.videochat.VideoChatService"/>
+        <service android:exported="false" android:name="com.google.android.apps.babel.hangout.StressService"/>
+        <receiver android:exported="false" android:name="com.google.android.apps.babel.hangout.StressService$StressReceiver"/>
+        <service android:name="com.google.android.apps.babel.realtimechat.RealTimeChatService"/>
+        <service android:name="com.google.android.apps.babel.realtimechat.DebugService"/>
+        <service android:name="com.google.android.apps.babel.realtimechat.RequestWriter"/>
+        <service android:name="com.google.android.apps.babel.hangout.IncomingInviteService"/>
+        <service android:name="com.google.android.apps.babel.realtimechat.ShemTestingIntentService"/>
         <receiver android:name="com.google.android.apps.babel.phone.PackageReplacedReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" android:ssp="com.google.android.apps.babel" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+                <data android:scheme="package" android:ssp="com.google.android.apps.babel"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" android:ssp="com.google.android.talk" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+                <data android:scheme="package" android:ssp="com.google.android.talk"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" android:ssp="com.google.android.gms" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+                <data android:scheme="package" android:ssp="com.google.android.gms"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <data android:scheme="package" android:ssp="com.google.android.gms" />
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <data android:scheme="package" android:ssp="com.google.android.gms"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <data android:scheme="package" android:ssp="com.google.android.gms" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package" android:ssp="com.google.android.gms"/>
             </intent-filter>
         </receiver>
-        <receiver android:name="com.google.android.apps.babel.hangout.VideoChatOutputReceiver" android:exported="false" />
+        <receiver android:exported="false" android:name="com.google.android.apps.babel.hangout.VideoChatOutputReceiver"/>
         <receiver android:name="com.google.android.apps.babel.service.AccountsChangedReceiver">
             <intent-filter>
-                <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED" />
+                <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED"/>
             </intent-filter>
         </receiver>
         <receiver android:name="com.google.android.apps.babel.service.DevicePolicyRegisteredReciever">
             <intent-filter>
-                <action android:name="com.google.android.apps.enterprise.dmagent.AUTO_REGISTRATION_FINISHED" />
+                <action android:name="com.google.android.apps.enterprise.dmagent.AUTO_REGISTRATION_FINISHED"/>
             </intent-filter>
         </receiver>
-        <receiver android:name="com.google.android.apps.babel.service.BootReceiver" android:enabled="true">
+        <receiver android:enabled="true" android:name="com.google.android.apps.babel.service.BootReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
         <receiver android:name="com.google.android.apps.babel.realtimechat.NotificationReceiver">
             <intent-filter>
-                <action android:name="com.google.android.apps.babel.realtimechat.reset" />
+                <action android:name="com.google.android.apps.babel.realtimechat.reset"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="com.google.android.apps.babel.realtimechat.reset_error_notifications" />
+                <action android:name="com.google.android.apps.babel.realtimechat.reset_error_notifications"/>
             </intent-filter>
         </receiver>
         <receiver android:name="com.google.android.apps.babel.realtimechat.RealTimeChatService$AlarmReceiver">
             <intent-filter>
-                <action android:name="com.google.android.apps.babel.UPDATE_NOTIFICATION" />
-                <action android:name="com.google.android.apps.babel.CLEANUP_DB" />
-                <action android:name="com.google.android.apps.babel.RENEW_ACCOUNT_REGISTRATION" />
-                <action android:name="com.google.android.apps.babel.TIMEOUT_PHONE_VERIFICATION" />
-                <action android:name="com.google.android.apps.babel.RETRY_GCM_REGISTRATION" />
-                <action android:name="com.google.android.apps.babel.UPDATE_IN_CALL_STATE" />
-                <action android:name="com.google.android.apps.babel.SYNC" />
-                <action android:name="com.google.android.apps.babel.DEFERRED_NOTIFICATION" />
+                <action android:name="com.google.android.apps.babel.UPDATE_NOTIFICATION"/>
+                <action android:name="com.google.android.apps.babel.CLEANUP_DB"/>
+                <action android:name="com.google.android.apps.babel.RENEW_ACCOUNT_REGISTRATION"/>
+                <action android:name="com.google.android.apps.babel.TIMEOUT_PHONE_VERIFICATION"/>
+                <action android:name="com.google.android.apps.babel.RETRY_GCM_REGISTRATION"/>
+                <action android:name="com.google.android.apps.babel.UPDATE_IN_CALL_STATE"/>
+                <action android:name="com.google.android.apps.babel.SYNC"/>
+                <action android:name="com.google.android.apps.babel.DEFERRED_NOTIFICATION"/>
             </intent-filter>
         </receiver>
         <receiver android:name="com.google.android.apps.babel.realtimechat.MessagesAvailableReceiver" android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="com.google.android.talk" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="com.google.android.talk"/>
             </intent-filter>
         </receiver>
         <receiver android:name="com.google.android.apps.babel.realtimechat.SimulatedIncomingEventReceiver">
             <intent-filter>
-                <action android:name="com.google.android.babel.intent.SIMULATED_MESSAGE_EVENT" />
-                <category android:name="com.google.android.apps.babel" />
+                <action android:name="com.google.android.babel.intent.SIMULATED_MESSAGE_EVENT"/>
+                <category android:name="com.google.android.apps.babel"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="com.google.android.babel.intent.SIMULATED_FOCUS_EVENT" />
-                <category android:name="com.google.android.apps.babel" />
+                <action android:name="com.google.android.babel.intent.SIMULATED_FOCUS_EVENT"/>
+                <category android:name="com.google.android.apps.babel"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="com.google.android.babel.intent.SIMULATED_WATERMARK_EVENT" />
-                <category android:name="com.google.android.apps.babel" />
+                <action android:name="com.google.android.babel.intent.SIMULATED_WATERMARK_EVENT"/>
+                <category android:name="com.google.android.apps.babel"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="com.google.android.babel.intent.SIMULATED_TYPING_EVENT" />
-                <category android:name="com.google.android.apps.babel" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name="com.google.android.apps.babel.phone.PhoneStateReceiver" android:enabled="true">
-            <intent-filter>
-                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="com.google.android.babel.intent.SIMULATED_TYPING_EVENT"/>
+                <category android:name="com.google.android.apps.babel"/>
             </intent-filter>
         </receiver>
-        <activity android:theme="@style/Theme.EmeraldSea.NoDisplay" android:name="com.google.android.apps.babel.phone.BabelProfileActionActivity">
+        <receiver android:enabled="true" android:name="com.google.android.apps.babel.phone.PhoneStateReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="vnd.android.cursor.item/vnd.googleplus.profile.comm" />
+                <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
+        <activity android:name="com.google.android.apps.babel.phone.BabelProfileActionActivity" android:theme="@style/Theme.EmeraldSea.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.android.cursor.item/vnd.googleplus.profile.comm"/>
             </intent-filter>
         </activity>
         <receiver android:name="com.google.android.apps.babel.service.LocaleChangeReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.LOCALE_CHANGED" />
+                <action android:name="android.intent.action.LOCALE_CHANGED"/>
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.Holo.Dialog" android:name="com.google.android.apps.babel.phone.DndDialogActivity" android:taskAffinity="" android:excludeFromRecents="true" />
-        <activity android:name="com.google.android.apps.babel.phone.ShowToastForTesting" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:label="@string/conversation_participants_activity_title" android:name="com.google.android.apps.babel.phone.ConversationParticipantsActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@style/BabelPhotoViewTheme" android:label="@string/app_name" android:name="com.google.android.apps.babel.phone.BabelPhotoViewActivity" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:label="@string/blocked_people_activity_label" android:name="com.google.android.apps.babel.phone.BlockedPeopleActivity" />
-        <activity android:theme="@style/Theme.EmeraldSea" android:label="@string/mood_setting_activity_label" android:name="com.google.android.apps.babel.phone.MoodSettingActivity" />
-        <receiver android:name="com.google.android.apps.babel.realtimechat.RequestWriter$NetworkStateReceiver" android:enabled="true" android:exported="true">
+        <activity android:excludeFromRecents="true" android:name="com.google.android.apps.babel.phone.DndDialogActivity" android:taskAffinity="" android:theme="@android:style/Theme.Holo.Dialog"/>
+        <activity android:name="com.google.android.apps.babel.phone.ShowToastForTesting"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/conversation_participants_activity_title" android:name="com.google.android.apps.babel.phone.ConversationParticipantsActivity" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:label="@string/app_name" android:name="com.google.android.apps.babel.phone.BabelPhotoViewActivity" android:theme="@style/BabelPhotoViewTheme"/>
+        <activity android:label="@string/blocked_people_activity_label" android:name="com.google.android.apps.babel.phone.BlockedPeopleActivity" android:theme="@style/Theme.EmeraldSea"/>
+        <activity android:label="@string/mood_setting_activity_label" android:name="com.google.android.apps.babel.phone.MoodSettingActivity" android:theme="@style/Theme.EmeraldSea"/>
+        <receiver android:enabled="true" android:exported="true" android:name="com.google.android.apps.babel.realtimechat.RequestWriter$NetworkStateReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.GTALK_CONNECTED" />
+                <action android:name="android.intent.action.GTALK_CONNECTED"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.GTALK_DISCONNECTED" />
+                <action android:name="android.intent.action.GTALK_DISCONNECTED"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="com.google.android.gcm.CONNECTED" />
+                <action android:name="com.google.android.gcm.CONNECTED"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="com.google.android.gcm.DISCONNECTED" />
+                <action android:name="com.google.android.gcm.DISCONNECTED"/>
             </intent-filter>
         </receiver>
-        <receiver android:name="com.google.android.apps.babel.sms.MmsWapPushReceiver" android:permission="android.permission.BROADCAST_WAP_PUSH" android:enabled="false">
+        <receiver android:enabled="false" android:name="com.google.android.apps.babel.sms.MmsWapPushReceiver" android:permission="android.permission.BROADCAST_WAP_PUSH">
             <intent-filter android:priority="2147483647">
-                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED" />
-                <data android:mimeType="application/vnd.wap.mms-message" />
+                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED"/>
+                <data android:mimeType="application/vnd.wap.mms-message"/>
             </intent-filter>
         </receiver>
-        <receiver android:name="com.google.android.apps.babel.sms.SmsReceiver" android:permission="android.permission.BROADCAST_SMS" android:enabled="false">
+        <receiver android:enabled="false" android:name="com.google.android.apps.babel.sms.SmsReceiver" android:permission="android.permission.BROADCAST_SMS">
             <intent-filter android:priority="2147483647">
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
         </receiver>
-        <receiver android:name="com.google.android.apps.babel.sms.AbortMmsWapPushReceiver" android:permission="android.permission.BROADCAST_WAP_PUSH" android:enabled="false">
+        <receiver android:enabled="false" android:name="com.google.android.apps.babel.sms.AbortMmsWapPushReceiver" android:permission="android.permission.BROADCAST_WAP_PUSH">
             <intent-filter android:priority="3">
-                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED" />
-                <data android:mimeType="application/vnd.wap.mms-message" />
+                <action android:name="android.provider.Telephony.WAP_PUSH_RECEIVED"/>
+                <data android:mimeType="application/vnd.wap.mms-message"/>
             </intent-filter>
         </receiver>
-        <receiver android:name="com.google.android.apps.babel.sms.AbortSmsReceiver" android:permission="android.permission.BROADCAST_SMS" android:enabled="false">
+        <receiver android:enabled="false" android:name="com.google.android.apps.babel.sms.AbortSmsReceiver" android:permission="android.permission.BROADCAST_SMS">
             <intent-filter android:priority="3">
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
         </receiver>
         <receiver android:name="com.google.android.apps.babel.sms.MmsWapPushDeliverReceiver" android:permission="android.permission.BROADCAST_WAP_PUSH">
             <intent-filter>
-                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
-                <data android:mimeType="application/vnd.wap.mms-message" />
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER"/>
+                <data android:mimeType="application/vnd.wap.mms-message"/>
             </intent-filter>
         </receiver>
         <receiver android:name="com.google.android.apps.babel.sms.SmsDeliverReceiver" android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_DELIVER" />
+                <action android:name="android.provider.Telephony.SMS_DELIVER"/>
             </intent-filter>
         </receiver>
         <receiver android:name="com.google.android.apps.babel.sms.SendStatusReceiver">
             <intent-filter>
-                <action android:name="com.google.android.apps.babel.sms.SendStatusReceiver.MESSAGE_SENT" />
-                <data android:scheme="content" />
+                <action android:name="com.google.android.apps.babel.sms.SendStatusReceiver.MESSAGE_SENT"/>
+                <data android:scheme="content"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="com.google.android.apps.babel.sms.SendStatusReceiver.MESSAGE_DELIVERED" />
+                <action android:name="com.google.android.apps.babel.sms.SendStatusReceiver.MESSAGE_DELIVERED"/>
             </intent-filter>
         </receiver>
-        <service android:name="com.google.android.apps.babel.service.NoConfirmationSmsSendService" android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE" android:exported="true">
+        <service android:exported="true" android:name="com.google.android.apps.babel.service.NoConfirmationSmsSendService" android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE">
             <intent-filter>
-                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="sms" />
-                <data android:scheme="smsto" />
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="sms"/>
+                <data android:scheme="smsto"/>
             </intent-filter>
         </service>
-        <activity android:theme="@*android:style/Theme.Translucent" android:label="@string/class_0_message_activity" android:name="com.google.android.apps.babel.phone.ClassZeroActivity" android:excludeFromRecents="true" android:launchMode="singleTask" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@style/Theme.EmeraldSea.NoDisplay" android:name="com.google.android.apps.babel.phone.SmsAccountPickerActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@style/Theme.EmeraldSea.NoDisplay" android:name="com.google.android.apps.babel.phone.SmsStorageLowWarningActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:excludeFromRecents="true" android:label="@string/class_0_message_activity" android:launchMode="singleTask" android:name="com.google.android.apps.babel.phone.ClassZeroActivity" android:theme="@android:style/Theme.Translucent"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.google.android.apps.babel.phone.SmsAccountPickerActivity" android:theme="@style/Theme.EmeraldSea.NoDisplay"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:name="com.google.android.apps.babel.phone.SmsStorageLowWarningActivity" android:theme="@style/Theme.EmeraldSea.NoDisplay"/>
         <receiver android:name="com.google.android.apps.babel.phone.StorageStatusReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
             </intent-filter>
         </receiver>
     </application>

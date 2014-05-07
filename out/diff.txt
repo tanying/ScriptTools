@@ -1,4 +1,27 @@
-1. Different Package: ContactsProvider.apk
+1. Different Package: UserDictionaryProvider.apk
+    Jrd Content Provider:
+        <provider android:authorities="user_dictionary" android:exported="true" android:multiprocess="false" android:name="UserDictionaryProvider" android:readPermission="android.permission.READ_USER_DICTIONARY" android:syncable="false" android:writePermission="android.permission.WRITE_USER_DICTIONARY"/>
+    Emu Content Provider:
+        <provider android:name="UserDictionaryProvider" android:readPermission="android.permission.READ_USER_DICTIONARY" android:writePermission="android.permission.WRITE_USER_DICTIONARY" android:exported="true" android:multiprocess="false" android:authorities="user_dictionary" android:syncable="false" />
+
+2. Different Package: DownloadProvider.apk
+    Jrd Content Provider:
+        <provider android:name=".DownloadProvider" android:exported="true" android:authorities="downloads">
+            <path-permission android:permission="android.permission.INTERNET" android:pathPrefix="/my_downloads" />
+            <path-permission android:permission="android.permission.ACCESS_ALL_DOWNLOADS" android:pathPrefix="/all_downloads" />
+            <path-permission android:permission="android.permission.INTERNET" android:pathPrefix="/download" />
+            <grant-uri-permission android:pathPrefix="/all_downloads/" />
+            <grant-uri-permission android:pathPrefix="/my_downloads/" />
+        </provider>
+    Emu Content Provider:
+        <provider android:name=".DownloadProvider" android:exported="true" android:authorities="downloads">
+            <path-permission android:permission="android.permission.INTERNET" android:pathPrefix="/my_downloads" />
+            <path-permission android:permission="android.permission.ACCESS_ALL_DOWNLOADS" android:pathPrefix="/all_downloads" />
+            <path-permission android:permission="android.permission.INTERNET" android:pathPrefix="/download" />
+            <grant-uri-permission android:pathPrefix="/all_downloads/" />
+        </provider>
+
+3. Different Package: ContactsProvider.apk
     Jrd Content Provider:
         <provider android:label="@2130968579" android:name="ContactsProvider2" android:readPermission="android.permission.READ_CONTACTS" android:writePermission="android.permission.WRITE_CONTACTS" android:exported="true" android:multiprocess="false" android:authorities="contacts;com.android.contacts">
             <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:pathPrefix="/search_suggest_query" />
@@ -14,7 +37,13 @@
             <grant-uri-permission android:pathPattern=".*" />
         </provider>
 
-2. Different Package: Browser.apk
+4. Different Package: PicoTts.apk
+    Jrd Content Provider:
+        <provider android:authorities="com.svox.pico.providers.SettingsProvider" android:name=".providers.SettingsProvider"/>
+    Emu Content Provider:
+        <provider android:name=".providers.SettingsProvider" android:authorities="com.svox.pico.providers.SettingsProvider" />
+
+5. Different Package: Browser.apk
     Jrd Content Provider:
         <provider android:name=".provider.BrowserProvider2" android:readPermission="com.android.browser.permission.READ_HISTORY_BOOKMARKS" android:writePermission="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS" android:exported="true" android:multiprocess="false" android:authorities="com.android.browser;browser">
             <path-permission android:readPermission="android.permission.GLOBAL_SEARCH" android:path="/bookmarks/search_suggest_query" />
@@ -35,7 +64,7 @@
     Emu Content Provider:
         <provider android:name=".provider.SnapshotProvider" android:exported="false" android:authorities="com.android.browser.snapshots" />
 
-3. Different Package: CalendarProvider.apk
+6. Different Package: CalendarProvider.apk
     Jrd Content Provider:
         <provider android:label="@2131034120" android:name="CalendarProvider2" android:readPermission="android.permission.READ_CALENDAR" android:writePermission="android.permission.WRITE_CALENDAR" android:exported="true" android:multiprocess="false" android:authorities="com.android.calendar" />
     Emu Content Provider:

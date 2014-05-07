@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest android:sharedUserId="android.uid.mtkbt" android:versionCode="17" android:versionName="4.2.2-vC62-0" package="com.mediatek.bluetooth"
+<manifest android:sharedUserId="android.uid.mtkbt" android:versionCode="17" android:versionName="4.2.2-vC80-0" package="com.mediatek.bluetooth"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <application android:label="@2131099939" android:icon="@2130837504" android:name="com.mediatek.bluetooth.BluetoothApplication" android:persistent="true" android:description="@2131099940">
-        <activity android:theme="@*android:style/Theme.Holo.Dialog.Presentation" android:name=".bpp.BluetoothBppEntryActivity" android:excludeFromRecents="true" android:configChanges="orientation|screenSize">
+        <activity android:theme="@android:style/Theme.Holo.Dialog.NoFrame" android:name=".bpp.BluetoothBppEntryActivity" android:excludeFromRecents="true" android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="mediatek.intent.action.PRINT" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -12,9 +12,9 @@
                 <data android:mimeType="text/x-vcard" />
             </intent-filter>
         </activity>
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".bpp.BluetoothBppAuthenticating" android:excludeFromRecents="true" android:configChanges="orientation" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".bpp.BluetoothBppAuthenticating" android:excludeFromRecents="true" android:configChanges="orientation" />
         <activity android:label="@2131099684" android:name=".bpp.BluetoothBppPrintJobSettings" android:excludeFromRecents="true" android:configChanges="orientation" />
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".bpp.BluetoothBppPrinting" android:excludeFromRecents="true" android:configChanges="orientation" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".bpp.BluetoothBppPrinting" android:excludeFromRecents="true" android:configChanges="orientation" />
         <permission android:label="@2131099681" android:name="android.permission.BLUETOOTH_PRINT" android:protectionLevel="signature" android:description="@2131099682" />
         <service android:name=".bpp.BluetoothBppManager" />
         <receiver android:name=".bpp.BluetoothBppReceiver">
@@ -33,11 +33,11 @@
                 <action android:name="com.mediatek.bluetooth.ftp.IBluetoothFtpClient" />
             </intent-filter>
         </service>
-        <activity android:theme="@*android:style/Theme.Holo.Light.Dialog.FixedSize" android:name=".ftp.BluetoothFtpServerNotify" android:taskAffinity="com.mediatek.bluetooth.ftp.server" android:excludeFromRecents="true" android:launchMode="singleInstance" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@*android:style/Theme.Holo.Light.Dialog.FixedSize" android:name=".ftp.BluetoothFtpAuthActivity" android:taskAffinity="com.mediatek.bluetooth.ftp.server" android:excludeFromRecents="true" android:launchMode="singleInstance" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@*android:style/Theme.Holo.Light" android:name=".ftp.BluetoothFtpClient" android:taskAffinity="com.mediatek.bluetooth.ftp" android:excludeFromRecents="true" android:alwaysRetainTaskState="true" />
-        <activity android:theme="@*android:style/Theme.Holo.Light" android:name=".ftp.BluetoothFtpLocalBrowser" android:taskAffinity="com.mediatek.bluetooth.ftp" android:excludeFromRecents="true" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@*android:style/Theme.Holo.Light" android:name=".ftp.BluetoothFtpSeveralMarker" android:taskAffinity="com.mediatek.bluetooth.ftp" android:excludeFromRecents="true" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".ftp.BluetoothFtpServerNotify" android:taskAffinity="com.mediatek.bluetooth.ftp.server" android:excludeFromRecents="true" android:launchMode="singleInstance" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".ftp.BluetoothFtpAuthActivity" android:taskAffinity="com.mediatek.bluetooth.ftp.server" android:excludeFromRecents="true" android:launchMode="singleInstance" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@android:style/Theme.Holo.Light" android:name=".ftp.BluetoothFtpClient" android:taskAffinity="com.mediatek.bluetooth.ftp" android:excludeFromRecents="true" android:alwaysRetainTaskState="true" />
+        <activity android:theme="@android:style/Theme.Holo.Light" android:name=".ftp.BluetoothFtpLocalBrowser" android:taskAffinity="com.mediatek.bluetooth.ftp" android:excludeFromRecents="true" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@android:style/Theme.Holo.Light" android:name=".ftp.BluetoothFtpSeveralMarker" android:taskAffinity="com.mediatek.bluetooth.ftp" android:excludeFromRecents="true" android:configChanges="keyboardHidden|orientation|screenSize" />
         <provider android:name=".ftp.BluetoothFtpProvider" android:authorities="com.mediatek.provider.bluetooth.ftp" />
         <service android:name=".avrcp.BluetoothAvrcpService" android:exported="true">
             <intent-filter>
@@ -70,10 +70,10 @@
                 <data android:scheme="android_secret_code" android:host="2872710" />
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".bip.BipTransmitting" android:excludeFromRecents="true" android:configChanges="orientation" />
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".bip.BipInitPushConfirmation" android:excludeFromRecents="true" android:configChanges="orientation" />
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".bip.BipRespPushConfirmation" android:excludeFromRecents="true" android:launchMode="singleInstance" android:configChanges="orientation" />
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".bip.BipAuthentication" android:excludeFromRecents="true" android:configChanges="orientation" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".bip.BipTransmitting" android:excludeFromRecents="true" android:configChanges="orientation" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".bip.BipInitPushConfirmation" android:excludeFromRecents="true" android:configChanges="orientation" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".bip.BipRespPushConfirmation" android:excludeFromRecents="true" android:launchMode="singleInstance" android:configChanges="orientation" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".bip.BipAuthentication" android:excludeFromRecents="true" android:configChanges="orientation" />
         <service android:name=".bip.BipService" android:exported="true">
             <intent-filter>
                 <action android:name="android.bluetooth.IBluetoothBipi" />
@@ -86,15 +86,15 @@
                 <action android:name="android.bluetooth.IBluetoothPbap" />
             </intent-filter>
         </service>
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".pbap.BluetoothServerAuthorize" android:excludeFromRecents="true" android:configChanges="orientation" />
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".pbap.BluetoothAuthenticating" android:excludeFromRecents="true" android:configChanges="orientation" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".pbap.BluetoothServerAuthorize" android:excludeFromRecents="true" android:configChanges="orientation" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".pbap.BluetoothAuthenticating" android:excludeFromRecents="true" android:configChanges="orientation" />
         <service android:name=".map.BluetoothMapServerService">
             <intent-filter>
                 <action android:name="android.bluetooth.IBluetoothMap" />
                 <action android:name="com.mediatek.bluetooth.map.IBluetoothMapSetting" />
             </intent-filter>
         </service>
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".map.BluetoothMapActivity" android:excludeFromRecents="true" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".map.BluetoothMapActivity" android:excludeFromRecents="true" />
         <service android:name=".simap.BluetoothSimapService" android:exported="true">
             <intent-filter>
                 <action android:name="android.bluetooth.IBluetoothSimap" />
@@ -109,11 +109,11 @@
                 <data android:scheme="android_secret_code" android:host="87819" />
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".simap.BluetoothSimapActivity" android:excludeFromRecents="true"> android:launchMode="singleInstance" <intent-filter>
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".simap.BluetoothSimapActivity" android:excludeFromRecents="true"> android:launchMode="singleInstance" <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".simap.BluetoothSimapConnNotification" android:excludeFromRecents="true"> android:launchMode="singleInstance" <intent-filter>
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".simap.BluetoothSimapConnNotification" android:excludeFromRecents="true"> android:launchMode="singleInstance" <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -129,7 +129,7 @@
                 <action android:name="android.bluetooth.IBluetoothHid" />
             </intent-filter>
         </service>
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".hid.BluetoothHidAlert" android:excludeFromRecents="true" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".hid.BluetoothHidAlert" android:excludeFromRecents="true" />
         <receiver android:name=".hid.BluetoothHidReceiver">
             <intent-filter>
                 <action android:name="android.bluetooth.devicepicker.action.DEVICE_SELECTED" />
@@ -137,15 +137,15 @@
                 <data android:scheme="android_secret_code" android:host="87410" />
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:label="@2131099887" android:name=".opp.mmi.OppClientActivity" android:excludeFromRecents="true" />
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".opp.mmi.OppServerActivity" android:excludeFromRecents="true" android:launchMode="singleInstance" android:configChanges="orientation">
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:label="@2131099887" android:name=".opp.mmi.OppClientActivity" android:excludeFromRecents="true" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".opp.mmi.OppServerActivity" android:excludeFromRecents="true" android:launchMode="singleInstance" android:configChanges="orientation">
             <intent-filter>
                 <action android:name="com.mediatek.bluetooth.opp.action.PUSH_REQUEST" />
                 <action android:name="com.mediatek.bluetooth.opp.action.PULL_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name=".opp.mmi.OppCancelActivity" android:excludeFromRecents="true" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name=".opp.mmi.OppCancelActivity" android:excludeFromRecents="true" />
         <service android:name=".opp.adp.OppService" />
         <service android:name=".opp.adp.BluetoothOppService" android:exported="true">
             <intent-filter>
@@ -174,7 +174,7 @@
                 <data android:mimeType="*/*" />
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.DeviceDefault.Dialog.FixedSize" android:name="com.mediatek.activity.MessageActivity" />
+        <activity android:theme="@android:style/Theme.Holo.Dialog.Alert" android:name="com.mediatek.activity.MessageActivity" />
         <receiver android:name=".BluetoothReceiver">
             <intent-filter>
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
@@ -185,7 +185,7 @@
                 <data android:scheme="file" />
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar" android:name=".BluetoothShareGatewayActivity" android:finishOnTaskLaunch="true" android:excludeFromRecents="true" android:configChanges="locale|mcc|mnc|orientation|screenSize">
+        <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:name=".BluetoothShareGatewayActivity" android:finishOnTaskLaunch="true" android:excludeFromRecents="true" android:configChanges="locale|mcc|mnc|orientation|screenSize">
             <intent-filter>
                 <action android:name="com.mediatek.bluetooth.sharegateway.action.DEVICE_SELECTED" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -224,7 +224,7 @@
                 <action android:name="com.mediatek.bluetooth.sharegateway.action.ACTION_SETTINGS" />
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.Holo.Light" android:name=".share.BluetoothShareMgmtActivity" android:taskAffinity="" android:excludeFromRecents="true" />
+        <activity android:theme="@android:style/Theme.Holo.Light" android:name=".share.BluetoothShareMgmtActivity" android:taskAffinity="" android:excludeFromRecents="true" />
         <activity android:name=".share.BluetoothShareTabActivity" android:excludeFromRecents="true" />
         <provider android:name=".share.BluetoothShareProvider" android:exported="false" android:authorities="com.mediatek.provider.bluetooth.share" />
         <receiver android:name="com.mediatek.bluetooth.psm.PsmBluetoothReceiver">
@@ -240,7 +240,7 @@
                 <action android:name="com.mediatek.bluetooth.service.IBluetoothTimes" />
             </intent-filter>
         </service>
-        <activity android:theme="@*android:style/Theme.Holo.Light" android:name="com.mediatek.bluetooth.settings.BluetoothAdvancedSettingsActivity" android:launchMode="singleTop">
+        <activity android:theme="@android:style/Theme.Holo.Light" android:name="com.mediatek.bluetooth.settings.BluetoothAdvancedSettingsActivity" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="com.mediatek.bluetooth.settings.action.START_BT_ADV_SETTING" />
                 <category android:name="android.intent.category.DEFAULT" />

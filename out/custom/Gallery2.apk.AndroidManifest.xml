@@ -30,7 +30,7 @@
     <supports-screens android:anyDensity="true" android:smallScreens="false" android:normalScreens="true" android:largeScreens="true" />
     <application android:theme="@2131558494" android:label="@2131493439" android:icon="@2130903041" android:name="com.android.gallery3d.app.GalleryAppImpl" android:logo="@2130903041" android:hardwareAccelerated="true" android:largeHeap="true">
         <uses-library android:name="com.google.android.media.effects" android:required="false" />
-        <activity android:label="@2131493443" android:name="com.android.gallery3d.app.MovieActivity" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize">
+        <activity android:label="@2131493443" android:icon="@2130903043" android:name="com.android.gallery3d.app.MovieActivity" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -163,7 +163,7 @@
             </intent-filter>
             <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" android:resource="@2131099649" />
         </activity>
-        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar" android:name="com.android.gallery3d.app.Wallpaper" android:configChanges="keyboardHidden|orientation|screenSize">
+        <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:name="com.android.gallery3d.app.Wallpaper" android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter android:label="@2131493471">
                 <action android:name="android.intent.action.ATTACH_DATA" />
                 <data android:mimeType="image/*" />
@@ -317,19 +317,19 @@
             </intent-filter>
         </receiver>
         <service android:name="com.android.gallery3d.gadget.WidgetService" android:permission="android.permission.BIND_REMOTEVIEWS" />
-        <activity android:theme="@*android:style/Theme.Translucent.NoTitleBar" android:name="com.android.gallery3d.gadget.WidgetConfigure" android:configChanges="keyboardHidden|orientation|screenSize">
+        <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" android:name="com.android.gallery3d.gadget.WidgetConfigure" android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
         <activity android:theme="@2131558499" android:name="com.android.camera.ProxyLauncher" />
-        <activity android:theme="@*android:style/Theme.Holo" android:label="@2131493332" android:icon="@*android:drawable/ic_menu_preferences" android:name="com.mediatek.gallery3d.video.SettingsActivity" android:configChanges="keyboardHidden|orientation|screenSize">
+        <activity android:theme="@android:style/Theme.Holo" android:label="@2131493332" android:icon="@android:drawable/ic_menu_preferences" android:name="com.mediatek.gallery3d.video.SettingsActivity" android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="com.mediatek.settings.streaming" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:theme="@*android:style/Theme.Holo" android:label="@2131493343" android:icon="@2130837705" android:name="com.mediatek.gallery3d.video.BookmarkActivity" android:configChanges="keyboardHidden|orientation|screenSize">
+        <activity android:theme="@android:style/Theme.Holo" android:label="@2131493343" android:icon="@2130837705" android:name="com.mediatek.gallery3d.video.BookmarkActivity" android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="com.mediatek.bookmark.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -337,7 +337,7 @@
         </activity>
         <activity android:label="@2131493202" android:name="com.mediatek.camera.panorama.PanoramaActivity" android:clearTaskOnLaunch="true" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize" android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
         <activity android:label="@2131492882" android:name="com.mediatek.camera.mav.MavActivity" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize" android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
-        <activity android:theme="@*android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="com.android.camera.PicturePicker" android:screenOrientation="landscape" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize" />
+        <activity android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" android:name="com.android.camera.PicturePicker" android:screenOrientation="landscape" android:configChanges="mcc|mnc|keyboardHidden|orientation|screenSize" />
         <receiver android:name="com.android.camera.GetCameraParametersReceiver">
             <intent-filter>
                 <action android:name="action.get.camera.parameter.req" />

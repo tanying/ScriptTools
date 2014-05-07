@@ -1,49 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="224000" android:versionName="1.3.242047" package="com.google.android.apps.uploader"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-    <supports-screens android:anyDensity="true" android:smallScreens="false" android:normalScreens="true" android:largeScreens="true" />
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.google.android.apps.uploader">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="false"/>
     <application android:label="@string/picasa_upload">
-        <provider android:name="com.google.android.picasasync.PicasaContentProvider1" android:exported="false" android:authorities="com.google.android.apps.uploader.PicasaUploadProvider" />
-        <service android:label="Picasa Upload Service" android:name="com.google.android.picasasync.PicasaUploadService" />
+        <provider android:authorities="com.google.android.apps.uploader.PicasaUploadProvider" android:exported="false" android:name="com.google.android.picasasync.PicasaContentProvider1"/>
+        <service android:label="Picasa Upload Service" android:name="com.google.android.picasasync.PicasaUploadService"/>
         <receiver android:name="com.google.android.picasasync.ConnectivityReceiver">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.conn.BACKGROUND_DATA_SETTING_CHANGED"/>
             </intent-filter>
         </receiver>
-        <service android:name="com.google.android.picasasync.ConnectivityReceiver$AsyncService" />
+        <service android:name="com.google.android.picasasync.ConnectivityReceiver$AsyncService"/>
         <receiver android:name="com.google.android.picasasync.BatteryReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.Holo.NoActionBar" android:name=".PicasaUploadActivity" android:excludeFromRecents="true" android:screenOrientation="user" android:configChanges="keyboardHidden|orientation|screenSize" android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
-            <intent-filter android:label="@string/share_to_picasa" android:icon="@drawable/picasa_upload_main">
-                <data android:mimeType="image/*" />
-                <data android:mimeType="video/*" />
-                <action android:name="android.intent.action.SEND" />
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.DEFAULT" />
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:excludeFromRecents="true" android:name=".PicasaUploadActivity" android:screenOrientation="user" android:theme="@android:style/Theme.Holo.NoActionBar" android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+            <intent-filter android:icon="@drawable/picasa_upload_main" android:label="@string/share_to_picasa">
+                <data android:mimeType="image/*"/>
+                <data android:mimeType="video/*"/>
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <category android:name="android.intent.category.ALTERNATIVE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <receiver android:name=".PicasaUploadProgressReceiver">
             <intent-filter>
-                <action android:name="com.google.android.uploader.manual_upload_report" />
-                <action android:name="com.android.gallery3d.app.NEW_UPLOADS" />
+                <action android:name="com.google.android.uploader.manual_upload_report"/>
+                <action android:name="com.android.gallery3d.app.NEW_UPLOADS"/>
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.Holo.Light.DarkActionBar" android:name=".PicasaUploadSummaryActivity" android:excludeFromRecents="true" android:screenOrientation="user" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@*android:style/Theme.Holo.Light.Dialog" android:name=".PicasaUploadNewAlbumActivity" android:excludeFromRecents="true" android:screenOrientation="user" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:excludeFromRecents="true" android:name=".PicasaUploadSummaryActivity" android:screenOrientation="user" android:theme="@android:style/Theme.Holo.Light.DarkActionBar"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:excludeFromRecents="true" android:name=".PicasaUploadNewAlbumActivity" android:screenOrientation="user" android:theme="@android:style/Theme.Holo.Light.Dialog"/>
     </application>
 </manifest>

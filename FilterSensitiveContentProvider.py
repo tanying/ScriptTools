@@ -40,8 +40,11 @@ DictXls=EnvPath+"/SystemServiceAndBundlePackageDict.xls"
 
 outList = []
 pathDict = {}
+ApkDict = {}
 verDict = {}
 protectionLevelDict = {}
+sourceDict={}
+renamePkgDict={}
 
 # define data structure of packageInfo
 class PackageInfo:
@@ -72,22 +75,6 @@ class Permission:
         self.ReadPermissionProtectionLevel = '' #P
         self.WritePermission = '' #Q
         self.WritePermissionProtectionLevel = '' #R
-
-def genPkgSourceDict(list):
-    sdict = {}
-    for info in list:
-        key = info.Package
-        if info.Source.find('OEM') > -1:
-            value = 'OEM'
-        elif info.Source.find('Google') > -1:
-            value = 'Google'
-        elif info.Source.find('AOSP') > -1:
-            value = 'AOSP'
-        elif info.Source.find('3rd') > -1:
-            value = '3rd party'
-
-        sdict[key] = value
-    return sdict
 
 def splitPathPermission(string):
     templist = string.split('<path-permission')
@@ -465,6 +452,9 @@ def generatePackageInstallationToPathDict():
             package = list[1][:idx1]
             idx2 = list[0].find(':') + 1
             path = list[0][idx2:]
+            idx3=list[0].rfind('/') + 1
+            apkname=list[0][idx3:]
+            ApkDict[apkname]=package
             pathDict[package] = path
 
 def generateVersionToVerDict():
@@ -472,23 +462,38 @@ def generateVersionToVerDict():
         for fileName in files:
             filePath = os.path.join(root,fileName)
             f = open(filePath, 'r')
+            minSdkVersion='1'
+            targetSdkVersion=minSdkVersion
+            key=''
+            renamePkg=''
             while True:
                 line = f.readline()
                 if not line:
                     break
-                if line.find('orig_package:') > -1:
-                    idx1 = line.find(':') + 1
-                    idx2 = line.find('\n')
-                    key = line[idx1:idx2].strip(' ')
-                if line.find('minSdkVersion:') > -1:
+                if line.find('apkFileName') > -1:
+		            idx1 = line.find(':') + 1
+		            idx2 = line.find('\n')
+		            key = line[idx1:idx2].strip(' ')
+                if line.find('minSdkVersion') > -1:
                     idx1 = line.rfind(':') + 1
                     idx2 = line.rfind('\n')
                     minSdkVersion = line[idx1:idx2].strip(' ').strip("'")
+                    targetSdkVersion=minSdkVersion
                 if line.find('targetSdkVersion') > -1:
                     idx1 = line.rfind(':') + 1
                     idx2 = line.rfind('\n')
                     targetSdkVersion = line[idx1:idx2].strip(' ').strip("'")
-            verDict[key] = [minSdkVersion, targetSdkVersion]
+                if line.find('rename-manifest-package') > -1:
+		            idx1 = line.find(':') + 1
+		            idx2 = line.find('\n')
+		            renamePkg = line[idx1:idx2].strip(' ')
+			
+            if renamePkg!='':
+		    	if ApkDict.has_key(key):
+		    		renamePkgDict[key]=renamePkg
+            if ApkDict.has_key(key):
+            	verDict[ApkDict[key]] = [minSdkVersion, targetSdkVersion]
+
 
 def generateProtectionLevelToProtectionLevelDict():
     f = open(protectionLevelTxt, 'r')
@@ -517,26 +522,48 @@ def filterCustomOEM():
         for filespath in files:
             jrdfilepath = os.path.join(root,filespath)
             emufilepath = os.path.join(EmuListPath,filespath)
+
+            apkNameFromFileName=filespath[:filespath.find('.',filespath.find('.')+1)]
+            #print apkNameFromFileName
             #generate package info
             info = PackageInfo()
             manifestStr = getNodeByTag('manifest', jrdfilepath)
-            pkg = getAttrValueByAttrTitle('package', manifestStr)
+            if renamePkgDict.has_key(apkNameFromFileName):
+            	pkg=renamePkgDict[apkNameFromFileName]
+            else:
+            	pkg=getAttrValueByAttrTitle('package', manifestStr)
+            #pkg = renamePkgDict.has_key(apkNameFromFileName)?renamePkgDict[apkNameFromFileName]:getAttrValueByAttrTitle('package', manifestStr)
             shareUserId = getAttrValueByAttrTitle('android:sharedUserId', manifestStr)
             
             info.Package = pkg
             info.PackageSharedUID = shareUserId.strip(' ')
+            splitedPkg=''
             #print pkg + "$$$$$$"
+
             if pathDict.has_key(pkg):
                 info.PackageInstallationPath = pathDict[pkg]
             else:
-            	pkg=pkg[:pkg.rfind('.')]
-            	if pathDict.has_key(pkg):
-            		info.PackageInstallationPath=pathDict[pkg]
+            	print "FilterSensitiveContentProvider error:"+pkg+" not found,retry once after split the package name."
+            	#modify for googleDrive.apk
+            	splitedPkg=pkg[:pkg.rfind('.')]
+            	if pathDict.has_key(splitedPkg):
+            		info.PackageInstallationPath=pathDict[splitedPkg]
+            		info.Package = splitedPkg
+            		print "FilterSensitiveContentProvider info:"+pkg+" has been repaired->"+splitedPkg
+            	else:
+            		print "FilterSensitiveContentProvider fatal error:"+pkg+" still not found,skip."
+            		continue
                 #print info.PackageInstallationPath
             if verDict.has_key(pkg):
                 info.PackageMinSdkVersion = verDict[pkg][0]
                 info.PackageTargetSdkVersion = verDict[pkg][1]
-            print ' <' + info.Package + ' output successed>'
+            else:
+            	if verDict.has_key(splitedPkg):
+            		info.PackageMinSdkVersion = verDict[splitedPkg][0]
+            		info.PackageTargetSdkVersion = verDict[splitedPkg][1]
+            	else:
+	            	print "FilterSensitiveContentProvider error:"+pkg+" sdk version not found,yml file maybe not exists."
+            #print ' <' + info.Package + ' output successed>'
 
             #Filter All Content Provider
             providerStr = filterContentProvider(jrdfilepath)
@@ -568,7 +595,6 @@ def filterCustomOEM():
                 if jrdProviderStr == emuProviderStr:
                     #print "++++++++++same+++++++++++"
                     info.Source = 'AOSP-unmodified'
-                    pass
                 else:
                     shutil.copy(jrdfilepath, customDir)
                     info.Source = 'OEM-modified AOSP'
@@ -651,6 +677,15 @@ def filterCustomOEM():
                     # outDict['providername'] = getAttrValueByAttrTitle('android:name', jrdProviderStr)
                     # outList.append(outDict)
             outList.append(info)
+            if info.Source.find('OEM') > -1:
+            	sourceValue = 'OEM'
+            elif info.Source.find('Google') > -1:
+            	sourceValue = 'Google'
+            elif info.Source.find('AOSP') > -1:
+            	sourceValue = 'AOSP'
+            elif info.Source.find('3rd') > -1:
+            	sourceValue = '3rd party'
+            sourceDict[info.Package]=sourceValue
             fDiff = open(diffTxt, 'w')
             fCustom = open(customTxt, 'w')
             fWithoutPermission = open(withoutPermissionTxt, 'w')

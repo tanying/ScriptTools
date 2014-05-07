@@ -12,15 +12,19 @@ function decodeApk(){
 	tempout=$1/tempout
 	manifestList=$1/manifestList
 
+	./apktool if $tempapk/framework-res.apk
+	./apktool if $tempapk/mediatek-res.apk
 	for filelist in $(ls $tempapk)
 		do
-		./apktool d -f $tempapk/$filelist  $tempout/$filelist 
-                #filename=$(echo $filelist | awk -F"." '{print $1}')
-                #echo $filename
-                #echo $filename
-                #cp $tempout/$filelist/AndroidManifest.xml $manifestList/$filename.AndroidManifest.xml
-                cp $tempout/$filelist/AndroidManifest.xml $manifestList/$filelist.AndroidManifest.xml
-                cp $tempout/$filelist/apktool.yml $manifestList/$filelist.apktool.yml
+		#echo $tempapk/$filelist
+		./apktool d -f $tempapk/$filelist  -o $tempout/$filelist 
+		#./apktool d -f $tempapk/$filelist  $tempout/$filelist 
+        #filename=$(echo $filelist | awk -F"." '{print $1}')
+        #echo $filename
+        #echo $filename
+        #cp $tempout/$filelist/AndroidManifest.xml $manifestList/$filename.AndroidManifest.xml
+        cp $tempout/$filelist/AndroidManifest.xml $manifestList/$filelist.AndroidManifest.xml
+        cp $tempout/$filelist/apktool.yml $manifestList/$filelist.apktool.yml
 		done
 }
 
@@ -47,6 +51,10 @@ function cpApk(){
 	done	
 }
 
+export JAVA_HOME=/local/jdk1.7.0_45
+export JRE_HOME=/local/jdk1.7.0_45/jre
+export PATH=/local/jdk1.7.0_45/bin:$PATH 
+export CLASSPATH=.:/local/jdk1.7.0_45/lib:/local/jdk1.7.0_45/jre/lib
 
 if [ $# -lt 1 ]
 then
@@ -114,5 +122,9 @@ echo "decode completed."
 #nautilus $tempdir/manifestList
 #fi
 
+export JAVA_HOME=/local/jdk1.6.0_45
+export JRE_HOME=/local/jdk1.6.0_45/jre
+export PATH=/local/jdk1.6.0_45/bin:$PATH 
+export CLASSPATH=.:/local/jdk1.6.0_45/lib:/local/jdk1.6.0_45/jre/lib
 
 

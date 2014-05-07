@@ -1,209 +1,232 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="71" android:versionName="1.41.0.7" package="com.wildtangent.android"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.DELETE_PACKAGES" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="com.wildtangent.permission.GAME_SERVICE" />
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-    <permission android:label="@string/permissionTitle" android:name="com.wildtangent.permission.GAME_SERVICE" android:protectionLevel="signature" android:permissionGroup="android.permission-group.COST_MONEY" android:description="@string/permissionDescription" />
-    <permission android:name="com.wildtangent.android.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="com.wildtangent.android.permission.C2D_MESSAGE" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <application android:theme="@style/Theme.WtActivity" android:label="@string/app_name" android:icon="@drawable/icon" android:name=".application.WTApplication" android:debuggable="false" android:logo="@drawable/notification_icon" android:hardwareAccelerated="true">
-        <activity android:label="@string/app_name" android:name=".MainActivity" android:launchMode="singleTask" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize">
-            <meta-data android:name="com.wildtangent.android.apilevel" android:value="11" />
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.wildtangent.android">
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.DELETE_PACKAGES"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="com.wildtangent.permission.GAME_SERVICE"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.android.launcher3.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <permission android:description="@string/permissionDescription" android:label="@string/permissionTitle" android:name="com.wildtangent.permission.GAME_SERVICE" android:permissionGroup="android.permission-group.COST_MONEY" android:protectionLevel="signature"/>
+    <permission android:name="com.wildtangent.android.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.wildtangent.android.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <application android:debuggable="false" android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/app_name" android:logo="@drawable/notification_icon" android:name=".application.WTApplication" android:theme="@style/Theme.WtActivity">
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:label="@string/app_name" android:launchMode="singleTask" android:name=".MainActivity">
+            <meta-data android:name="com.wildtangent.android.apilevel" android:value="11"/>
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:theme="@style/Theme.Transparent" android:name=".deeplinks.DeepLinksActivity" android:excludeFromRecents="true" android:launchMode="singleInstance" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize">
+        <receiver android:name=".MainActivityReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="wildtangent" android:host="wildtangent.com" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="wildtangent.com" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.ca" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.mx" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.com.br" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.co.uk" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.fr" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.de" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.es" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.it" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.eu" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.kr" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.com.au" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.co.nz" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.hk" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.sg" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="wildtangent.in" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.com" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.ca" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.mx" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.com.br" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.co.uk" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.fr" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.de" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.es" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.it" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.eu" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.kr" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.com.au" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.co.nz" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.hk" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.sg" android:pathPrefix="/app" />
-                <data android:scheme="http" android:host="m.wildtangent.in" android:pathPrefix="/app" />
-            </intent-filter>
-        </activity>
-        <activity android:theme="@*android:style/Theme.Translucent" android:name=".costperinstall.CpiLargeDownloadAlertActivity" android:exported="false" android:excludeFromRecents="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:theme="@*android:style/Theme.Holo.NoActionBar" android:name=".LicenseCheckActivity" android:permission="com.wildtangent.permission.GAME_SERVICE" android:stateNotNeeded="true" android:excludeFromRecents="true" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" android:windowSoftInputMode="stateAlwaysHidden">
-            <intent-filter>
-                <action android:name="com.wildtangent.intent.action.CHECK_LICENSE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:theme="@style/Theme.TransparentDim" android:name=".WtObsoleteGameActivity" android:permission="com.wildtangent.permission.GAME_SERVICE" android:exported="false" android:excludeFromRecents="true" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" />
-        <activity android:name=".WebViewActivityV11" android:permission="com.wildtangent.permission.GAME_SERVICE" android:exported="false" android:excludeFromRecents="true" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" android:windowSoftInputMode="stateVisible|adjustPan">
-            <intent-filter>
-                <action android:name="com.wildtangent.intent.action.WEB_VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:label="@string/settings" android:name=".settings.WtPreferenceActivityV11" android:permission="com.wildtangent.permission.GAME_SERVICE" android:exported="false" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="com.wildtangent.intent.action.PREFERENCES" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".LoginActivity" android:permission="com.wildtangent.permission.GAME_SERVICE" android:configChanges="orientation|uiMode|screenSize" />
-        <activity android:name=".gamelaunch.StartGameInfoActivity" android:permission="com.wildtangent.permission.GAME_SERVICE" android:exported="false" android:finishOnTaskLaunch="true" android:stateNotNeeded="true" android:excludeFromRecents="true" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:theme="@style/Theme.TransparentDim" android:name=".welcome.WelcomeActivity" android:exported="false" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" />
-        <activity android:name=".cellularwarning.ActivityCellularDataWarning" android:exported="false" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" />
-        <service android:name=".AnalyticsService">
-            <intent-filter>
-                <action android:name="com.wildtangent.intent.action.ANALYTICS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </service>
-        <service android:name="com.wildtangent.GameBoost.WtUDID.WtUDID_service">
-            <intent-filter>
-                <action android:name="org.openudid.GETUDID" />
-            </intent-filter>
-        </service>
-        <service android:name=".DownloadService" android:exported="false" />
-        <receiver android:name=".InstallReceiver">
-            <intent-filter android:priority="999">
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" />
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
             </intent-filter>
         </receiver>
-        <activity android:theme="@*android:style/Theme.NoTitleBar" android:name="com.wildtangent.android.search.SearchActivity" android:permission="com.wildtangent.permission.GAME_SERVICE" android:exported="false" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" android:windowSoftInputMode="adjustPan">
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:finishOnTaskLaunch="true" android:launchMode="singleInstance" android:name=".deeplink.DeepLinkActivity" android:theme="@style/Theme.Transparent">
             <intent-filter>
-                <action android:name="com.wildtangent.intent.action.SEARCH" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="wildtangent.com" android:scheme="wildtangent"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="wildtangent.com" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.ca" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.mx" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.com.br" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.co.uk" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.fr" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.de" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.es" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.it" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.eu" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.kr" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.com.au" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.co.nz" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.hk" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.sg" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="wildtangent.in" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.com" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.ca" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.mx" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.com.br" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.co.uk" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.fr" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.de" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.es" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.it" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.eu" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.kr" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.com.au" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.co.nz" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.hk" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.sg" android:pathPrefix="/app" android:scheme="http"/>
+                <data android:host="m.wildtangent.in" android:pathPrefix="/app" android:scheme="http"/>
             </intent-filter>
         </activity>
-        <activity android:label="BrandBoost" android:name="com.wildtangent.brandboost.BrandBoostActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
-        <activity android:label="Interstitial" android:name="com.wildtangent.wtads.InterstitialActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
-        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.admarvel.android.ads.AdMarvelActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:hardwareAccelerated="true" />
-        <activity android:theme="@*android:style/Theme.NoTitleBar.Fullscreen" android:name="com.admarvel.android.ads.AdMarvelVideoActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:hardwareAccelerated="true" />
-        <service android:name="com.wildtangent.igp.InGamePurchaseService">
+        <service android:name=".deeplink.DeepLinkIntentService"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name=".costperinstall.CpiLargeDownloadAlertActivity" android:theme="@android:style/Theme.Translucent">
             <intent-filter>
-                <action android:name="com.wildtangent.igp.InGamePurchaseService.BIND" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:name=".LicenseCheckActivity" android:permission="com.wildtangent.permission.GAME_SERVICE" android:stateNotNeeded="true" android:theme="@android:style/Theme.Holo.NoActionBar" android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="com.wildtangent.intent.action.CHECK_LICENSE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:exported="false" android:name=".WtObsoleteGameActivity" android:permission="com.wildtangent.permission.GAME_SERVICE" android:theme="@style/Theme.TransparentDim"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:exported="false" android:name=".WebViewActivityV11" android:permission="com.wildtangent.permission.GAME_SERVICE" android:windowSoftInputMode="stateVisible|adjustPan">
+            <intent-filter>
+                <action android:name="com.wildtangent.intent.action.WEB_VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:exported="false" android:label="@string/settings" android:name=".settings.WtPreferenceActivityV11" android:permission="com.wildtangent.permission.GAME_SERVICE" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="com.wildtangent.intent.action.PREFERENCES"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:name=".LoginActivity" android:permission="com.wildtangent.permission.GAME_SERVICE"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" android:excludeFromRecents="true" android:exported="false" android:finishOnTaskLaunch="true" android:name=".gamelaunch.StartGameInfoActivity" android:permission="com.wildtangent.permission.GAME_SERVICE" android:stateNotNeeded="true" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:exported="false" android:name=".cellularwarning.ActivityCellularDataWarning"/>
+        <service android:name=".AnalyticsService">
+            <intent-filter>
+                <action android:name="com.wildtangent.intent.action.ANALYTICS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </service>
-        <activity android:theme="@style/Theme.IAP_dialog" android:name="com.wildtangent.igp.InGamePurchaseActivity" android:taskAffinity="com.wildtangent.igp" android:excludeFromRecents="true" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" />
-        <activity android:name="com.wildtangent.igp.InGamePurchaseWebViewActivity11" android:permission="com.wildtangent.permission.GAME_SERVICE" android:exported="false" android:excludeFromRecents="true" android:configChanges="keyboard|keyboardHidden|orientation|uiMode|screenSize" android:windowSoftInputMode="stateVisible|adjustPan">
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:exported="false" android:launchMode="singleTop" android:name=".preq.ui.PreqActivity" android:theme="@style/Theme.TransparentDim"/>
+        <service android:exported="false" android:name=".preq.services.PreqStarterService"/>
+        <service android:exported="false" android:name=".preq.services.PreqUIStartService"/>
+        <service android:name="com.wildtangent.GameBoost.WtUDID.WtUDID_service">
             <intent-filter>
-                <action android:name="com.wildtangent.intent.action.IGP_WEB_VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="org.openudid.GETUDID"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name=".DownloadService"/>
+        <receiver android:exported="true" android:name=".InstallReceiver">
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:exported="false" android:name="com.wildtangent.android.search.SearchActivity" android:permission="com.wildtangent.permission.GAME_SERVICE" android:theme="@android:style/Theme.NoTitleBar" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="com.wildtangent.intent.action.SEARCH"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="BrandBoost" android:name="com.wildtangent.wtads.BrandBoostActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="Interstitial" android:name="com.wildtangent.wtads.InterstitialActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:hardwareAccelerated="true" android:name="com.admarvel.android.ads.AdMarvelActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:hardwareAccelerated="true" android:name="com.admarvel.android.ads.AdMarvelVideoActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <service android:name="com.wildtangent.igp.InGamePurchaseService">
+            <intent-filter>
+                <action android:name="com.wildtangent.igp.InGamePurchaseService.BIND"/>
+            </intent-filter>
+        </service>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:name="com.wildtangent.igp.InGamePurchaseActivity" android:taskAffinity="com.wildtangent.igp" android:theme="@style/Theme.IAP_dialog"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:exported="false" android:name="com.wildtangent.igp.PurchaseWebViewActivity11" android:permission="com.wildtangent.permission.GAME_SERVICE" android:windowSoftInputMode="stateVisible|adjustPan">
+            <intent-filter>
+                <action android:name="com.wildtangent.intent.action.PURCHASE_WEB_VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <receiver android:name="com.wildtangent.GameBoost.notifications.GameBoostBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-                <category android:name="com.wildtangent.android" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                <category android:name="com.wildtangent.android"/>
             </intent-filter>
         </receiver>
-        <service android:name=".gameboost.WtGameBoostIntentService" />
-        <service android:name=".installservice.WtInstallService" android:exported="false">
+        <service android:name=".gameboost.WtGameBoostIntentService"/>
+        <service android:exported="false" android:name=".installservice.WtInstallService">
             <intent-filter>
-                <action android:name="com.wildtangent.intent.action.ACTION_INSTALL" />
-                <action android:name="com.wildtangent.intent.action.ACTION_CANCEL" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.wildtangent.intent.action.ACTION_INSTALL"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_CANCEL"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </service>
         <receiver android:name=".installservice.receiver.WtInstallReceiver">
             <intent-filter android:priority="999">
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <data android:scheme="package" />
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <data android:scheme="package"/>
             </intent-filter>
         </receiver>
         <receiver android:name=".costperinstall.CostPerInstallReceiver">
             <intent-filter android:priority="999">
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <data android:scheme="package" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH" />
-                <action android:name="com.wildtangent.intent.action.ACTION_INSTALL_STARTED" />
-                <action android:name="com.wildtangent.intent.action.ACTION_INSTALL_COMPLETED" />
-                <action android:name="com.wildtangent.intent.action.ACTION_CPI_CANCEL" />
+                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_INSTALL_STARTED"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_INSTALL_COMPLETED"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_CPI_CANCEL"/>
             </intent-filter>
         </receiver>
-        <service android:name=".costperinstall.CostPerInstall" android:exported="false">
+        <service android:exported="false" android:name=".costperinstall.CostPerInstall">
             <intent-filter>
-                <action android:name="com.wildtangent.intent.action.ACTION_FIRST_LAUNCH" />
-                <action android:name="com.wildtangent.intent.action.ACTION_UNINSTALL" />
-                <action android:name="com.wildtangent.intent.action.ACTION_CPI" />
-                <action android:name="com.wildtangent.intent.action.ACTION_DOWNLOAD_FAILED" />
-                <action android:name="com.wildtangent.intent.action.ACTION_DOWNLOAD_SUCCESS" />
+                <action android:name="com.wildtangent.intent.action.ACTION_FIRST_LAUNCH"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_UNINSTALL"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_CPI"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_DOWNLOAD_FAILED"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_DOWNLOAD_SUCCESS"/>
             </intent-filter>
         </service>
-        <service android:name=".downloadservice.WtDownloadService" android:exported="false">
+        <service android:exported="false" android:name=".downloadservice.WtDownloadService">
             <intent-filter>
-                <action android:name="com.wildtangent.intent.action.ACTION_DOWNLOAD" />
-                <action android:name="com.wildtangent.intent.action.ACTION_DOWNLOAD_CANCEL" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.wildtangent.intent.action.ACTION_DOWNLOAD"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_DOWNLOAD_CANCEL"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </service>
         <receiver android:name=".downloadservice.WtDownloadReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
             </intent-filter>
         </receiver>
-        <service android:name="com.wildtangent.android.filesizeservice.FileSizeService" android:exported="false">
+        <service android:exported="false" android:name="com.wildtangent.android.filesizeservice.FileSizeService">
             <intent-filter>
-                <action android:name="com.wildtangent.action.ACTION_GET_FILE_SIZES" />
+                <action android:name="com.wildtangent.action.ACTION_GET_FILE_SIZES"/>
             </intent-filter>
         </service>
-        <provider android:name=".provider.PropertiesProvider" android:exported="true" android:authorities="com.wildtangent.android.provider.propertyprovider" />
+        <service android:exported="false" android:name="com.wildtangent.android.appdownloadservice.AppDownloadService">
+            <intent-filter>
+                <action android:name="com.wildtangent.intent.action.ACTION_APP_DOWNLOAD_SERVICE_REQUEST"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_APP_DOWNLOAD_SERVICE_CONTINUE"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_APP_DOWNLOAD_SERVICE_CANCEL"/>
+                <action android:name="com.wildtangent.intent.action.ACTION_APP_DOWNLOAD_SERVICE_ALERT_RESULT"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name="com.wildtangent.android.guaranteedhttprequestservice.GuaranteedHttpRequestService">
+            <intent-filter>
+                <action android:name="com.wildtangent.intent.action.ACTION_GUARANTEED_HTTP_REQUEST_SERVICE_ADD_URLS"/>
+            </intent-filter>
+        </service>
+        <provider android:authorities="com.wildtangent.android.provider.propertyprovider" android:exported="true" android:name=".provider.PropertiesProvider"/>
+        <service android:name=".purchase.PurchaseGameIntentService"/>
     </application>
 </manifest>

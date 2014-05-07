@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="17" android:versionName="4.2.2-vC62-0" package="com.android.providers.partnerbookmarks"
-  xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.android.providers.partnerbookmarks">
     <application>
-        <provider android:name="PartnerBookmarksProvider" android:authorities="com.android.partnerbookmarks" />
+        <provider android:authorities="com.android.partnerbookmarks" android:name="PartnerBookmarksProvider"/>
     </application>
 </manifest>

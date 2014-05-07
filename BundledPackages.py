@@ -61,12 +61,21 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, p
     for root,dirs,files in os.walk(P.ManifestListPath):
         for filespath in files:
             jrdfilepath = os.path.join(root,filespath)
+            
+            apkNameFromFileName=filespath[:filespath.find('.',filespath.find('.')+1)]
+            #print apkNameFromFileName
+
             pkg = Package()
             manifestStr = P.getNodeByTag('manifest', jrdfilepath)
-            name = P.getAttrValueByAttrTitle('package', manifestStr)
+            if P.renamePkgDict.has_key(apkNameFromFileName):
+            	name=P.renamePkgDict[apkNameFromFileName]
+            else:
+            	name=P.getAttrValueByAttrTitle('package', manifestStr)
+            #name = P.renamePkgDict.has_key(apkNameFromFileName)?P.renamePkgDict[apkNameFromFileName]:P.getAttrValueByAttrTitle('package', manifestStr)
             shareUserId = P.getAttrValueByAttrTitle('android:sharedUserId', manifestStr).strip(' ')
 
             pkg.name = name
+            splitedName=''
             if shareUserId == '':
                 pkg.packageUID = 'system assigned'
             else:
@@ -77,9 +86,26 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, p
                 idx = tmpStr.rfind('/')
                 pkg.location = tmpStr[:idx]
                 pkg.apkname = tmpStr[idx+1:]
+            else:
+            	#modify for googleDrive.apk and soft link.
+            	print "BundledPackages error:"+name+" not found,retry once after split the package name."
+            	splitedName=name[:name.rfind('.')]
+            	if P.pathDict.has_key(splitedName):
+            		tmpStr = P.pathDict[splitedName]
+	                idx = tmpStr.rfind('/')
+	                pkg.location = tmpStr[:idx]
+	                pkg.apkname = tmpStr[idx+1:]
+	                pkg.name=splitedName
+	                print "BundledPackages info:"+name+" has been repaired->"+splitedName
+                else:
+                	print "BundledPackages fatal error:"+name+" still not found,skip."
+	                continue
 
             if pkgSourceDict.has_key(name):
                 pkg.source = pkgSourceDict[name]
+            else:
+            	if pkgSourceDict.has_key(splitedName):
+            		pkg.source=pkgSourceDict[splitedName]
 
             if pkgPermissionDict.has_key(filespath):
                 for per in pkgPermissionDict[filespath]:
@@ -90,7 +116,7 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, p
                     else:
                         permission.protectionLevel = 'Not Found'
                     pkg.permission.append(permission)
- 
+
             if pkgUsesPermissionDict.has_key(filespath):
                 for per in pkgUsesPermissionDict[filespath]:
                     permission = Permission()
@@ -114,7 +140,6 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, p
                         tmpProtectionLevel = 'Not Found'
                     permission.protectionLevel = checkProtectionLevelValue(tmpProtectionLevel)
                     pkg.usesPermission.append(permission)
-
             outList.append(pkg)
     return outList
 
@@ -307,18 +332,18 @@ def Output(_wb):
                 BundlePackageDict[key]=BundlePackageSheet.row_values(rownum)
         #P.prepareDirsAndDicts()
         #P.getProtectLevelFromManifest('permission ', protectionLevelTxt)
-        P.generatePackageInstallationToPathDict()
+        #P.generatePackageInstallationToPathDict()
         P.generateProtectionLevelToProtectionLevelDict()
 
         pkgProtectionLevelDict = genPkgPermissionProtectionLevelDict(P.protectionLevelTxt)
         pkgPermissionDict = genPkgAndPermssionDict(P.protectionLevelTxt)
         pkgUsesPermissionDict = genPkgAndPermssionDict(usesProtectionLevelTxt)
 
-        P.filterCustomOEM()
-        pkgSourceDict = P.genPkgSourceDict(P.outList)
+        #P.filterCustomOEM()
+        #pkgSourceDict = P.genPkgSourceDict(P.outList)
         #print pkgSourceDict
 
-        outList = genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, pkgProtectionLevelDict)
+        outList = genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, P.sourceDict, pkgProtectionLevelDict)
         style = P.setStyles(False)
         style_title = P.setStyles(True)
         style_pkg = setPkgStyle()
@@ -354,10 +379,10 @@ def main():
         pkgUsesPermissionDict = genPkgAndPermssionDict(usesProtectionLevelTxt)
 
         P.filterCustomOEM()
-        pkgSourceDict = P.genPkgSourceDict(P.outList)
+        #pkgSourceDict = P.genPkgSourceDict(P.outList)
         #print pkgSourceDict
 
-        outList = genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, pkgProtectionLevelDict)
+        outList = genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, P.sourceDict, pkgProtectionLevelDict)
         style = P.setStyles(False)
         style_title = P.setStyles(True)
         style_pkg = setPkgStyle()

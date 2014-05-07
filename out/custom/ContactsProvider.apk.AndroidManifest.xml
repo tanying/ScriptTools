@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest android:sharedUserId="android.uid.shared" android:versionCode="17" android:versionName="4.2.2-vC62-0" android:sharedUserLabel="@2130968577" package="com.android.providers.contacts"
+<manifest android:sharedUserId="android.uid.shared" android:versionCode="17" android:versionName="4.2.2-vC80-0" android:sharedUserLabel="@2130968577" package="com.android.providers.contacts"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <permission android:label="@2130968586" android:name="com.android.voicemail.permission.READ_WRITE_ALL_VOICEMAIL" android:protectionLevel="signature" android:permissionGroup="android.permission-group.PERSONAL_INFO" android:description="@2130968587" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -61,7 +61,7 @@
         </receiver>
         <service android:name="VoicemailCleanupService" />
         <provider android:name="LocalGroupsProvider" android:exported="false" android:authorities="com.android.contacts.groups" />
-        <activity android:theme="@*android:style/Theme.Holo.Dialog" android:label="@2130968589" android:name=".debug.ContactsDumpActivity">
+        <activity android:theme="@android:style/Theme.Holo.Dialog" android:label="@2130968589" android:name=".debug.ContactsDumpActivity">
             <intent-filter>
                 <action android:name="com.android.providers.contacts.DUMP_DATABASE" />
                 <category android:name="android.intent.category.DEFAULT" />

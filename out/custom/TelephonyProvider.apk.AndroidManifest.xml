@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest android:sharedUserId="android.uid.phone" android:versionCode="17" android:versionName="4.2.2-vC62-0" package="com.android.providers.telephony" coreApp="true"
+<manifest android:sharedUserId="android.uid.phone" android:versionCode="17" android:versionName="4.2.2-vC80-0" package="com.android.providers.telephony" coreApp="true"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />

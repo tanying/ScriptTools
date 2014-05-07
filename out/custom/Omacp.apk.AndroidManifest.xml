@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest android:sharedUserId="android.uid.mms" android:versionCode="17" android:versionName="4.2.2-vC62-0" android:sharedUserLabel="@2131034112" package="com.mediatek.omacp"
+<manifest android:sharedUserId="android.uid.mms" android:versionCode="17" android:versionName="4.2.2-vC80-0" android:sharedUserLabel="@2131034112" package="com.mediatek.omacp"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <original-package android:name="com.mediatek.omacp" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />

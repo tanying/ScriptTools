@@ -1,263 +1,269 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="261" android:versionName="1.1.28" package="com.att.android.digitallocker"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <supports-screens android:smallScreens="false" android:normalScreens="true" android:largeScreens="true" />
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.att.android.digitallocker">
+    <supports-screens android:largeScreens="true" android:normalScreens="true" android:smallScreens="false"/>
     <compatible-screens>
-        <screen android:screenSize="normal" android:screenDensity="ldpi" />
-        <screen android:screenSize="normal" android:screenDensity="mdpi" />
-        <screen android:screenSize="normal" android:screenDensity="hdpi" />
-        <screen android:screenSize="normal" android:screenDensity="xhdpi" />
-        <screen android:screenSize="normal" android:screenDensity="480" />
-        <screen android:screenSize="large" android:screenDensity="ldpi" />
-        <screen android:screenSize="large" android:screenDensity="mdpi" />
-        <screen android:screenSize="large" android:screenDensity="hdpi" />
-        <screen android:screenSize="large" android:screenDensity="xhdpi" />
-        <screen android:screenSize="large" android:screenDensity="213" />
-        <screen android:screenSize="large" android:screenDensity="480" />
+        <screen android:screenDensity="ldpi" android:screenSize="normal"/>
+        <screen android:screenDensity="mdpi" android:screenSize="normal"/>
+        <screen android:screenDensity="hdpi" android:screenSize="normal"/>
+        <screen android:screenDensity="xhdpi" android:screenSize="normal"/>
+        <screen android:screenDensity="480" android:screenSize="normal"/>
+        <screen android:screenDensity="ldpi" android:screenSize="large"/>
+        <screen android:screenDensity="mdpi" android:screenSize="large"/>
+        <screen android:screenDensity="hdpi" android:screenSize="large"/>
+        <screen android:screenDensity="xhdpi" android:screenSize="large"/>
+        <screen android:screenDensity="213" android:screenSize="large"/>
+        <screen android:screenDensity="480" android:screenSize="large"/>
     </compatible-screens>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_OWNER_DATA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_SYNC_STATS" />
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-feature android:name="android.hardware.telephony" android:required="false" />
-    <application android:theme="@style/Theme.DigitalLocker.NoTitle" android:label="@string/app_name" android:icon="@drawable/dl_icon" android:name=".application.DigitalLockerApplication">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_OWNER_DATA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_SYNC_STATS"/>
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-feature android:name="android.hardware.telephony" android:required="false"/>
+    <application android:icon="@drawable/dl_icon" android:label="@string/app_name" android:name=".application.DigitalLockerApplication" android:theme="@style/Theme.DigitalLocker.NoTitle">
         <activity android:label="@string/app_name" android:name=".activities.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="attlocker" android:host="postbilling" />
-                <data android:scheme="attlocker" android:host="billingerror" />
+                <action android:name="android.intent.action.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="postbilling" android:scheme="attlocker"/>
+                <data android:host="billingerror" android:scheme="attlocker"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SignInActivity" android:windowSoftInputMode="stateUnchanged" />
-        <activity android:theme="@style/Theme.DigitalLocker.NoTitle" android:name=".activities.RegistrationActivity" android:configChanges="orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker.NoTitle" android:name=".activities.LazyProvisioningWebActivity" android:configChanges="orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.DisplayUrlContentActivity" android:configChanges="orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker.NoTitle" android:name=".activities.VerifyEmailActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.OutageActivity" android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker.NoTitle" android:name=".activities.session.AccountErrorActivity" android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation" />
-        <activity android:name=".activities.tabs.HomeActivity" android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation" />
-        <activity android:name=".activities.tabs.MyLockerActivity" android:launchMode="singleTop">
-            <meta-data android:name="android.app.default_searchable" android:value=".activities.MediaMultiListActivity" />
-        </activity>
-        <activity android:name=".activities.tabs.SharedActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/shared_tab_text" android:name=".activities.tabs.SharedByMeActivity" />
-        <activity android:name=".activities.tabs.AccountActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/about_page_header" android:name=".activities.AboutActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/help_page_header" android:name=".activities.HelpActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/feedback_page_header" android:name=".activities.FeedbackActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/view_terms_page_header" android:name=".activities.ViewTermsAndConditionsActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/view_privacy_page_header" android:name=".activities.ViewPrivacyPolicyActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/usage_details_page_header" android:name=".activities.UsageDetailsActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/cancel_service_page_header" android:name=".activities.CancelServiceActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/account_info_page_header" android:name=".activities.AccountInfoActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/blocked_senders_page_header" android:name=".activities.BlockedSendersActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/shared_event_details_page_header" android:name=".activities.ShareHistoryDetailsActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/select_share_method_share_album" android:name=".activities.sharing.SelectShareMethodActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/manage_social_networks" android:name=".activities.account.ManageSocialNetworksActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker.NoTitle" android:name=".activities.account.SocialNetworkLoginActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/sns_facebook" android:name=".activities.account.FacebookLoginActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/share_via_email_activity_title" android:name=".activities.sharing.ShareViaEmailActivity" android:configChanges="keyboardHidden|orientation" android:windowSoftInputMode="stateHidden" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/share_via_sns_activity_title" android:name=".activities.sharing.ShareViaSnsActivity" android:configChanges="keyboardHidden|orientation" android:windowSoftInputMode="stateHidden" />
-        <activity android:theme="@style/UploadButtonDialog" android:name=".activities.dialogs.ChooseMediaSourceActivity" android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker.NoTitle" android:label="@string/forgot_id_pasword_page_header" android:name=".activities.ForgotIdPasswordActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/upload_details_label" android:name=".activities.UploadDetailsActivity" android:windowSoftInputMode="adjustResize" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/upload_details_label" android:name=".activities.GlobalShareActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.NewGroupActivity" android:windowSoftInputMode="stateVisible" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/edit_group_title" android:name=".activities.edit.EditAlbumDetailsActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/edit_group_title" android:name=".activities.edit.EditFolderDetailsActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/edit_group_title" android:name=".activities.edit.EditPlaylistDetailsActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/edit_group_title" android:name=".activities.edit.EditMediaDetailsActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/item_details_song" android:name=".activities.edit.EditTrackDetailsActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/edit_group_title" android:name=".activities.edit.EditFileDetailsActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:theme="@style/AutoUploadDialog" android:name=".activities.UploadPreferenceDialog" />
-        <activity android:theme="@style/AutoUploadDialog" android:name=".activities.UploadAllPromptActivity" />
-        <activity android:theme="@style/AutoUploadDialog" android:name=".activities.MusicPromotionPrmoptActivity" />
-        <activity android:theme="@style/BlackButtonDialog" android:name=".activities.DuplicateFilePromptActivity" />
-        <activity android:theme="@style/BlackButtonDialog" android:name=".activities.InvalidCodeActivity" />
-        <activity android:theme="@style/BlackButtonDialog" android:name=".activities.UserNotVerified" />
-        <activity android:theme="@style/BlackButtonDialog" android:name=".activities.VerificationEmailSent" />
-        <activity android:theme="@style/BlackButtonDialog" android:name=".activities.ExceededVerifyEmailActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.MediaMultiListActivity" android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation">
+        <activity android:name=".activities.SignInActivity" android:windowSoftInputMode="stateUnchanged"/>
+        <activity android:configChanges="orientation" android:name=".activities.RegistrationActivity" android:theme="@style/Theme.DigitalLocker.NoTitle">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data android:name="android.app.searchable" android:resource="@xml/search_media" />
-        </activity>
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.MusicMultiListActivity" android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data android:name="android.app.searchable" android:resource="@xml/search_music" />
-        </activity>
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.FileMultiListActivity" android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data android:name="android.app.searchable" android:resource="@xml/search_files" />
-        </activity>
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.MusicAlbumListActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.MusicByArtistActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.MusicByArtistAllSongsActivity" />
-        <activity android:theme="@style/Theme.Digitallocker.NTB.FS.NT" android:name=".activities.MediaViewerActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.Digitallocker.NTB.FS.NT" android:name=".activities.MusicViewerActivity" android:configChanges="keyboardHidden" />
-        <activity android:theme="@style/Theme.Digitallocker.NTB.FS.NT" android:name=".activities.FileViewerActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.Digitallocker.NTB.FS.NT" android:name=".activities.TimelineViewerActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.MediaPlayerActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.PreviewActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.BasePreviewActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker.NoTitle" android:name=".activities.MusicPreviewActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/app_name" android:name=".activities.ManualUploadActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.CHOOSER" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-                <data android:mimeType="video/*" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.CHOOSER" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-                <data android:mimeType="video/*" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.ALTERNATIVE" />
-                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
-                <data android:mimeType="video/*" />
+                <data android:host="locker.att.net" android:path="/app" android:scheme="https"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="Preferences" android:name=".activities.Preferences">
+        <activity android:configChanges="orientation" android:name=".activities.LazyProvisioningWebActivity" android:theme="@style/Theme.DigitalLocker.NoTitle"/>
+        <activity android:configChanges="orientation" android:name=".activities.DisplayUrlContentActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.VerifyEmailActivity" android:theme="@style/Theme.DigitalLocker.NoTitle"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop" android:name=".activities.OutageActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.session.AccountErrorActivity" android:theme="@style/Theme.DigitalLocker.NoTitle"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop" android:name=".activities.tabs.HomeActivity"/>
+        <activity android:launchMode="singleTop" android:name=".activities.tabs.MyLockerActivity">
+            <meta-data android:name="android.app.default_searchable" android:value=".activities.MediaMultiListActivity"/>
+        </activity>
+        <activity android:name=".activities.tabs.SharedActivity"/>
+        <activity android:label="@string/shared_tab_text" android:name=".activities.tabs.SharedByMeActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:name=".activities.tabs.AccountActivity"/>
+        <activity android:label="@string/about_page_header" android:name=".activities.AboutActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:label="@string/help_page_header" android:name=".activities.HelpActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:label="@string/feedback_page_header" android:name=".activities.FeedbackActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/view_terms_page_header" android:name=".activities.ViewTermsAndConditionsActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:label="@string/view_privacy_page_header" android:name=".activities.ViewPrivacyPolicyActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/usage_details_page_header" android:name=".activities.UsageDetailsActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:label="@string/cancel_service_page_header" android:name=".activities.CancelServiceActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/account_info_page_header" android:name=".activities.AccountInfoActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:label="@string/blocked_senders_page_header" android:name=".activities.BlockedSendersActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/shared_event_details_page_header" android:name=".activities.ShareHistoryDetailsActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:label="@string/select_share_method_share_album" android:name=".activities.sharing.SelectShareMethodActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/manage_social_networks" android:name=".activities.account.ManageSocialNetworksActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:name=".activities.account.SocialNetworkLoginActivity" android:theme="@style/Theme.DigitalLocker.NoTitle"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/sns_facebook" android:name=".activities.account.FacebookLoginActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/share_via_email_activity_title" android:name=".activities.sharing.ShareViaEmailActivity" android:theme="@style/Theme.DigitalLocker" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/share_via_sns_activity_title" android:name=".activities.sharing.ShareViaSnsActivity" android:theme="@style/Theme.DigitalLocker" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop" android:name=".activities.dialogs.ChooseMediaSourceActivity" android:theme="@style/UploadButtonDialog"/>
+        <activity android:label="@string/forgot_id_pasword_page_header" android:name=".activities.ForgotIdPasswordActivity" android:theme="@style/Theme.DigitalLocker.NoTitle"/>
+        <activity android:label="@string/upload_details_label" android:name=".activities.UploadDetailsActivity" android:theme="@style/Theme.DigitalLocker" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/upload_details_label" android:name=".activities.GlobalShareActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:name=".activities.NewGroupActivity" android:theme="@style/Theme.DigitalLocker" android:windowSoftInputMode="stateVisible"/>
+        <activity android:label="@string/edit_group_title" android:name=".activities.edit.EditAlbumDetailsActivity" android:theme="@style/Theme.DigitalLocker" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/edit_group_title" android:name=".activities.edit.EditFolderDetailsActivity" android:theme="@style/Theme.DigitalLocker" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/edit_group_title" android:name=".activities.edit.EditPlaylistDetailsActivity" android:theme="@style/Theme.DigitalLocker" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/edit_group_title" android:name=".activities.edit.EditMediaDetailsActivity" android:theme="@style/Theme.DigitalLocker" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/item_details_song" android:name=".activities.edit.EditTrackDetailsActivity" android:theme="@style/Theme.DigitalLocker" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/edit_group_title" android:name=".activities.edit.EditFileDetailsActivity" android:theme="@style/Theme.DigitalLocker" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activities.UploadPreferenceDialog" android:theme="@style/AutoUploadDialog"/>
+        <activity android:name=".activities.UploadAllPromptActivity" android:theme="@style/AutoUploadDialog"/>
+        <activity android:name=".activities.MusicPromotionPrmoptActivity" android:theme="@style/AutoUploadDialog"/>
+        <activity android:name=".activities.DuplicateFilePromptActivity" android:theme="@style/BlackButtonDialog"/>
+        <activity android:name=".activities.InvalidCodeActivity" android:theme="@style/BlackButtonDialog"/>
+        <activity android:name=".activities.UserNotVerified" android:theme="@style/BlackButtonDialog"/>
+        <activity android:name=".activities.VerificationEmailSent" android:theme="@style/BlackButtonDialog"/>
+        <activity android:name=".activities.ExceededVerifyEmailActivity" android:theme="@style/BlackButtonDialog"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop" android:name=".activities.MediaMultiListActivity" android:theme="@style/Theme.DigitalLocker">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@xml/search_media"/>
+        </activity>
+        <activity android:launchMode="singleTop" android:name=".activities.MusicMultiListActivity" android:theme="@style/Theme.DigitalLocker">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@xml/search_music"/>
+        </activity>
+        <activity android:launchMode="singleTop" android:name=".activities.FileMultiListActivity" android:theme="@style/Theme.DigitalLocker">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@xml/search_files"/>
+        </activity>
+        <activity android:name=".activities.MusicAlbumListActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:name=".activities.MusicByArtistActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:name=".activities.MusicByArtistAllSongsActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.MediaViewerActivity" android:theme="@style/Theme.Digitallocker.NTB.FS.NT"/>
+        <activity android:configChanges="keyboardHidden" android:name=".activities.MusicViewerActivity" android:theme="@style/Theme.Digitallocker.NTB.FS.NT"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.FileViewerActivity" android:theme="@style/Theme.Digitallocker.NTB.FS.NT"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.TimelineViewerActivity" android:theme="@style/Theme.Digitallocker.NTB.FS.NT"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.MediaPlayerActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.PreviewActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.BasePreviewActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.MusicPreviewActivity" android:theme="@style/Theme.DigitalLocker.NoTitle"/>
+        <activity android:label="@string/app_name" android:name=".activities.ManualUploadActivity" android:theme="@style/Theme.DigitalLocker">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.ALTERNATIVE"/>
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.CHOOSER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.ALTERNATIVE"/>
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.ALTERNATIVE"/>
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.ALTERNATIVE"/>
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE"/>
+                <data android:mimeType="video/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.CHOOSER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.ALTERNATIVE"/>
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE"/>
+                <data android:mimeType="video/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.ALTERNATIVE"/>
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE"/>
+                <data android:mimeType="video/*"/>
             </intent-filter>
         </activity>
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/manual_upload_settings" android:name=".activities.BulkUploadPreferencesActivity">
+        <activity android:label="Preferences" android:name=".activities.Preferences" android:theme="@style/Theme.DigitalLocker">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/uploadPref" android:name=".activities.UploadPreferenceActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/confirm_identity_text" android:name=".activities.AccountAuthenticationActivity" android:launchMode="singleTop" android:configChanges="keyboardHidden|orientation">
+        <activity android:label="@string/manual_upload_settings" android:name=".activities.BulkUploadPreferencesActivity" android:theme="@style/Theme.DigitalLocker">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/upd_t_and_c_page_header" android:name=".activities.UpdatedTermsAndConditionsActivity">
+        <activity android:label="@string/uploadPref" android:name=".activities.UploadPreferenceActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/confirm_identity_text" android:launchMode="singleTop" android:name=".activities.AccountAuthenticationActivity" android:theme="@style/Theme.DigitalLocker">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LazyProvisioningActivity" android:windowSoftInputMode="stateHidden" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/view_help_detail_page_header" android:name=".activities.HelpDetailActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.ShareFromLockerActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.MediaMultiShareActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name="com.att.android.digitallocker.activities.MediaGridSelectActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.FileMultiShareActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:name=".activities.common.CustomGalleryActivity" android:configChanges="keyboardHidden|orientation" />
-        <activity android:theme="@style/Theme.DigitalLocker.Dialog" android:name=".activities.common.PopupActivity" android:windowSoftInputMode="stateHidden" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/offers_page_header" android:name=".activities.billing.PromotionalOfferActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/payment_method" android:name=".activities.billing.PaymentMethodsActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/offers_page_header" android:name=".activities.billing.OffersActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/summary_page_header" android:name=".activities.billing.BillingConfirmationActivity" />
-        <activity android:theme="@style/Theme.DigitalLocker" android:label="@string/success_page_header" android:name=".activities.billing.BillingSuccessActivity" />
-        <activity android:theme="@style/AutoUploadDialog" android:name=".activities.billing.BillingDialogActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activities.setupflow.AboutLockerActivity" />
-        <activity android:name=".activities.setupflow.AboutAccessIDActivity" />
-        <activity android:theme="@style/AutoUploadDialog" android:name=".activities.setupflow.SetupFlowPopUpDialog" />
-        <activity android:name=".activities.startupwizard.StartupWizardCompletedActivity" />
-        <activity android:name=".activities.startupwizard.StartupWizardIntroductionActivity" android:launchMode="singleTop" />
-        <activity android:name=".activities.startupwizard.StartupWizardCTNFailureActivity" />
-        <activity android:theme="@style/AutoUploadDialog" android:name=".activities.startupwizard.StartupWizardSetupCompleteDialog" />
-        <activity android:name=".activities.ConnectionErrorActivity" />
-        <provider android:name="com.att.android.digitallocker.async.disk.DiskCacheProvider" android:exported="false" android:process=":loadingProcess" android:authorities="com.att.android.digitallocker.diskcacheprovider" />
-        <provider android:name="com.att.android.digitallocker.utils.UserPreferenceProvider" android:exported="false" android:process=":loadingProcess" android:authorities="com.att.android.digitallocker.utils.userpreferenceprovider" />
-        <receiver android:name="com.att.android.digitallocker.upload.BootCompletedReceiver" android:enabled="true" android:process=":loadingProcess">
+        <activity android:label="@string/upd_t_and_c_page_header" android:name=".activities.UpdatedTermsAndConditionsActivity" android:theme="@style/Theme.DigitalLocker">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.LazyProvisioningActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:label="@string/view_help_detail_page_header" android:name=".activities.HelpDetailActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.ShareFromLockerActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.MediaMultiShareActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name="com.att.android.digitallocker.activities.MediaGridSelectActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.FileMultiShareActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:name=".activities.common.CustomGalleryActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:name=".activities.common.PopupActivity" android:theme="@style/Theme.DigitalLocker.Dialog" android:windowSoftInputMode="stateHidden"/>
+        <activity android:label="@string/offers_page_header" android:name=".activities.billing.PromotionalOfferActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:label="@string/payment_method" android:name=".activities.billing.PaymentMethodsActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:label="@string/offers_page_header" android:name=".activities.billing.OffersActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:label="@string/summary_page_header" android:name=".activities.billing.BillingConfirmationActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:label="@string/success_page_header" android:name=".activities.billing.BillingSuccessActivity" android:theme="@style/Theme.DigitalLocker"/>
+        <activity android:name=".activities.billing.BillingDialogActivity" android:screenOrientation="portrait" android:theme="@style/AutoUploadDialog"/>
+        <activity android:name=".activities.setupflow.AboutLockerActivity"/>
+        <activity android:name=".activities.setupflow.AboutAccessIDActivity"/>
+        <activity android:name=".activities.setupflow.SetupFlowPopUpDialog" android:theme="@style/AutoUploadDialog"/>
+        <activity android:name=".activities.startupwizard.StartupWizardCompletedActivity"/>
+        <activity android:launchMode="singleTop" android:name=".activities.startupwizard.StartupWizardIntroductionActivity"/>
+        <activity android:name=".activities.startupwizard.StartupWizardCTNFailureActivity"/>
+        <activity android:name=".activities.startupwizard.StartupWizardSetupCompleteDialog" android:theme="@style/AutoUploadDialog"/>
+        <activity android:name=".activities.ConnectionErrorActivity"/>
+        <provider android:authorities="com.att.android.digitallocker.diskcacheprovider" android:exported="false" android:name="com.att.android.digitallocker.async.disk.DiskCacheProvider" android:process=":loadingProcess"/>
+        <provider android:authorities="com.att.android.digitallocker.utils.userpreferenceprovider" android:exported="false" android:name="com.att.android.digitallocker.utils.UserPreferenceProvider" android:process=":loadingProcess"/>
+        <receiver android:enabled="true" android:name="com.att.android.digitallocker.upload.BootCompletedReceiver" android:process=":loadingProcess">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
         <receiver android:name=".utils.ConnectionMonitor">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
         <receiver android:name=".utils.BackgroundConnectionMonitor" android:process=":loadingProcess">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
         <receiver android:name=".utils.Ready2GoVersionMonitor" android:process=":loadingProcess">
             <intent-filter>
-                <action android:name="com.att.android.digitallocker.getVersion" />
+                <action android:name="com.att.android.digitallocker.getVersion"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".utils.UploadListener" android:enabled="true" android:exported="true" android:process=":loadingProcess">
+        <receiver android:enabled="true" android:exported="true" android:name=".utils.UploadListener" android:process=":loadingProcess">
             <intent-filter>
-                <action android:name="com.att.android.digitallocker.upload.HUNG" />
+                <action android:name="com.att.android.digitallocker.upload.HUNG"/>
             </intent-filter>
         </receiver>
-        <service android:name="com.att.android.digitallocker.upload.MediaObserverService" android:exported="false" android:process=":loadingProcess" />
-        <service android:name="com.att.android.digitallocker.upload.UploadService" android:exported="false" android:process=":loadingProcess" />
-        <provider android:name="com.att.android.digitallocker.upload.UploadQueueProvider" android:exported="false" android:process=":loadingProcess" android:authorities="com.att.android.digitallocker.uploadqueueprovider" />
-        <service android:name=".services.DownloadService" android:exported="false" android:process=":loadingProcess" />
-        <meta-data android:name="com.lge.support.SPLIT_WINDOW" android:value="true" />
-        <meta-data android:name="com.lge.splitwindow.MINIMUM_SIZE_W" android:value="50%" />
-        <meta-data android:name="com.lge.splitwindow.MINIMUM_SIZE_H" android:value="50%" />
+        <service android:exported="false" android:name="com.att.android.digitallocker.upload.MediaObserverService" android:process=":loadingProcess"/>
+        <service android:exported="false" android:name="com.att.android.digitallocker.upload.UploadService" android:process=":loadingProcess"/>
+        <provider android:authorities="com.att.android.digitallocker.uploadqueueprovider" android:exported="false" android:name="com.att.android.digitallocker.upload.UploadQueueProvider" android:process=":loadingProcess"/>
+        <service android:exported="false" android:name=".services.DownloadService" android:process=":loadingProcess"/>
+        <meta-data android:name="com.lge.support.SPLIT_WINDOW" android:value="true"/>
+        <meta-data android:name="com.lge.splitwindow.MINIMUM_SIZE_W" android:value="50%"/>
+        <meta-data android:name="com.lge.splitwindow.MINIMUM_SIZE_H" android:value="50%"/>
     </application>
 </manifest>

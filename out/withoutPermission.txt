@@ -1,22 +1,22 @@
 1. Without Permission Package: Videos.apk
-        <provider android:name="com.google.android.videos.search.VideoSearchProvider" android:exported="true" android:authorities="com.google.android.videos" />
+        <provider android:authorities="com.google.android.videos" android:exported="true" android:name="com.google.android.videos.search.VideoSearchProvider"/>
 
 2. Without Permission Package: GoogleContactsSyncAdapter.apk
-        <provider android:name="com.google.android.syncadapters.contacts.GalProvider" android:readPermission="android.permission.BIND_DIRECTORY_SEARCH" android:exported="true" android:multiprocess="false" android:authorities="com.google.contacts.gal.provider">
-            <meta-data android:name="android.content.ContactDirectory" android:value="true" />
+        <provider android:authorities="com.google.contacts.gal.provider" android:exported="true" android:multiprocess="false" android:name="com.google.android.syncadapters.contacts.GalProvider" android:readPermission="android.permission.BIND_DIRECTORY_SEARCH">
+            <meta-data android:name="android.content.ContactDirectory" android:value="true"/>
         </provider>
 
 3. Without Permission Package: Music2.apk
-        <provider android:name="com.google.android.music.store.MusicContentProvider" android:exported="true" android:process=":main" android:multiprocess="false" android:authorities="com.google.android.music.MusicContent" android:initOrder="1" />
+        <provider android:authorities="com.google.android.music.MusicContent" android:exported="true" android:initOrder="1" android:multiprocess="false" android:name="com.google.android.music.store.MusicContentProvider" android:process=":main"/>
 
 4. Without Permission Package: OfficeSuite.apk
-        <provider android:name="com.mobisystems.office.io.HelpContentProvider" android:exported="true" android:authorities="com.mobisystems.office.help" />
+        <provider android:authorities="com.mobisystems.office.help" android:exported="true" android:name="com.mobisystems.office.io.HelpContentProvider"/>
 
-        <provider android:name="com.mobisystems.office.search.FileSearchProvider" android:exported="true" android:process=":search" android:multiprocess="false" android:authorities="com.mobisystems.office.search" />
+        <provider android:authorities="com.mobisystems.office.search" android:exported="true" android:multiprocess="false" android:name="com.mobisystems.office.search.FileSearchProvider" android:process=":search"/>
 
-        <provider android:name="com.mobisystems.office.mail.provider.AttachmentProvider" android:exported="true" android:process="com.mobisystems.office.mail" android:authorities="com.mobisystems.office.mail.provider.attachmentprovider" />
+        <provider android:authorities="com.mobisystems.office.mail.provider.attachmentprovider" android:exported="true" android:name="com.mobisystems.office.mail.provider.AttachmentProvider" android:process="com.mobisystems.office.mail"/>
 
-        <provider android:name="com.mobisystems.provider.AssetsProvider" android:exported="true" android:authorities="com.mobisystems.office.assets" />
+        <provider android:authorities="com.mobisystems.office.assets" android:exported="true" android:name="com.mobisystems.provider.AssetsProvider"/>
 
 5. Without Permission Package: Email.apk
         <provider android:name=".provider.AttachmentProvider" android:readPermission="com.android.email.permission.READ_ATTACHMENT" android:exported="true" android:multiprocess="true" android:authorities="com.android.email.attachmentprovider" android:grantUriPermissions="true" />
@@ -25,16 +25,16 @@
         <provider android:name="com.mediatek.phone.provider.CallHistoryContentProvider" android:exported="true" android:authorities="call_history" />
 
 7. Without Permission Package: Maps_alldpi.apk
-        <provider android:name="com.google.android.apps.gmm.navigation.util.NavigationAvailabilityProvider" android:exported="true" android:authorities="com.google.android.maps.NavigationAvailabilityProvider" />
+        <provider android:authorities="com.google.android.maps.NavigationAvailabilityProvider" android:exported="true" android:name="com.google.android.apps.gmm.navigation.util.NavigationAvailabilityProvider"/>
 
 8. Without Permission Package: facebook.apk
-        <provider android:name="com.facebook.bookmark.provider.BookmarkProvider" android:readPermission="com.facebook.katana.provider.ACCESS" android:authorities="com.facebook.katana.provider.BookmarkProvider" />
+        <provider android:authorities="com.facebook.katana.provider.BookmarkProvider" android:name="com.facebook.bookmark.provider.BookmarkProvider" android:readPermission="com.facebook.katana.provider.ACCESS"/>
 
-        <provider android:name="com.facebook.katana.provider.AttributionIdProvider" android:authorities="com.facebook.katana.provider.AttributionIdProvider" />
+        <provider android:authorities="com.facebook.katana.provider.AttributionIdProvider" android:name="com.facebook.katana.provider.AttributionIdProvider"/>
 
-        <provider android:name="com.facebook.katana.provider.PlatformProvider" android:authorities="com.facebook.katana.provider.PlatformProvider" />
+        <provider android:authorities="com.facebook.katana.provider.PlatformProvider" android:name="com.facebook.katana.provider.PlatformProvider"/>
 
-        <provider android:name="com.facebook.katana.provider.orca.MessengerForegroundProvider" android:authorities="com.facebook.katana.provider.MessagesForegroundProvider" />
+        <provider android:authorities="com.facebook.katana.provider.MessagesForegroundProvider" android:name="com.facebook.katana.provider.orca.MessengerForegroundProvider"/>
 
 9. Without Permission Package: GoogleDrive.apk
         <provider android:authorities="com.google.android.apps.docs.oem.welcome.promotion" android:exported="true" android:name="com.google.android.apps.docs.welcome.PromotionEnabled"/>
@@ -44,14 +44,14 @@
         <provider android:authorities="com.google.android.apps.docs.storage.legacy" android:exported="true" android:icon="@drawable/launcher_drive_icon" android:label="@string/app_name" android:name="com.google.android.gms.drive.external.LegacyStorageBackendContentProvider"/>
 
 10. Without Permission Package: PlusOne.apk
-        <provider android:label="@string/es_data" android:name="com.google.android.apps.plus.content.EsApiProvider" android:exported="true" android:authorities="com.google.android.apps.plus.content.ApiProvider">
-            <path-permission android:readPermission="android.permission.GET_ACCOUNTS" android:path="/account" />
+        <provider android:authorities="com.google.android.apps.plus.content.ApiProvider" android:exported="true" android:label="@string/es_data" android:name="com.google.android.apps.plus.content.EsApiProvider">
+            <path-permission android:path="/account" android:readPermission="android.permission.GET_ACCOUNTS"/>
         </provider>
 
-        <provider android:name="com.google.android.apps.plus.content.AdsProvider" android:exported="true" android:authorities="com.google.plus.platform" />
+        <provider android:authorities="com.google.plus.platform" android:exported="true" android:name="com.google.android.apps.plus.content.AdsProvider"/>
 
 11. Without Permission Package: GooglePartnerSetup.apk
-        <provider android:name=".RlzAppProvider" android:exported="true" android:authorities="com.google.android.partnersetup.rlzappprovider" />
+        <provider android:authorities="com.google.android.partnersetup.rlzappprovider" android:exported="true" android:name=".RlzAppProvider"/>
 
 12. Without Permission Package: TelephonyProvider.apk
         <provider android:name="CbProvider" android:readPermission="android.permission.READ_PHONE_STATE" android:exported="true" android:multiprocess="true" android:authorities="cb" />
@@ -59,60 +59,63 @@
         <provider android:name="WapPushProvider" android:readPermission="android.permission.READ_PHONE_STATE" android:exported="true" android:multiprocess="true" android:authorities="wappush" />
 
 13. Without Permission Package: GmsCore.apk
-        <provider android:name="com.google.android.location.internal.LocationContentProvider" android:exported="true" android:process="com.google.process.location" android:authorities="com.google.android.location.internal" android:syncable="false" />
+        <provider android:authorities="com.google.android.location.internal" android:exported="true" android:name="com.google.android.location.internal.LocationContentProvider" android:process="com.google.process.location" android:syncable="false"/>
 
-        <provider android:label="@string/people_content_provider_title" android:name=".people.debug.PeopleExportProvider" android:exported="true" android:authorities="com.google.android.gms.people.export" />
+        <provider android:authorities="com.google.android.gms.people.export" android:exported="true" android:label="@string/people_content_provider_title" android:name=".people.debug.PeopleExportProvider"/>
 
 14. Without Permission Package: Settings.apk
         <provider android:name="com.mediatek.beam.BeamShareProvider" android:exported="true" android:authorities="com.android.settings.provider.beam.share" />
 
-15. Without Permission Package: GoogleServicesFramework.apk
-        <provider android:name=".settings.GoogleSettingsProvider" android:writePermission="com.google.android.providers.settings.permission.WRITE_GSETTINGS" android:exported="true" android:multiprocess="false" android:authorities="com.google.settings" android:initOrder="100" />
+15. Without Permission Package: PicoTts.apk
+        <provider android:authorities="com.svox.pico.providers.SettingsProvider" android:name=".providers.SettingsProvider"/>
 
-16. Without Permission Package: Phonesky.apk
-        <provider android:name="com.google.android.finsky.providers.RecentSuggestionsProvider" android:authorities="com.google.android.finsky.RecentSuggestionsProvider" />
+16. Without Permission Package: GoogleServicesFramework.apk
+        <provider android:authorities="com.google.settings" android:exported="true" android:initOrder="100" android:multiprocess="false" android:name=".settings.GoogleSettingsProvider" android:writePermission="com.google.android.providers.settings.permission.WRITE_GSETTINGS"/>
 
-        <provider android:name="com.google.android.finsky.providers.AppIconProvider" android:authorities="com.google.android.finsky.AppIconProvider" />
+17. Without Permission Package: Phonesky.apk
+        <provider android:authorities="com.google.android.finsky.RecentSuggestionsProvider" android:name="com.google.android.finsky.providers.RecentSuggestionsProvider"/>
 
-        <provider android:name="com.google.android.finsky.providers.QSBSuggestionsProvider" android:authorities="com.google.android.finsky.QSBSuggestionsProvider2" />
+        <provider android:authorities="com.google.android.finsky.AppIconProvider" android:name="com.google.android.finsky.providers.AppIconProvider"/>
 
-17. Without Permission Package: Games.apk
-        <provider android:name=".provider.PropertiesProvider" android:exported="true" android:authorities="com.wildtangent.android.provider.propertyprovider" />
+        <provider android:authorities="com.google.android.finsky.QSBSuggestionsProvider2" android:name="com.google.android.finsky.providers.QSBSuggestionsProvider"/>
 
-18. Without Permission Package: talkback.apk
-        <provider android:name=".StatusProvider" android:exported="true" android:authorities="com.google.android.marvin.talkback.providers.StatusProvider" />
+18. Without Permission Package: Games.apk
+        <provider android:authorities="com.wildtangent.android.provider.propertyprovider" android:exported="true" android:name=".provider.PropertiesProvider"/>
 
-19. Without Permission Package: PartnerBookmarksProvider.apk
-        <provider android:name="PartnerBookmarksProvider" android:authorities="com.android.partnerbookmarks" />
+19. Without Permission Package: talkback.apk
+        <provider android:authorities="com.google.android.marvin.talkback.providers.StatusProvider" android:exported="true" android:name=".StatusProvider"/>
 
-20. Without Permission Package: Chrome.apk
-        <provider android:name="com.google.android.apps.chrome.AutofillDataProvider" android:exported="true" android:authorities="com.android.chrome.AutofillDataProvider" />
+20. Without Permission Package: PartnerBookmarksProvider.apk
+        <provider android:authorities="com.android.partnerbookmarks" android:name="PartnerBookmarksProvider"/>
 
-21. Without Permission Package: Gmail2.apk
-        <provider android:label="@string/public_provider_label" android:name=".provider.PublicContentProvider" android:readPermission="com.google.android.gm.permission.READ_CONTENT_PROVIDER" android:exported="true" android:multiprocess="false" android:authorities="com.google.android.gm">
-            <grant-uri-permission android:pathPattern=".*" />
+21. Without Permission Package: Chrome.apk
+        <provider android:authorities="com.android.chrome.AutofillDataProvider" android:exported="true" android:name="com.google.android.apps.chrome.AutofillDataProvider"/>
+
+22. Without Permission Package: Gmail2.apk
+        <provider android:authorities="com.google.android.gm" android:exported="true" android:label="@string/public_provider_label" android:multiprocess="false" android:name=".provider.PublicContentProvider" android:readPermission="com.google.android.gm.permission.READ_CONTENT_PROVIDER">
+            <grant-uri-permission android:pathPattern=".*"/>
         </provider>
 
-22. Without Permission Package: Omacp.apk
+23. Without Permission Package: Omacp.apk
         <provider android:name=".provider.OmacpProvider" android:readPermission="android.permission.READ_PHONE_STATE" android:exported="true" android:multiprocess="true" android:authorities="omacp" />
 
-23. Without Permission Package: CityID.apk
-        <provider android:name="com.cequint.cityid.CityIdContentProvider" android:enabled="true" android:exported="true" android:authorities="com.cequint.cityid" />
+24. Without Permission Package: CityID.apk
+        <provider android:authorities="com.cequint.cityid" android:enabled="true" android:exported="true" android:name="com.cequint.cityid.CityIdContentProvider"/>
 
-        <provider android:name="com.cequint.cityid.CallerIdContentProvider" android:enabled="true" android:exported="true" android:authorities="com.cequint.ecid" />
+        <provider android:authorities="com.cequint.ecid" android:enabled="true" android:exported="true" android:name="com.cequint.cityid.CallerIdContentProvider"/>
 
-24. Without Permission Package: SmsReg.apk
-        <provider android:name="com.mediatek.smsreg.SmsRegContentProvider" android:readPermission="android.permission.READ_PHONE_STATE" android:exported="true" android:authorities="com.mediatek.providers.smsreg" />
+25. Without Permission Package: SmsReg.apk
+        <provider android:authorities="com.mediatek.providers.smsreg" android:exported="true" android:name="com.mediatek.smsreg.SmsRegContentProvider" android:readPermission="android.permission.READ_PHONE_STATE"/>
 
-25. Without Permission Package: Magazines.apk
-        <provider android:label="@string/app_name" android:name="com.google.apps.dots.android.newsstand.provider.ExportedContentProvider" android:exported="true" android:multiprocess="false" android:authorities="com.google.android.apps.magazines.exported" android:syncable="false" />
+26. Without Permission Package: Magazines.apk
+        <provider android:authorities="com.google.android.apps.magazines.exported" android:exported="true" android:label="@string/app_name" android:multiprocess="false" android:name="com.google.apps.dots.android.newsstand.provider.ExportedContentProvider" android:syncable="false"/>
 
-        <provider android:label="@string/app_name" android:name="com.google.apps.dots.android.newsstand.provider.WebDataContentProvider" android:exported="true" android:multiprocess="false" android:authorities="com.google.android.apps.magazines.webdata" android:syncable="false" />
+        <provider android:authorities="com.google.android.apps.magazines.webdata" android:exported="true" android:label="@string/app_name" android:multiprocess="false" android:name="com.google.apps.dots.android.newsstand.provider.WebDataContentProvider" android:syncable="false"/>
 
-26. Without Permission Package: Books.apk
-        <provider android:name=".provider.BooksProvider$PublicProvider" android:exported="true" android:authorities="com.google.android.apps.books.public" />
+27. Without Permission Package: Books.apk
+        <provider android:authorities="com.google.android.apps.books.public" android:exported="true" android:name=".provider.BooksProvider$PublicProvider"/>
 
-27. Without Permission Package: MtkBt.apk
+28. Without Permission Package: MtkBt.apk
         <provider android:name=".ftp.BluetoothFtpProvider" android:authorities="com.mediatek.provider.bluetooth.ftp" />
 
         <provider android:name=".bip.BipProvider" android:authorities="com.mediatek.provider.bluetooth.bip" />
