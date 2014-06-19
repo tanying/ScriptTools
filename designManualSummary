@@ -24,9 +24,10 @@ main()
 [检测是否存在temp/manifestList/文件夹]
 如果不存在此文件夹则首先需要连接手机,将手机中的manifest文件pull出来.
 并同时生成manifestPath.txt 和 protectionLevel.txt 两个文件.
-pullAndroidManifestsFromPhone("/system/app/", "/system/framework/", "/custpack/app/")
-目前pull手机的三个路径分别是:
+pullAndroidManifestsFromPhone("/system/app/", "/system/priv-app/", "/system/framework/", "/custpack/app/")
+目前pull手机的四个路径分别是:
 /system/app/
+/system/priv-app/
 /system/framework/
 /custpack/app/
 如果存在此文件夹, 则直接进行后续的分离操作
