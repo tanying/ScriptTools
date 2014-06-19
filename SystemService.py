@@ -34,11 +34,11 @@ def initWorkbook(style, style_title,list, Dict,wb=0):
 
     for key in list:
 		i=i+1
-		if Dict.has_key(key):
+		if Dict.has_key(key.lower()):
 			_ws1.write(i, 0, key, style)
-			_ws1.write(i, 1, Dict[key][1], style)
-			_ws1.write(i, 2, Dict[key][2], style)
-			_ws1.write(i, 3, Dict[key][3], style)
+			_ws1.write(i, 1, Dict[key.lower()][1], style)
+			_ws1.write(i, 2, Dict[key.lower()][2], style)
+			_ws1.write(i, 3, Dict[key.lower()][3], style)
 		else:
 			_ws1.write(i, 0, key, style)
 			_ws1.write(i, 1, 'OEM supplied', style)
@@ -85,7 +85,7 @@ def Output(_wb):
 
 		for rownum in range(SystemServiceSheet.nrows):
 	    	#print SystemServiceSheet.row_values(rownum)
-			key=SystemServiceSheet.row(rownum)[0].value
+			key=SystemServiceSheet.row(rownum)[0].value.lower()
 			#print key
 			if not SystemSerivceDict.has_key(key):
 				SystemSerivceDict[key]=SystemServiceSheet.row_values(rownum)

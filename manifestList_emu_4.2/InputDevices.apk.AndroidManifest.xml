@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:sharedUserId="android.uid.system" android:versionCode="17" android:versionName="4.2-526865" package="com.android.inputdevices" coreApp="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="@string/app_label" android:allowClearUserData="false" android:process="system">
+        <receiver android:label="@string/keyboard_layouts_label" android:name=".InputDeviceReceiver">
+            <intent-filter>
+                <action android:name="android.hardware.input.action.QUERY_KEYBOARD_LAYOUTS" />
+            </intent-filter>
+            <meta-data android:name="android.hardware.input.metadata.KEYBOARD_LAYOUTS" android:resource="@xml/keyboard_layouts" />
+        </receiver>
+    </application>
+</manifest>

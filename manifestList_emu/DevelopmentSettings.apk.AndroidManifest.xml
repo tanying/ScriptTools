@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="1" android:versionName="1.0" package="com.android.development_settings"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:label="@string/app_label" android:icon="@mipmap/ic_launcher_devsettings" android:hasCode="false">
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.android.development_settings">
+    <application android:hasCode="false" android:icon="@mipmap/ic_launcher_devsettings" android:label="@string/app_label">
         <activity android:label="@string/activity_label" android:name="android.app.AliasActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <meta-data android:name="android.app.alias" android:resource="@xml/alias" />
+            <meta-data android:name="android.app.alias" android:resource="@xml/alias"/>
         </activity>
     </application>
 </manifest>

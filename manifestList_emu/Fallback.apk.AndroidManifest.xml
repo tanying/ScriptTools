@@ -1,44 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="17" android:versionName="4.2-526865" package="com.android.fallback"
-  xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.android.fallback">
     <application android:label="@string/appTitle">
-        <activity android:theme="@*android:style/Theme.Dialog" android:label="@string/title" android:name="Fallback">
+        <activity android:label="@string/title" android:name="Fallback" android:theme="@android:style/Theme.Dialog">
             <intent-filter android:priority="-1000">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="vnd.android.cursor.item/sms-chat" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.android.cursor.item/sms-chat"/>
             </intent-filter>
             <intent-filter android:priority="-1000">
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.SENDTO" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="sms" />
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SENDTO"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="sms"/>
             </intent-filter>
             <intent-filter android:priority="-1000">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:mimeType="vnd.android.cursor.item/sms" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:mimeType="vnd.android.cursor.item/sms"/>
             </intent-filter>
             <intent-filter android:priority="-1000">
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.SENDTO" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="mailto" />
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SENDTO"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="mailto"/>
             </intent-filter>
             <intent-filter android:priority="-1000">
-                <action android:name="android.intent.action.WALLPAPER_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.WALLPAPER_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             <intent-filter android:priority="-1000">
-                <action android:name="android.intent.action.GET_CONTENT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
+                <action android:name="android.intent.action.GET_CONTENT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
             </intent-filter>
             <intent-filter android:priority="-1000">
-                <action android:name="android.settings.SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.settings.SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
     </application>

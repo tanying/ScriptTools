@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest android:versionCode="17" android:versionName="4.2-526865" package="com.android.vpndialogs"
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:label="VpnDialogs" android:allowBackup="false">
-        <activity android:theme="@*android:style/Theme.Holo.Dialog.Alert" android:name=".ConfirmDialog">
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.android.vpndialogs">
+    <application android:allowBackup="false" android:label="VpnDialogs">
+        <activity android:name=".ConfirmDialog" android:theme="@android:style/Theme.Holo.Dialog.Alert">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:theme="@*android:style/Theme.Holo.Dialog.Alert" android:name=".ManageDialog" android:noHistory="true">
+        <activity android:name=".ManageDialog" android:noHistory="true" android:theme="@android:style/Theme.Holo.Dialog.Alert">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
     </application>

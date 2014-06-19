@@ -413,6 +413,13 @@ def pullAndroidManifestsFromPhone(path1, path2, path3):
     os.system("%s %s %s %s %s" % (command, path1, path2, path3, tempdir))
     os.chdir("%s" % EnvPath)
 
+def pullAndroidManifestsFromPhoneKK(path1, path2, path3,path4):
+    command = "source " + PullAndroidManifestToolPath + "/OneKeyPullManifest.sh"
+    os.chdir("PullAndroidManifestTool")
+    os.system("pwd")
+    os.system("%s %s %s %s %s %s" % (command, path1, path2, path3, path4, tempdir))
+    os.chdir("%s" % EnvPath)
+
 def splitXmlAndYml():
     if os.path.exists(ymlDir):   
         shutil.rmtree(ymlDir)
@@ -824,8 +831,8 @@ def initWorkbook(style, style_title, list,wb=0):
             _ws0.write(i, 2, info.PackageInstallationPath, style)
             _ws0.write(i, 3, info.PackageSharedUID, style)
             _ws0.write(i, 4, info.Source, style)
-            _ws0.write(i, 19, cp.ProviderIsexported, style)
-            _ws0.write(i, 20, cp.ProviderExportValue, style)
+            #_ws0.write(i, 19, cp.ProviderIsexported, style)
+            #_ws0.write(i, 20, cp.ProviderExportValue, style)
             _ws0.write(i, 21, info.PackageMinSdkVersion, style)
             _ws0.write(i, 22, info.PackageTargetSdkVersion, style)
 
@@ -856,7 +863,9 @@ def prepareFilesFromPhone():
     if not os.path.exists(ManifestListPath):
         print "Please connect your Phone By USB!\n Begin to pull android.manifest from phone..."
         #Pull Android Manifests From Phone, path1, path2, path3 represent three different phone path.
-        pullAndroidManifestsFromPhone("/system/app/", "/system/framework/", "/custpack/app/")
+        #pullAndroidManifestsFromPhone("/system/app/", "/system/framework/", "/custpack/app/")
+        #modify for Androir4.4KK
+        pullAndroidManifestsFromPhoneKK("/system/app/", "/system/priv-app/", "/system/framework/", "/custpack/app/")
         #The Original ManifestListPath contains manifest files and yml files. Seperate them first
         splitXmlAndYml()
         #get Manfest Path From Phone --> OutPut file: manifestPathTxt
