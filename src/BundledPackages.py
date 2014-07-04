@@ -62,16 +62,16 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, p
         for filespath in files:
             jrdfilepath = os.path.join(root,filespath)
             
-            apkNameFromFileName=filespath[:filespath.find('.',filespath.find('.')+1)]
-            #print apkNameFromFileName
+            name=filespath[:filespath.find('.apk')]
+            #print name
 
             pkg = Package()
             manifestStr = P.getNodeByTag('manifest', jrdfilepath)
-            if P.renamePkgDict.has_key(apkNameFromFileName):
-            	name=P.renamePkgDict[apkNameFromFileName]
-            else:
-            	name=P.getAttrValueByAttrTitle('package', manifestStr)
-            #name = P.renamePkgDict.has_key(apkNameFromFileName)?P.renamePkgDict[apkNameFromFileName]:P.getAttrValueByAttrTitle('package', manifestStr)
+            #if P.renamePkgDict.has_key(packageNameFromFileName):
+            	#name=P.renamePkgDict[packageNameFromFileName]
+            #else:
+            	#name=P.getAttrValueByAttrTitle('package', manifestStr)
+            #name = P.renamePkgDict.has_key(packageNameFromFileName)?P.renamePkgDict[packageNameFromFileName]:P.getAttrValueByAttrTitle('package', manifestStr)
             shareUserId = P.getAttrValueByAttrTitle('android:sharedUserId', manifestStr).strip(' ')
 
             pkg.name = name
@@ -88,18 +88,19 @@ def genBundledPkgInfo(pkgPermissionDict, pkgUsesPermissionDict, pkgSourceDict, p
                 pkg.apkname = tmpStr[idx+1:]
             else:
             	#modify for googleDrive.apk and soft link.
-            	print "BundledPackages error:"+name+" not found,retry once after split the package name."
-            	splitedName=name[:name.rfind('.')]
-            	if P.pathDict.has_key(splitedName):
-            		tmpStr = P.pathDict[splitedName]
-	                idx = tmpStr.rfind('/')
-	                pkg.location = tmpStr[:idx]
-	                pkg.apkname = tmpStr[idx+1:]
-	                pkg.name=splitedName
-	                print "BundledPackages info:"+name+" has been repaired->"+splitedName
-                else:
-                	print "BundledPackages fatal error:"+name+" still not found,skip."
-	                continue
+            	print "BundledPackages error:"+name+" not found."
+            	continue
+            	#splitedName=name[:name.rfind('.')]
+            	#if P.pathDict.has_key(splitedName):
+            		#tmpStr = P.pathDict[splitedName]
+	                #idx = tmpStr.rfind('/')
+	                #pkg.location = tmpStr[:idx]
+	                #pkg.apkname = tmpStr[idx+1:]
+	                #pkg.name=splitedName
+	                #print "BundledPackages info:"+name+" has been repaired->"+splitedName
+                #else:
+                	#print "BundledPackages fatal error:"+name+" still not found,skip."
+	                #continue
 
             if pkgSourceDict.has_key(name):
                 pkg.source = pkgSourceDict[name]

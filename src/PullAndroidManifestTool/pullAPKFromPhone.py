@@ -1,6 +1,6 @@
 #!/usr/bin/python
-#Output Bundled Packages Excel Table
-#ying.tan@tcl.com
+#Output AndroidManifest xml files.
+#jinshi.song@jrdcom.com
 
 import os
 import sys

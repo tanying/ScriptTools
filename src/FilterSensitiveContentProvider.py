@@ -40,11 +40,11 @@ DictXls=EnvPath+"/../input/SystemServiceAndBundlePackageDict.xls"
 
 outList = []
 pathDict = {}
-ApkDict = {}
+#ApkDict = {}
 verDict = {}
 protectionLevelDict = {}
 sourceDict={}
-renamePkgDict={}
+#renamePkgDict={}
 
 # define data structure of packageInfo
 class PackageInfo:
@@ -408,14 +408,14 @@ def checkSdkVersion(path):
 
 def pullAndroidManifestsFromPhone(path1, path2, path3):
     command = "source " + PullAndroidManifestToolPath + "/OneKeyPullManifest.sh"
-    os.chdir("PullAndroidManifestTool")
+    os.chdir("./PullAndroidManifestTool")
     os.system("pwd")
     os.system("%s %s %s %s %s" % (command, path1, path2, path3, tempdir))
     os.chdir("%s" % EnvPath)
 
 def pullAndroidManifestsFromPhoneKK(path1, path2, path3,path4):
     command = "source " + PullAndroidManifestToolPath + "/OneKeyPullManifest.sh"
-    os.chdir("PullAndroidManifestTool")
+    os.chdir("./PullAndroidManifestTool")
     os.system("pwd")
     os.system("%s %s %s %s %s %s" % (command, path1, path2, path3, path4, tempdir))
     os.chdir("%s" % EnvPath)
@@ -459,9 +459,9 @@ def generatePackageInstallationToPathDict():
             package = list[1][:idx1]
             idx2 = list[0].find(':') + 1
             path = list[0][idx2:]
-            idx3=list[0].rfind('/') + 1
-            apkname=list[0][idx3:]
-            ApkDict[apkname]=package
+            #idx3=list[0].rfind('/') + 1
+            #apkname=list[0][idx3:]
+            #ApkDict[apkname]=package
             pathDict[package] = path
 
 def generateVersionToVerDict():
@@ -472,14 +472,14 @@ def generateVersionToVerDict():
             minSdkVersion='1'
             targetSdkVersion=minSdkVersion
             key=''
-            renamePkg=''
+            #renamePkg=''
             while True:
                 line = f.readline()
                 if not line:
                     break
                 if line.find('apkFileName') > -1:
 		            idx1 = line.find(':') + 1
-		            idx2 = line.find('\n')
+		            idx2 = line.rfind('.')
 		            key = line[idx1:idx2].strip(' ')
                 if line.find('minSdkVersion') > -1:
                     idx1 = line.rfind(':') + 1
@@ -490,16 +490,19 @@ def generateVersionToVerDict():
                     idx1 = line.rfind(':') + 1
                     idx2 = line.rfind('\n')
                     targetSdkVersion = line[idx1:idx2].strip(' ').strip("'")
-                if line.find('rename-manifest-package') > -1:
-		            idx1 = line.find(':') + 1
-		            idx2 = line.find('\n')
-		            renamePkg = line[idx1:idx2].strip(' ')
+                #if line.find('rename-manifest-package') > -1:
+		            #idx1 = line.find(':') + 1
+		            #idx2 = line.find('\n')
+		            #renamePkg = line[idx1:idx2].strip(' ')
 			
-            if renamePkg!='':
-		    	if ApkDict.has_key(key):
-		    		renamePkgDict[key]=renamePkg
-            if ApkDict.has_key(key):
-            	verDict[ApkDict[key]] = [minSdkVersion, targetSdkVersion]
+            #if renamePkg!='':
+		    	#if pathDict.has_key(key):
+		    		#renamePkgDict[key]=renamePkg
+		    		#print renamePkg
+            if pathDict.has_key(key):
+            	verDict[key] = [minSdkVersion, targetSdkVersion]
+            	#print key
+            	#print verDict[key]
 
 
 def generateProtectionLevelToProtectionLevelDict():
@@ -530,16 +533,16 @@ def filterCustomOEM():
             jrdfilepath = os.path.join(root,filespath)
             emufilepath = os.path.join(EmuListPath,filespath)
 
-            apkNameFromFileName=filespath[:filespath.find('.',filespath.find('.')+1)]
-            #print apkNameFromFileName
+            pkg=filespath[:filespath.find('.apk')]
+            #print packageNameFromFileName
             #generate package info
             info = PackageInfo()
             manifestStr = getNodeByTag('manifest', jrdfilepath)
-            if renamePkgDict.has_key(apkNameFromFileName):
-            	pkg=renamePkgDict[apkNameFromFileName]
-            else:
-            	pkg=getAttrValueByAttrTitle('package', manifestStr)
-            #pkg = renamePkgDict.has_key(apkNameFromFileName)?renamePkgDict[apkNameFromFileName]:getAttrValueByAttrTitle('package', manifestStr)
+            #if renamePkgDict.has_key(packageNameFromFileName):
+            	#pkg=renamePkgDict[packageNameFromFileName]
+            #else:
+            	#pkg=getAttrValueByAttrTitle('package', manifestStr)
+            #pkg = renamePkgDict.has_key(packageNameFromFileName)?renamePkgDict[packageNameFromFileName]:getAttrValueByAttrTitle('package', manifestStr)
             shareUserId = getAttrValueByAttrTitle('android:sharedUserId', manifestStr)
             
             info.Package = pkg
@@ -550,26 +553,29 @@ def filterCustomOEM():
             if pathDict.has_key(pkg):
                 info.PackageInstallationPath = pathDict[pkg]
             else:
-            	print "FilterSensitiveContentProvider error:"+pkg+" not found,retry once after split the package name."
+            	print "FilterSensitiveContentProvider error:"+pkg+" not found."
+            	continue
             	#modify for googleDrive.apk
-            	splitedPkg=pkg[:pkg.rfind('.')]
-            	if pathDict.has_key(splitedPkg):
-            		info.PackageInstallationPath=pathDict[splitedPkg]
-            		info.Package = splitedPkg
-            		print "FilterSensitiveContentProvider info:"+pkg+" has been repaired->"+splitedPkg
-            	else:
-            		print "FilterSensitiveContentProvider fatal error:"+pkg+" still not found,skip."
-            		continue
+            	#splitedPkg=pkg[:pkg.rfind('.')]
+            	#if pathDict.has_key(splitedPkg):
+            		#info.PackageInstallationPath=pathDict[splitedPkg]
+            		#info.Package = splitedPkg
+            		#print "FilterSensitiveContentProvider info:"+pkg+" has been repaired->"+splitedPkg
+            	#else:
+            		#print "FilterSensitiveContentProvider fatal error:"+pkg+" still not found,skip."
+            		#continue
                 #print info.PackageInstallationPath
+            #print pkg
             if verDict.has_key(pkg):
                 info.PackageMinSdkVersion = verDict[pkg][0]
                 info.PackageTargetSdkVersion = verDict[pkg][1]
             else:
-            	if verDict.has_key(splitedPkg):
-            		info.PackageMinSdkVersion = verDict[splitedPkg][0]
-            		info.PackageTargetSdkVersion = verDict[splitedPkg][1]
-            	else:
-	            	print "FilterSensitiveContentProvider error:"+pkg+" sdk version not found,yml file maybe not exists."
+            	print "FilterSensitiveContentProvider error:"+pkg+" sdk version not found,yml file maybe not exists."
+            	#if verDict.has_key(splitedPkg):
+            		#info.PackageMinSdkVersion = verDict[splitedPkg][0]
+            		#info.PackageTargetSdkVersion = verDict[splitedPkg][1]
+            	#else:
+	            	#print "FilterSensitiveContentProvider error:"+pkg+" sdk version not found,yml file maybe not exists."
             #print ' <' + info.Package + ' output successed>'
 
             #Filter All Content Provider
