@@ -1,16 +1,17 @@
 Usage:
-./OneKeyAndroidSecurity.py SWC62
+cd src
+./OneKeyAndroidSecurity.py SWC80+UA
 
 
-1.  manifestList_emu取自原生Android代码, 
-    运行脚本前必须保证Framework根目录之下有此文件夹.
-2.  PullAndroidManifestTool用于抓取手机apk中的AndroidManifest文件, 
+1.  ./input是预先准备好的文件，包括需要人工检查和解释的项以及取自原生Android代码的manifestList_emu 
+    运行脚本前必须保证./input目录之下有这些文件.
+2.  ./src/PullAndroidManifestTool用于抓取手机apk中的AndroidManifest文件, 
     运行脚本前必须保证手机与电脑相连, 同时adb可以pull手机中的文件.
-3.  temp是过滤Custom ContentProvider的临时文件夹
+3.  ./temp是过滤Custom ContentProvider的临时文件夹
     其中manifestList是手机中pull出的AndroidManifest文件, 
     inAosp文件夹存放原生代码中已存在apk的AndroidManifest文件, 
     outAosp文件夹存放Jrd新增的apk的AndroidManifest文件
-4.  out是最终输出的结果文件夹, 
+4.  ./output是最终输出的结果文件夹, 
     custom文件夹存放所有包含custom content provider的AndroidManifest文件. 
     custom.txt 中记录了最终过滤出的所有Custom ContentProvider.
     diff.txt 中记录了在inAosp中, 但被jrd修改过的ContentProvider, 方便人工检查使用.
@@ -20,5 +21,4 @@ Usage:
     withPermission.txt 中记录了exprot = 'true',
     且同时定义了readPermission和writePermission的CP.
     或者没有exported属性, 但定义了permission的CP.
-5.  out.xls
 
