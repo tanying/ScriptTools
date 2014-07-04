@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="1" android:versionName="1.0" package="com.android.emulator.connectivity.test"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <instrumentation android:name="android.test.InstrumentationTestRunner" android:targetPackage="com.android.emulator.connectivity.test" />
+    <application android:label="Connectivity Test">
+        <uses-library android:name="android.test.runner" />
+    </application>
+</manifest>

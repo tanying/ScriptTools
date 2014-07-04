@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:sharedUserId="android.uid.phone" coreApp="true" package="com.android.providers.telephony">
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <application android:allowBackup="false" android:allowClearUserData="false" android:icon="@mipmap/ic_launcher_phone" android:label="@string/app_label" android:process="com.android.phone">
+        <provider android:authorities="telephony" android:exported="true" android:multiprocess="false" android:name="TelephonyProvider"/>
+        <provider android:authorities="sms" android:exported="true" android:multiprocess="false" android:name="SmsProvider" android:readPermission="android.permission.READ_SMS" android:writePermission="android.permission.WRITE_SMS"/>
+        <provider android:authorities="mms" android:exported="true" android:multiprocess="false" android:name="MmsProvider" android:readPermission="android.permission.READ_SMS" android:writePermission="android.permission.WRITE_SMS">
+            <grant-uri-permission android:pathPrefix="/part/"/>
+            <grant-uri-permission android:pathPrefix="/drm/"/>
+        </provider>
+        <provider android:authorities="mms-sms" android:exported="true" android:multiprocess="false" android:name="MmsSmsProvider" android:readPermission="android.permission.READ_SMS" android:writePermission="android.permission.WRITE_SMS"/>
+    </application>
+</manifest>

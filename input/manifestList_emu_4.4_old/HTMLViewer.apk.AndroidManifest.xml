@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.android.htmlviewer">
+    <original-package android:name="com.android.htmlviewer"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <application android:label="@string/app_label">
+        <activity android:label="HTMLViewer" android:name="HTMLViewerActivity" android:theme="@android:style/Theme.Holo">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <data android:scheme="file"/>
+                <data android:scheme="content"/>
+                <data android:mimeType="text/html"/>
+                <data android:mimeType="text/plain"/>
+                <data android:mimeType="application/xhtml+xml"/>
+                <data android:mimeType="application/vnd.wap.xhtml+xml"/>
+            </intent-filter>
+        </activity>
+        <provider android:authorities="com.android.htmlfileprovider" android:exported="false" android:grantUriPermissions="true" android:multiprocess="false" android:name="FileContentProvider" android:syncable="false"/>
+    </application>
+</manifest>

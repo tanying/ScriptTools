@@ -12,8 +12,8 @@ function decodeApk(){
 	tempout=$1/tempout
 	manifestList=$1/manifestList
 
-	./apktool if $tempapk/framework-res.apk
-	./apktool if $tempapk/mediatek-res.apk
+	#./apktool if $tempapk/framework-res.apk
+	#./apktool if $tempapk/mediatek-res.apk
 	for filelist in $(ls $tempapk)
 		do
 		#echo $tempapk/$filelist
@@ -103,15 +103,18 @@ mkdir -p $tempdir/tempapk
 mkdir -p $tempdir/tempout
 
 echo "adb pull is beginning."
-for((i=1;i<$#;i++));do
-echo $(eval echo \${${i}})
-adb pull $(eval echo \${${i}}) $tempdir/temp
-done
+#for((i=1;i<$#;i++));do
+#echo $(eval echo \${${i}})
+#adb pull $(eval echo \${${i}}) $tempdir/temp
+#done
+
+adb shell pm list package -f > ./pmlist.txt
+./pullAPKFromPhone.py $tempdir/tempapk
 echo "adb pull completed."
 
-echo "copy file is beginning."
-cpApk $tempdir/temp $tempdir/tempapk
-echo "copy file completed."
+#echo "copy file is beginning."
+#cpApk $tempdir/temp $tempdir/tempapk
+#echo "copy file completed."
 
 echo "decode is beginning."
 decodeApk $tempdir

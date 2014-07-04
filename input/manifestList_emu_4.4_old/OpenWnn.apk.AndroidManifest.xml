@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="jp.co.omronsoft.openwnn">
+    <original-package android:name="jp.co.omronsoft.openwnn"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <application android:label="OpenWnn">
+        <service android:id="@id/openwnn_japanese" android:label="Japanese IME" android:name="OpenWnnJAJP" android:permission="android.permission.BIND_INPUT_METHOD">
+            <intent-filter>
+                <action android:name="android.view.InputMethod"/>
+            </intent-filter>
+            <meta-data android:name="android.view.im" android:resource="@xml/method_ja"/>
+        </service>
+        <activity android:label="@string/preference_ime_setting_app" android:name="OpenWnnControlPanelJAJP">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="jp.co.omronsoft.openwnn.JAJP.UserDictionaryToolsListJAJP"/>
+        <activity android:label="@string/user_dictionary_edit_words" android:name="jp.co.omronsoft.openwnn.JAJP.UserDictionaryToolsEditJAJP"/>
+        <activity android:name="jp.co.omronsoft.openwnn.EN.UserDictionaryToolsListEN"/>
+        <activity android:label="@string/user_dictionary_edit_words" android:name="jp.co.omronsoft.openwnn.EN.UserDictionaryToolsEditEN"/>
+    </application>
+</manifest>

@@ -15,9 +15,9 @@ result = "Pass"
 EnvPath = sys.path[0]
 
 PullAndroidManifestToolPath = EnvPath + "/PullAndroidManifestTool"
-EmuListPath = EnvPath + "/manifestList_emu"
-tempdir = EnvPath + "/temp"
-outdir = EnvPath + "/out"
+EmuListPath = EnvPath + "/../input/manifestList_emu"
+tempdir = EnvPath + "/../temp"
+outdir = EnvPath + "/../output"
 ManifestListPath = tempdir + "/manifestList"
 manifestPathTxt = tempdir + "/manifestPath.txt"
 protectionLevelTxt = tempdir + "/protectionLevel.txt"
@@ -36,7 +36,7 @@ outXls = outdir + "/contentProvider.xls"
 ProtectedBroadcastTxt=tempdir + "/ProtectedBroadcast.txt"
 emuProtectedBroadcastTxt=tempdir + "/emuProtectedBroadcast.txt"
 SystemServiceTxt=tempdir+"/SystemServiceList.txt"
-DictXls=EnvPath+"/SystemServiceAndBundlePackageDict.xls"
+DictXls=EnvPath+"/../input/SystemServiceAndBundlePackageDict.xls"
 
 outList = []
 pathDict = {}
